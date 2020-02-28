@@ -1,0 +1,17 @@
+psql -U asos -h mod-msc-sw1.cs.bham.ac.uk  -d asos
+as2xv9i16m
+
+psql -U postgres -h localhost  -d postgres
+
+
+
+CREATE TABLE account(
+   user_id serial PRIMARY KEY,
+   username VARCHAR (50) UNIQUE NOT NULL,
+   password VARCHAR (50) NOT NULL
+);
+
+INSERT INTO account(username , password) VALUES( 'hyc01', '123456');
+INSERT INTO account(username , password) VALUES( 'hyc02', '223456');
+INSERT INTO account(username , password) VALUES( 'hyc03', '323456');
+INSERT INTO account(username , password) VALUES( 'hyc04', '423456');

@@ -16,7 +16,7 @@ public interface DatabaseInterface {
 	 *         1: wrong url,time out exception
 	 *         2: other problem
 	 */
-	public int run();
+	public int connect();
 	
 	/**
 	 * stop a database class
@@ -44,11 +44,11 @@ public interface DatabaseInterface {
 	 * Before this, Server should check whether the user is logged in first
 	 * @param username_or_userId
 	 * @param password
-	 * @return 0: successful
-	 *         1: failed because of wrong username/password
-	 *         2: other problem
+	 * @return -1: failed because of wrong username/password pair
+	 *         -2: failed for other problem
+	 *          other: log in successfully, and the return integer is User ID
 	 */
-	public int userLogIn(String username_or_userId, String password);
+	public int userLogIn(String username, String password);
 	
 	
 	/**
@@ -69,5 +69,7 @@ public interface DatabaseInterface {
 	 * @return ship positions
 	 */
 	public ShipPosition[] loadShipPosition(String username_or_userId, int slot);
+	
+	
 	
 }
