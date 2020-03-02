@@ -28,19 +28,34 @@ public class ServerThread implements Runnable {
 		System.out.println("Connected: " + socket);
         try {
         	while(true) {
-            Scanner in = new Scanner(socket.getInputStream());
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            String[] input = in.nextLine().split("\\s");
-            if(input[0] == "login") {
-            	Database db = new Database();
-            	db.userSignIn(input[1], input[2]);
-            	loggedIn = true;
-            	out.
+        		Scanner in = new Scanner(socket.getInputStream());
+        		PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        		Database db = new Database();
+        		String[] input = in.nextLine().split("\\s");
+        		if(input[0] == "login") {
+        			int logInResult = db.userLogIn(input[1], input[2]);
+        			if (logInResult == 0) {
+        				loggedIn=true;
+        				out.println("loggedIn");
+        			}
+        			else { // handle specific cases here e.g. -1 or -2
+        				out.println("Please try again");
+        			}
+        		}
+        		if(input[0] == "register") {
+        			int signInResult = db.userSignIn(input[1], input[2]);
+        			if (signInResult >= 0) {
+        				loggedIn=true;
+        				out.println("loggedIn");
+        			}
+            	else { // handle specific cases here e.g. -1 or -2
+            		out.println("Please try again or register");
+            	}
             }
-            if(loggedin= true) {
-            	new GameThread(socket, playerID);
+            if(loggedIn= true) {
+//            	new GameThread(socket, playerID);
             }
-        	} // connect to database check
+        } 
         	
         } catch (Exception e) {
             System.out.println("Error:" + socket);

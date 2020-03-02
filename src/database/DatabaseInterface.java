@@ -37,7 +37,7 @@ public interface DatabaseInterface {
 	 *         3:other problem
 	 * 
 	 */
-	public int userSignIn(String username, String password);
+	public int userSignUp(String username, String password);
 	
 	/**
 	 * log in for users, check the username and password
