@@ -84,7 +84,9 @@ public class Client extends Application{
 		        @Override
 		        public void handle(ActionEvent event) {
 		            out.println("register "+usernameField.getText()+" "+passwordField.getText());
-
+		            //send to client()
+		            // gets response if successful
+		            // if successful launch game screen
 		        }
 		    });
 		    registerButton.setLayoutX(130);

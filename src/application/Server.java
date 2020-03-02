@@ -11,8 +11,10 @@ public class Server {
 		try (ServerSocket listener = new ServerSocket(50000)) {
 	         System.out.println("Server Running");
 	         ExecutorService pool = Executors.newFixedThreadPool(20);
+	         int i=0;
 	         while (true) {
-	             pool.execute(new Login(listener.accept()));
+	        	 i++;
+	             pool.execute(new ServerThread(listener.accept(), i));
 	             
 	         }
 	     }
