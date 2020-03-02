@@ -4,6 +4,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.*;
 import javafx.scene.input.*;
+import javafx.scene.text.Text;
+
 import java.util.Random;
 /**
  * Main class for the GUI
@@ -69,6 +71,15 @@ public class GUIMain extends Application{
 		for(Board.Cell c : playerBoard.getCells()) {
 			group.getChildren().add(c);
 		}
+		Text text = new Text("Press H to set ships horizontal, press V to set ships vertical" );
+		//Text secondLine = new Text("Ships placed: " + playerBoard.getShips());
+		text.setX(10);
+		text.setY(520);
+		//secondLine.setX(10);
+		//secondLine.setY(530);
+		//group.getChildren().add(secondLine);
+		group.getChildren().add(text);
+		//group.getChildren().add(secondLine);
 		Scene scene = new Scene(group);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Battleship - Player");
