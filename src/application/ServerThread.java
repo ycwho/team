@@ -33,7 +33,6 @@ public class ServerThread implements Runnable {
         		PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         		Database db = new Database();
         		String[] input = in.nextLine().split("\\s");
-        		System.out.println(db.checkExistUser(input));
         		if(input[0] == "login") {
         			boolean logInResult = db.checkExistUser(input);
         			if (!logInResult) {
@@ -45,11 +44,13 @@ public class ServerThread implements Runnable {
         			}
         		}
         		if(input[0] == "register") {
+        			System.out.println(input[1]+ " " + input[2]);
+        			System.out.println(db.checkExistUser(input));
 //        			int signInResult = db.userSignIn(input[1], input[2]);
 //        			if (signInResult >= 0) {
 //        				loggedIn=true;
 //        				out.println("loggedIn");
-        			if(!db.checkExistUser(input)) {
+        			if(db.checkExistUser(input) == false) {
         				db.insertUser(input);
         				out.println("registered");
         			}
