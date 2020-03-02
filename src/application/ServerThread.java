@@ -57,12 +57,12 @@ public class ServerThread implements Runnable {
             		out.println("Please try again or register");
             	}
             }
-            if(loggedIn= true) {
+//            if(loggedIn= true) {
 //            	new GameThread(socket, playerID);
-            }
+//            }
         } 
         	
-        } catch (Exception e) {
+         catch (Exception e) {
             System.out.println("Error:" + socket);
         } finally {
             try {
