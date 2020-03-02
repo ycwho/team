@@ -29,7 +29,8 @@ public class Client extends Application{
 	public static Group root = new Group();
 	Stage primaryStage;
 	static PrintWriter out;
-	
+	static Scanner in;
+	 
 	public static void main(String[] args) throws IOException {
 		if (args.length != 1) {
             System.err.println("Pass the server IP as the sole command line argument");
@@ -38,6 +39,7 @@ public class Client extends Application{
 		try (Socket socket = new Socket(args[0], 50000)) {
           while(true) {
         	  out = new PrintWriter(socket.getOutputStream(), true);
+        	  in = new Scanner(socket.getInputStream());
         	  out.println("Client Connected");
         	  launch(args);
           }
