@@ -35,6 +35,7 @@ public class ServerThread implements Runnable {
             	Database db = new Database();
             	db.userSignIn(input[1], input[2]);
             	loggedIn = true;
+            	out.
             }
             if(loggedin= true) {
             	new GameThread(socket, playerID);
