@@ -34,8 +34,8 @@ public class ServerThread implements Runnable {
         		Database db = new Database();
         		String[] input = in.nextLine().split("\\s");
         		if(input[0] == "login") {
-        			int logInResult = db.userLogIn(input[1], input[2]);
-        			if (logInResult == 0) {
+        			boolean logInResult = db.checkExistUser(input);
+        			if (!logInResult) {
         				loggedIn=true;
         				out.println("loggedIn");
         			}
