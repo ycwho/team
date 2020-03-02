@@ -73,7 +73,23 @@ public class GUIMain extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Battleship - Player");
 		primaryStage.show();
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
+			@Override
+			public void handle(KeyEvent keyEvent) {
+
+	            switch (keyEvent.getCode()) {
+	                case V:
+	                    playerBoard.setVertical();
+	                    break;
+	                case H:
+	                	playerBoard.setHorizontal();
+
+	            }
+				
+			}
+			
+		});
 
 		Stage secondStage = new Stage();
 		Group secondGroup = new Group();
