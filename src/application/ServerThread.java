@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+import database.Database;
 import database.DatabaseTest;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -43,10 +44,14 @@ public class ServerThread implements Runnable {
         			}
         		}
         		if(input[0] == "register") {
-        			int signInResult = db.userSignIn(input[1], input[2]);
-        			if (signInResult >= 0) {
-        				loggedIn=true;
-        				out.println("loggedIn");
+//        			int signInResult = db.userSignIn(input[1], input[2]);
+//        			if (signInResult >= 0) {
+//        				loggedIn=true;
+//        				out.println("loggedIn");
+        			if(!db.checkExistUser(input)) {
+        				db.insertUser(input);
+        				out.println("registered");
+        			}
         			}
             	else { // handle specific cases here e.g. -1 or -2
             		out.println("Please try again or register");
