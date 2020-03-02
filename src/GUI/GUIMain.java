@@ -11,8 +11,7 @@ import java.util.Random;
  * Main class for the GUI
  * @author ELizabeth Atkins
  * Improvements that need to be made:
- * I need to have it so you can change the ship length and whether or not a given ship will be vertical or
- * horizontal from the GUI
+ * I need to have it so you can change the ship length
  * */
 public class GUIMain extends Application{
 	private static Board playerBoard;
