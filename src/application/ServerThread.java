@@ -26,7 +26,8 @@ public class ServerThread implements Runnable {
         	while(true) {
             Scanner in = new Scanner(socket.getInputStream());
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            System.out.println(in.nextLine());  // currently prints command but should be verified and have success sent back to client.
+            String input = in.nextLine;
+            //System.out.println(in.nextLine());  // currently prints command but should be verified and have success sent back to client.
         	} // connect to database check
         } catch (Exception e) {
             System.out.println("Error:" + socket);
