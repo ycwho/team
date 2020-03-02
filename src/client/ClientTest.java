@@ -1,9 +1,9 @@
 package client;
-
+//test
 // Usage:
 //        java Client hostname
 // type a non-zero integer on a line to send it to server
-// type a blank line to end client tt
+// type a blank line to end client
 
 import java.io.*;
 import java.net.*;
