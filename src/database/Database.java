@@ -1,3 +1,5 @@
+package database;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,19 +33,19 @@ public class Database {
 
 	// Checking if the user' information existed(if the user has registered?)?
 	// if not, return false ,and insert his firstname,lastname,password.
-	public boolean checkExistUser(String user) {
+	public boolean checkExistUser(String[] input) {
 		try {
-			String sql = "SELECT first_name, last_name FROM USERS WHERE " + "first_name= ?";
+			String sql = "SELECT Username FROM USERS WHERE " + "Username= ?";
 			PreparedStatement selectStatement = this.connection.prepareStatement(sql);
 
 			ResultSet resultSet = selectStatement.executeQuery();
 			while (resultSet.next()) {
-				String firstName = resultSet.getString("first_name");
-				String lastName = resultSet.getString("last_name");
+				String Username = resultSet.getString("Username");
+				//String lastName = resultSet.getString("last_name");
 
-				System.out.println(firstName + " " + lastName);
-				String[] userStrings = user.split(",");
-				if (userStrings[1] == firstName && userStrings[2] == lastName) {
+				System.out.println(Username);
+			//	String[] userStrings = user.split(" ");
+				if (input[1] == Username) {
 					return true;
 				}
 			}
@@ -54,15 +56,15 @@ public class Database {
 	}
 
 	// Insert new user' information who has not registered before.
-	public void insertUser(String user) {
+	public void insertUser(String[] user) {
 		try {
 			PreparedStatement insertStatement = connection
-					.prepareStatement("INSERT INTO USERS (first_name,last_name,password) " + "VALUES (?,?,?) ");
+					.prepareStatement("INSERT INTO USERS (Username,Password) " + "VALUES (?,?) ");
 			System.out.println("Connection established");
-			String[] userStrings = user.split(",");
-			insertStatement.setString(1, userStrings[1]);
-			insertStatement.setString(2, userStrings[2]);
-		insertStatement.setString(3, userStrings[3]);
+			//String[] userStrings = user.split(",");
+			insertStatement.setString(1, user[1]);
+			insertStatement.setString(2, user[2]);
+	//	insertStatement.setString(3, userStrings[3]);
 			insertStatement.executeUpdate();
 			int result = insertStatement.executeUpdate();
 			System.out.println(result);
