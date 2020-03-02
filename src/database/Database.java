@@ -3,18 +3,15 @@ package database;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.Properties;
 import org.postgresql.Driver;
 
 public class Database {
-	private static Connection connection;
-	private static String username;
-	private static String password;
-	private static String url;
+	 Connection connection;
+	 String username;
+	 String password;
+	 String url;
 
 	public Database() {
 		try (FileInputStream input = new FileInputStream(new File("db.properties"))) {
@@ -23,7 +20,7 @@ public class Database {
 			props.load(input);
 			this.username = (String) props.getProperty("username");
 			this.password = (String) props.getProperty("password");// as2xv9i16m
-			url = (String) props.getProperty("URL");
+			this.url = (String) props.getProperty("URL");
 
 			this.connection = DriverManager.getConnection(this.url, this.username, this.password);
 	} catch (Exception e) {
@@ -76,39 +73,40 @@ public class Database {
 	}
 
 	public static void main(String[] args) throws IOException {
+		Database d = new Database();
 
-		try (Connection connection = DriverManager.getConnection(url, username, password);
+		try (Connection connection = DriverManager.getConnection(d.url, d.username, d.password);
 				PreparedStatement insertStatement = connection
-						.prepareStatement("INSERT INTO USERS (first_name,last_name,password) " + "VALUES (?,?,?) ");
+						.prepareStatement("INSERT INTO USERS (Username,Password) " + "VALUES (?,?) ");
 				PreparedStatement selectStatement = connection
-						.prepareStatement("SELECT first_name, last_name FROM USERS WHERE " + "first_name= ?")) {
+						.prepareStatement("SELECT Username, Password FROM USERS WHERE " + "Username= ?")) {
 
 			System.out.println("Connection established");
 
 			insertStatement.setString(1, "John");
-			insertStatement.setString(2, "Smith");
-			insertStatement.setString(3, "123");
+			insertStatement.setString(2, "Password");
 
 			// execute the statement
 			insertStatement.executeUpdate();
 
 			// more such data
-			insertStatement.setString(1, "John");
-			insertStatement.setString(2, "Anderson");
-			insertStatement.setString(3, "1234");
+			insertStatement.setString(1, "Jim");
+			insertStatement.setString(2, "Pass");
 
 			insertStatement.executeUpdate();
 			
 			selectStatement.setString(1, "John");
 			try (ResultSet resultSet = selectStatement.executeQuery()) {
 				while (resultSet.next()) {
-					String firstName = resultSet.getString("first_name");
-					String lastName = resultSet.getString("last_name");
+					String username = resultSet.getString("Username");
+					String password = resultSet.getString("Password");
 
-					System.out.println(firstName + " " + lastName);
+					System.out.println(username + " " + password);
 				}
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//System.out.println("SQLException");
 		}
 	}
 }
