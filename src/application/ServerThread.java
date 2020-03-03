@@ -6,9 +6,13 @@ import database.Database;
 
 public class ServerThread extends Thread {
 
-    private Socket clientSocket = null;
+    private Socket clientSocket;
     private int playerID;
     private boolean loggedIn;
+    private ObjectInputStream fromClient;
+	private ObjectOutputStream toClient;
+	private String[] input;
+	private Database db;
 
     public ServerThread(Socket clientSocket, int i) {
         super ("ServerThread");
@@ -21,25 +25,42 @@ public class ServerThread extends Thread {
     public void run() {
         // TODO Auto-generated method stub
 
-        try (
-                ObjectOutputStream toClient = new ObjectOutputStream(clientSocket.getOutputStream());
-                ObjectInputStream fromClient = new ObjectInputStream(clientSocket.getInputStream()))
+        try
                 //PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true))
         {
-            if (fromClient.readUTF().equals("Connected")) {
-                System.out.println("Connected: " + clientSocket);
+        	toClient = new ObjectOutputStream(clientSocket.getOutputStream());
+            fromClient = new ObjectInputStream(clientSocket.getInputStream());
+            db = new Database();
+        }catch (IOException e) {
+            	e.printStackTrace();
             }
             // todo write proper closing of thread from client (eg the exit square from the gui)
-            while (true) {
-                Database db = new Database();
-
-                    String[] input = fromClient.readUTF().split("\\s");
-                    if (input[0] == "login") {
-                        System.out.println("test");
-                        boolean logInResult = db.checkExistUser(input);
+           try {
+        	   
+        	   while(true) {
+        		   
+        		  
+        		   try {
+        		   input = (String[]) fromClient.readObject();
+        		   } catch (EOFException eof) {
+        			  String[] empty = {""};
+        			  input = empty;
+        		   }
+        		   if(input[0] != "" ) {
+        			   System.out.println(input[0]);
+        		   }
+        		   if (input[0].equals("Connected")){
+                       System.out.println("Connected: " + clientSocket);
+                   }
+                    if (input[0].equals("login")) {
+                        System.out.println(input[0]+" "+input[1]+" "+input[2]);
+                        boolean logInResult = db.checkExistUser(input[1], input[2]);
+                        System.out.println("log in result: " + logInResult);
                         if (logInResult) {
                             loggedIn = true;
                             //out.println("loggedIn");
+                            String[] returnString = {"login", "1"};
+                            toClient.writeObject(returnString);
                             System.out.println(loggedIn);
                         } else { // handle specific cases here e.g. -1 or -2
                             //out.println("Please try again");
@@ -47,12 +68,12 @@ public class ServerThread extends Thread {
                     }
                     if (input[0] == "register") {
                         System.out.println(input[1] + " " + input[2]);
-                        System.out.println(db.checkExistUser(input));
+                        System.out.println(db.checkExistUser(input[1], input[2]));
 //        			int signInResult = db.userSignIn(input[1], input[2]);
 //        			if (signInResult >= 0) {
 //        				loggedIn=true;
 //        				out.println("loggedIn");
-                        if (db.checkExistUser(input) == false) {
+                        if (db.checkExistUser(input[1], input[2]) == false) {
                             db.insertUser(input);
                             //out.println("registered");
                         }
@@ -65,11 +86,11 @@ public class ServerThread extends Thread {
 //            	new GameThread(socket, playerID);
 //            }
 
-            }
-            //System.out.println("Disconnected: " + clientSocket);
-        } catch (IOException e){
-            e.printStackTrace();
+        	   }   
+        } catch (IOException | ClassNotFoundException e) {
+        	e.printStackTrace();
         }
+
 
     }
 
