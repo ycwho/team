@@ -29,16 +29,36 @@ public class Client {
     private ObjectOutputStream toServer;
     private ObjectInputStream fromServer;
     //private BufferedReader fromUser;
+    private Controller controller;
+    private String[] input;
+   
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
 
-    Client(String serverName) {
+	Client(String serverName) throws ClassNotFoundException {
         try {
             server = new Socket(serverName, 50000);
+            
             toServer = new ObjectOutputStream(server.getOutputStream());
             fromServer = new ObjectInputStream(server.getInputStream());
+            toServer.flush();
             //fromUser = new BufferedReader(new InputStreamReader(System.in));
-
-            toServer.writeUTF("Connected"); //server connected
-
+            String[] connected = {"Connected"};
+            toServer.writeObject(connected); //server connected
+//            while(true) {
+//            	 try {
+//          		   input = (String[]) fromServer.readObject();
+//          		   } catch (EOFException eof) {
+//          			  String[] empty = {""};
+//          			  input = empty;
+//          		   }
+//            	 if(input[0].equals("login")) {
+//            		 if(input[1].equals("1"));
+//            		 System.out.println("logged in");;
+//            	 }
+//            }
+            
         } catch (UnknownHostException e) {
             System.out.println("Unknown Host");
         } catch (IOException e) {
@@ -52,6 +72,10 @@ public class Client {
 
     public ObjectInputStream getFromServer () {
         return fromServer;
+    }
+    
+    public void login(String loginDetails) throws IOException {
+    	toServer.writeObject(loginDetails.split(" "));
     }
 
 }
