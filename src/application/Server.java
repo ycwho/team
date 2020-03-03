@@ -6,20 +6,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-	
-	public static void main(String[] args) throws IOException {
-		try (ServerSocket listener = new ServerSocket(50000)) {
-	         System.out.println("Server Running");
-	         ExecutorService pool = Executors.newFixedThreadPool(20);
-	         int i=0;
-	         while (true) {
-	        	 i++;
-	             pool.execute(new ServerThread(listener.accept(), i));
-	             
-	         }
-	     }
+
+	public static void main (String[] args) {
+		try (ServerSocket serverSocket = new ServerSocket(50000)) {
+			System.out.println("Server is Running");
+			ExecutorService pool = Executors.newFixedThreadPool(10);
+			int i = 0;
+			while (true) {
+				i++;
+				pool.execute(new ServerThread(serverSocket.accept(), i));
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	 
+
 }
 

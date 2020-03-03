@@ -1,77 +1,76 @@
 package application;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.util.Scanner;
-
+import java.net.*;
+import java.io.*;
 import database.Database;
-import database.DatabaseTest;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
-public class ServerThread implements Runnable {
-	
-	private Socket socket;
-	private int playerID;
-	private boolean loggedIn;
-	
-	public ServerThread(Socket socket, int i) {
-		
-		this.socket = socket;
-		this.playerID = i;
-		loggedIn = false;
-	}
+public class ServerThread extends Thread {
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		System.out.println("Connected: " + socket);
-        try {
-        	while(true) {
-        		Scanner in = new Scanner(socket.getInputStream());
-        		PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-        		Database db = new Database();
-        		String[] input = in.nextLine().split("\\s");
-        		if(input[0] == "login") {
-        			boolean logInResult = db.checkExistUser(input);
-        			if (!logInResult) {
-        				loggedIn=true;
-        				out.println("loggedIn");
-        			}
-        			else { // handle specific cases here e.g. -1 or -2
-        				out.println("Please try again");
-        			}
-        		}
-        		if(input[0] == "register") {
-        			System.out.println(input[1]+ " " + input[2]);
-        			System.out.println(db.checkExistUser(input));
+    private Socket clientSocket = null;
+    private int playerID;
+    private boolean loggedIn;
+
+    public ServerThread(Socket clientSocket, int i) {
+        super ("ServerThread");
+        this.clientSocket = clientSocket;
+        this.playerID = i;
+        loggedIn = false;
+
+    }
+
+    public void run() {
+        // TODO Auto-generated method stub
+
+        try (
+                ObjectOutputStream toClient = new ObjectOutputStream(clientSocket.getOutputStream());
+                ObjectInputStream fromClient = new ObjectInputStream(clientSocket.getInputStream()))
+                //PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true))
+        {
+            if (fromClient.readUTF().equals("Connected")) {
+                System.out.println("Connected: " + clientSocket);
+            }
+            // todo write proper closing of thread from client (eg the exit square from the gui)
+            while (true) {
+                Database db = new Database();
+
+                    String[] input = fromClient.readUTF().split("\\s");
+                    if (input[0] == "login") {
+                        System.out.println("test");
+                        boolean logInResult = db.checkExistUser(input);
+                        if (logInResult) {
+                            loggedIn = true;
+                            //out.println("loggedIn");
+                            System.out.println(loggedIn);
+                        } else { // handle specific cases here e.g. -1 or -2
+                            //out.println("Please try again");
+                        }
+                    }
+                    if (input[0] == "register") {
+                        System.out.println(input[1] + " " + input[2]);
+                        System.out.println(db.checkExistUser(input));
 //        			int signInResult = db.userSignIn(input[1], input[2]);
 //        			if (signInResult >= 0) {
 //        				loggedIn=true;
 //        				out.println("loggedIn");
-        			if(db.checkExistUser(input) == false) {
-        				db.insertUser(input);
-        				out.println("registered");
-        			}
-        			}
-            	else { // handle specific cases here e.g. -1 or -2
-            		out.println("Please try again or register");
-            	}
-            }
+                        if (db.checkExistUser(input) == false) {
+                            db.insertUser(input);
+                            //out.println("registered");
+                        }
+                    } else { // handle specific cases here e.g. -1 or -2
+                        //out.println("Please try again or register");
+                    }
+
+
 //            if(loggedIn= true) {
 //            	new GameThread(socket, playerID);
 //            }
-        } 
-        	
-         catch (Exception e) {
-            System.out.println("Error:" + socket);
-        } finally {
-            try {
-                socket.close();
-            } catch (IOException e) {
+
             }
-            System.out.println("Closed: " + socket);
+            //System.out.println("Disconnected: " + clientSocket);
+        } catch (IOException e){
+            e.printStackTrace();
         }
-	}
+
+    }
+
 }
