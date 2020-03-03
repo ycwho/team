@@ -11,7 +11,7 @@ import java.util.Random;
  * Main class for the GUI
  * @author ELizabeth Atkins
  * Improvements that need to be made:
- * I need to have it so you can change the ship length
+ * ships should not be able to overlap
  * */
 public class GUIMain extends Application{
 	private static Board playerBoard;
@@ -26,7 +26,8 @@ public class GUIMain extends Application{
 		playerTurn = true;
 		 playerBoard = new Board(false, event -> {
 	           Board.Cell cell = (Board.Cell) event.getSource();
-	           playerBoard.placeShip(playerBoard.getCells().indexOf(cell),4);
+	           //playerBoard.setShipLength(4);
+	           playerBoard.placeShip(playerBoard.getCells().indexOf(cell));
 	           });
 		//enables the player to strike the enemy board
 		enemyBoard = new Board(true, event ->  {
@@ -43,8 +44,9 @@ public class GUIMain extends Application{
 			});
 			//Having "enemy" place random ships for testing purposes
 			Random rand = new Random();
+			enemyBoard.setShipLength(4);
 			for(int i = 0; i < 5;i++) {
-				enemyBoard.placeShip(rand.nextInt(100), 4);
+				enemyBoard.placeShip(rand.nextInt(100));
 			}
 	}
 	/**
@@ -70,7 +72,8 @@ public class GUIMain extends Application{
 		for(Board.Cell c : playerBoard.getCells()) {
 			group.getChildren().add(c);
 		}
-		Text text = new Text("Press H to set ships horizontal, press V to set ships vertical" );
+		Text text = new Text("Press H to set ships horizontal, press V to set ships vertical. \n" +
+		"Press up arrow to increase ship size, press down arrow to decrease ship size");
 		//Text secondLine = new Text("Ships placed: " + playerBoard.getShips());
 		text.setX(10);
 		text.setY(520);
@@ -94,6 +97,29 @@ public class GUIMain extends Application{
 	                    break;
 	                case H:
 	                	playerBoard.setHorizontal();
+	                	break;
+	               // case NUMPAD1:
+	               // 	playerBoard.setShipLength(1);
+	               // 	break;
+	               // case NUMPAD2:
+	               // 	playerBoard.setShipLength(2);
+	               // 	break;
+	               // case NUMPAD3:
+	               // 	playerBoard.setShipLength(3);
+	               // 	break;
+	               // case NUMPAD4:
+	               // 	playerBoard.setShipLength(4);
+	               // 	break;
+	               // case NUMPAD5:
+	               // 	playerBoard.setShipLength(5);
+	               // 	break;
+	                case UP:
+	                	playerBoard.setShipLength(playerBoard.getShipLength() + 1);
+	                	break;
+	                case DOWN:
+	                	playerBoard.setShipLength(playerBoard.getShipLength() - 1);
+	                	break;
+	                	
 
 	            }
 				
