@@ -30,19 +30,16 @@ public class Database {
 
 	// Checking if the user' information existed(if the user has registered?)?
 	// if not, return false ,and insert his firstname,lastname,password.
-	public boolean checkExistUser(String[] input) {
+	public boolean checkExistUser(String user, String pass) {
 		try {
-			String sql = "SELECT Username FROM USERS WHERE " + "Username= ?";
+			String sql = "select username from users where " + "username= ? and password = ?";
 			PreparedStatement selectStatement = this.connection.prepareStatement(sql);
-
+			selectStatement.setString(1, user);
+			selectStatement.setString(2, pass);
 			ResultSet resultSet = selectStatement.executeQuery();
 			while (resultSet.next()) {
-				String Username = resultSet.getString("Username");
-				//String lastName = resultSet.getString("last_name");
-
-				System.out.println(Username);
-			//	String[] userStrings = user.split(" ");
-				if (input[1] == Username) {
+				String username = resultSet.getString("username").substring(0, user.length());
+				if (user.equals(username)) {
 					return true;
 				}
 			}

@@ -8,7 +8,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/database"/>
-	<classpathentry kind="lib" path="D:/develop/Java/postgresql-42.2.10.jar"/>
 	<classpathentry kind="lib" path="lib/postgresql-42.2.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
