@@ -31,23 +31,30 @@ public class Client {
     private ObjectInputStream fromServer;
     //private BufferedReader fromUser;
     private Controller controller;
-    private String[] input;
+    private MainMenuController mainMenuController;
+    private Main main;
+    
+    public void setMainMenuController(MainMenuController mainMenuController) {
+		this.mainMenuController = mainMenuController;
+	}
+
+	private String[] input;
    
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 
-	Client(String serverName) throws ClassNotFoundException {
+	Client(String serverName, Main main) throws ClassNotFoundException {
         try {
+        	this.main = main;
             server = new Socket(serverName, 50000);
-            
             toServer = new ObjectOutputStream(server.getOutputStream());
             fromServer = new ObjectInputStream(server.getInputStream());
             toServer.flush();
             //fromUser = new BufferedReader(new InputStreamReader(System.in));
             String[] connected = {"Connected"};
             toServer.writeObject(connected); //server connected
-            Thread fromServerThread = new Thread(new FromServer(fromServer));
+            Thread fromServerThread = new Thread(new FromServer(fromServer, main));
 			fromServerThread.start();
 //            	 try {
 //          		   input = (String[]) fromServer.readObject();
@@ -86,9 +93,11 @@ class FromServer implements Runnable {
 	
 	ObjectInputStream fromServer;
 	String[] nextLine;
+	Main main;
 	
-	public FromServer(ObjectInputStream fromServer) {
+	public FromServer(ObjectInputStream fromServer, Main main) {
 		this.fromServer = fromServer;
+		this.main=main;
 	}
 	
 	@Override
@@ -100,6 +109,7 @@ class FromServer implements Runnable {
 					if(nextLine[0].equals("login")) {
 						if(nextLine[1].equals("1")) {
 							System.out.println("you are logged in");
+							main.setMainMenuStage();
 						}
 					}
 					

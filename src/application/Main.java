@@ -24,7 +24,7 @@ public class Main extends Application {
 //        primaryStage.setTitle("BattleShips");
 //        primaryStage.setScene(new Scene(root, 300, 275));
 //        primaryStage.show();
-    	client = new Client("localhost");
+    	client = new Client("localhost", this);
     	setLoginStage(primaryStage);
     	
     	
@@ -55,4 +55,23 @@ public class Main extends Application {
 
 	        primaryStage.show(); 
 	}
+	
+	public void setMainMenuStage() throws IOException {
+		 FXMLLoader loader = new FXMLLoader();
+	        URL url = new File("res/mainMenuFX.fxml").toURI().toURL();
+	        loader.setLocation(url);
+	        VBox vbox = loader.<VBox>load();
+	        ((MainMenuController) loader.getController()).setPrimaryStage(primaryStage);
+	        Scene scene = new Scene(vbox);
+	        
+
+	        
+		MainMenuController mainMenuController = loader.getController();
+		mainMenuController.setClient(client);
+		mainMenuController.setMain(this);// pointing to this instance
+		this.client.setMainMenuController(mainMenuController);
+
+	}
+	
+	
 }

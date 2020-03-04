@@ -22,7 +22,6 @@ public class Controller {
 	
 	//todo work out host for client argument
     public Controller() {
-//        this.client = new Client("localhost");
     }
     
     @FXML
@@ -35,8 +34,7 @@ public class Controller {
 
 		}
 	}
-    
-    
+   
     public Main getMain() {
 		return main;
 	}
