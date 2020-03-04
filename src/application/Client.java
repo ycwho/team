@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,7 +47,8 @@ public class Client {
             //fromUser = new BufferedReader(new InputStreamReader(System.in));
             String[] connected = {"Connected"};
             toServer.writeObject(connected); //server connected
-//            while(true) {
+            Thread fromServerThread = new Thread(new FromServer(fromServer));
+			fromServerThread.start();
 //            	 try {
 //          		   input = (String[]) fromServer.readObject();
 //          		   } catch (EOFException eof) {
@@ -80,7 +82,35 @@ public class Client {
 
 }
 
-
+class FromServer implements Runnable {
+	
+	ObjectInputStream fromServer;
+	String[] nextLine;
+	
+	public FromServer(ObjectInputStream fromServer) {
+		this.fromServer = fromServer;
+	}
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while (true) {
+				try {
+					String[] nextLine = (String[]) fromServer.readObject();
+					if(nextLine[0].equals("login")) {
+						if(nextLine[1].equals("1")) {
+							System.out.println("you are logged in");
+						}
+					}
+					
+				} catch (ClassNotFoundException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("From Server: " + Arrays.toString(nextLine));
+		}
+	}
+}
 
 
 //    //todo Finalise problems
