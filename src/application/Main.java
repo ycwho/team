@@ -57,19 +57,20 @@ public class Main extends Application {
 	}
 	
 	public void setMainMenuStage() throws IOException {
-		 FXMLLoader loader = new FXMLLoader();
-	        URL url = new File("res/mainMenuFX.fxml").toURI().toURL();
-	        loader.setLocation(url);
-	        VBox vbox = loader.<VBox>load();
-	        ((MainMenuController) loader.getController()).setPrimaryStage(primaryStage);
-	        Scene scene = new Scene(vbox);
-	        
-
-	        
-		MainMenuController mainMenuController = loader.getController();
-		mainMenuController.setClient(client);
-		mainMenuController.setMain(this);// pointing to this instance
-		this.client.setMainMenuController(mainMenuController);
+//		FXMLLoader loader = new FXMLLoader();
+//		MainMenuController mainMenuController = loader.getController();
+//		mainMenuController.setClient(this.client);
+//		mainMenuController.setMain(this);// pointing to this instance
+//		this.client.setMainMenuController(mainMenuController);
+//		 
+//	        URL url = new File("res/mainMenuFX.fxml").toURI().toURL();
+//	        loader.setLocation(url);
+//	        VBox vbox = loader.<VBox>load();
+//	        ((MainMenuController) loader.getController()).setPrimaryStage(primaryStage);
+//	        Scene scene = new Scene(vbox);
+//	        primaryStage.setScene(scene);
+//		 primaryStage.show(); 
+		System.out.println("to main menu");
 
 	}
 	
