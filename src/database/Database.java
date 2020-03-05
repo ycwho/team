@@ -48,6 +48,27 @@ public class Database {
 		}
 		return false;
 	}
+	
+	// Checking if the user' information existed(if the user has registered?)?
+	// if not, return false ,and insert his firstname,lastname,password.
+	public boolean checkPassword(String user, String pass) {
+		try {
+			String sql = "select password from users where " + "username= ? and password = ?";
+			PreparedStatement selectStatement = this.connection.prepareStatement(sql);
+			selectStatement.setString(1, user);
+			selectStatement.setString(2, pass);
+			ResultSet resultSet = selectStatement.executeQuery();
+			while (resultSet.next()) {
+				String password = resultSet.getString("password").substring(0, pass.length());
+				if (pass.equals(password)) {
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
 
 	// Insert new user' information who has not registered before.
 	public void insertUser(String[] user) {

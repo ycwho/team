@@ -17,7 +17,10 @@ public class Controller {
 	@FXML
 	private PasswordField passwordField;
 	@FXML
-	private Button LogInButton;
+	private Button logInButton;
+	@FXML
+	private Button registerInButton;
+	
 
 	
 	//todo work out host for client argument
@@ -34,6 +37,17 @@ public class Controller {
 
 		}
 	}
+    
+    @FXML
+   	protected void register(MouseEvent event) throws IOException {
+   		if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
+   			String loginToServer = "login " + usernameField.getText() + " "+ passwordField.getText();
+   			this.client.login(loginToServer);
+   		} else {
+   			System.out.println("login failed");
+
+   		}
+   	}
    
     public Main getMain() {
 		return main;

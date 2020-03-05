@@ -21,7 +21,7 @@
                </image>
             </ImageView>
             <Button fx:id="loginButton" layoutX="264.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#login" text="Log in" />
-            <Button layoutX="328.0" layoutY="246.0" mnemonicParsing="false" text="Register" />
+            <Button fx:id="registerButton" layoutX="328.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#register" text="Register" />
             <Text layoutX="178.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asos Battleships" wrappingWidth="301.568359375">
                <font>
                   <Font name="Franklin Gothic Medium" size="42.0" />

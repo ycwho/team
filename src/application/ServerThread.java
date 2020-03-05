@@ -55,8 +55,9 @@ public class ServerThread extends Thread {
                     if (input[0].equals("login")) {
                         System.out.println(input[0]+" "+input[1]+" "+input[2]);
                         boolean logInResult = db.checkExistUser(input[1], input[2]);
-                        System.out.println("log in result: " + logInResult);
-                        if (logInResult) {
+                        boolean passwordCorrect = db.checkPassword(input[1], input[2]);
+                        System.out.println("password check: " + passwordCorrect);
+                        if (logInResult && passwordCorrect) {
                             loggedIn = true;
                             //out.println("loggedIn");
                             String[] returnString = {"login", "1"};
