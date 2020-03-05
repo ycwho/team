@@ -73,7 +73,9 @@ public class ServerThread extends Thread {
                         System.out.println("user exists already: " + userAlreadyExists);
                         if (userAlreadyExists == false) {
                             db.insertUser(input[1], input[2]);
-                            //out.println("registered");
+                            String[] returnString = {"register", "1"};
+                            toClient.writeObject(returnString);
+                            System.out.println(loggedIn);
                         }
                     } else { // handle specific cases here e.g. -1 or -2
                         //out.println("Please try again or register");

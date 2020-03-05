@@ -116,6 +116,12 @@ class FromServer implements Runnable {
 							main.setMainMenuStage();
 						}
 					}
+					if(nextLine[0].equals("register")) {
+						if(nextLine[1].equals("1")) {
+							System.out.println("you can now log in");
+							main.setMainMenuStage();
+						}
+					}
 					
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
