@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -21,7 +21,7 @@
                </image>
             </ImageView>
             <Button fx:id="loginButton" layoutX="264.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#login" text="Log in" />
-            <Button layoutX="328.0" layoutY="246.0" mnemonicParsing="false" text="Register" />
+            <Button fx:id="registerButton" layoutX="328.0" layoutY="246.0" mnemonicParsing="false" onMousePressed="#register" text="Register" />
             <Text layoutX="178.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asos Battleships" wrappingWidth="301.568359375">
                <font>
                   <Font name="Franklin Gothic Medium" size="42.0" />

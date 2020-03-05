@@ -86,6 +86,10 @@ public class Client {
     public void login(String loginDetails) throws IOException {
     	toServer.writeObject(loginDetails.split(" "));
     }
+    
+    public void register(String loginDetails) throws IOException {
+    	toServer.writeObject(loginDetails.split(" "));
+    }
 
 }
 

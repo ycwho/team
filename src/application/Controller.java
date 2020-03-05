@@ -19,7 +19,7 @@ public class Controller {
 	@FXML
 	private Button logInButton;
 	@FXML
-	private Button registerInButton;
+	private Button registerButton;
 	
 
 	
@@ -40,9 +40,10 @@ public class Controller {
     
     @FXML
    	protected void register(MouseEvent event) throws IOException {
+    	System.out.println("pressed");
    		if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
-   			String loginToServer = "login " + usernameField.getText() + " "+ passwordField.getText();
-   			this.client.login(loginToServer);
+   			String registerToServer = "register " + usernameField.getText() + " "+ passwordField.getText();
+   			this.client.register(registerToServer);
    		} else {
    			System.out.println("login failed");
 

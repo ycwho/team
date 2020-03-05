@@ -67,15 +67,12 @@ public class ServerThread extends Thread {
                             //out.println("Please try again");
                         }
                     }
-                    if (input[0] == "register") {
+                    if (input[0].equals("register")) {
                         System.out.println(input[1] + " " + input[2]);
-                        System.out.println(db.checkExistUser(input[1], input[2]));
-//        			int signInResult = db.userSignIn(input[1], input[2]);
-//        			if (signInResult >= 0) {
-//        				loggedIn=true;
-//        				out.println("loggedIn");
-                        if (db.checkExistUser(input[1], input[2]) == false) {
-                            db.insertUser(input);
+                        boolean userAlreadyExists = db.checkExistUser(input[1], input[2]);
+                        System.out.println("user exists already: " + userAlreadyExists);
+                        if (userAlreadyExists == false) {
+                            db.insertUser(input[1], input[2]);
                             //out.println("registered");
                         }
                     } else { // handle specific cases here e.g. -1 or -2

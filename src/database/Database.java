@@ -71,16 +71,13 @@ public class Database {
 	}
 
 	// Insert new user' information who has not registered before.
-	public void insertUser(String[] user) {
+	public void insertUser(String user, String pass) {
 		try {
-			PreparedStatement insertStatement = connection
-					.prepareStatement("INSERT INTO USERS (Username,Password) " + "VALUES (?,?) ");
-			System.out.println("Connection established");
-			//String[] userStrings = user.split(",");
-			insertStatement.setString(1, user[1]);
-			insertStatement.setString(2, user[2]);
-	//	insertStatement.setString(3, userStrings[3]);
-			insertStatement.executeUpdate();
+			String sql = "INSERT INTO USERS (Username,Password) " + "VALUES (?,?)";
+			PreparedStatement insertStatement = connection.prepareStatement(sql);
+			insertStatement.setString(1, user);
+			insertStatement.setString(2, pass);
+//			insertStatement.executeUpdate();
 			int result = insertStatement.executeUpdate();
 			System.out.println(result);
 
