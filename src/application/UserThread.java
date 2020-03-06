@@ -50,7 +50,6 @@ public class UserThread extends Thread {
 
 	public void run() {
 		try {
-
 //			database = new DatabaseTest();
 //			database.run();
 			database = new Database();
@@ -58,25 +57,13 @@ public class UserThread extends Thread {
 			toClient = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 			fromClient = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-			String getCommand;
+			String getCommand = null;
 
 			System.out.println("waiting for client respond");
 
-			while (!(getCommand = fromClient.readLine()).equals(Protocol.DISCONNECTION)) {
-				if (userStatus == 0) {
-					System.out.println("hi");
-					tellClient("[REPLY]"+logCommand(getCommand));
-				} else if (userStatus == 1) {
-					tellClient("[REPLY]"+userCommand(getCommand));
-				} else if (userStatus == 2) {
-					tellClient("[REPLY]"+gameCommand(getCommand));
-				}
-				
-
-			}
-//			while (true) {
-//				
+//			while (!(getCommand = fromClient.readLine()).equals(Protocol.DISCONNECTION)) {
 //				if (userStatus == 0) {
+//					System.out.println("hi");
 //					tellClient("[REPLY]"+logCommand(getCommand));
 //				} else if (userStatus == 1) {
 //					tellClient("[REPLY]"+userCommand(getCommand));
@@ -86,8 +73,23 @@ public class UserThread extends Thread {
 //				
 //
 //			}
+			while (true) {
+				System.out.println("listening to client");
+				getCommand = fromClient.readLine();
+				if(getCommand != null)
+					System.out.println(getCommand);
+				if (userStatus == 0) {
+					tellClient("[REPLY]"+logCommand(getCommand));
+				} else if (userStatus == 1) {
+					tellClient("[REPLY]"+userCommand(getCommand));
+				} else if (userStatus == 2) {
+					tellClient("[REPLY]"+gameCommand(getCommand));
+				}
+				
 
-			System.out.println(Thread.currentThread().getName() + ":" + username + "Client want to disconnect");
+			}
+
+//			System.out.println(Thread.currentThread().getName() + ":" + username + "Client want to disconnect");
 
 		}
 

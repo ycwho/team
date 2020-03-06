@@ -119,9 +119,9 @@ public class Client {
 		this.mainMenuController = controller2;
 	}
 
-	public void register(String registerToServer) {
+	public void register(String registerToServer) throws IOException {
 		// TODO Auto-generated method stub
-		
+		toServer.write("log Jim Pass");
 	}
 
 
