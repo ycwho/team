@@ -1,4 +1,4 @@
-package merge;
+package copyOfHenryApplication;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +27,6 @@ public class Main extends Application {
 //        primaryStage.show();
     	this.primaryStage = primaryStage;
     	client = new Client("localhost", this);
-    	client.run();
     	
     	primaryStage.setOnCloseRequest(event -> {
 			System.out.println("Stage is closing");

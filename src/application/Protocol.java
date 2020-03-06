@@ -1,4 +1,4 @@
-package merge;
+package application;
 
 public interface Protocol {
 	
@@ -12,7 +12,7 @@ public interface Protocol {
 	
 	String[] CLIENT_SIGNUP_REPLY = {"sign up success" , "sign up failed because the username already exists", "sign up because reason 2"};
 	
-	
+	//log username password
 	String CLIENT_LOGIN = "log";
 	
 	String[] CLIENT_LOGIN_REPLY = {"login success" , "log in failed because wrong username/password", "log in failed because reason 2"};

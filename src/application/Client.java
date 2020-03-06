@@ -1,250 +1,138 @@
 package application;
 
-// TODO gui crashing when closing the login gui
+
 
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import java.net.*;
 
 public class Client {
 
-    private Socket server;
-    private ObjectOutputStream toServer;
-    private ObjectInputStream fromServer;
-    //private BufferedReader fromUser;
-    private Controller controller;
-    private MainMenuController mainMenuController;
-    private Main main;
-    
-    public void setMainMenuController(MainMenuController mainMenuController) {
-		this.mainMenuController = mainMenuController;
+	// Communication:
+
+	private Socket server;
+	// private OutputStreamWriter toServer;
+	private BufferedWriter toServer;
+	// private InputStreamReader fromServer;
+	private BufferedReader fromServer;
+	private BufferedReader fromUser;
+	ListenFromSystem printer;
+	private boolean isLogin;
+	private Controller controller;
+	private MainMenuController mainMenuController;
+
+	Client(String serverName, Main main) {
+		try {
+			server = new Socket(serverName, 50000);
+			// toServer = new DataOutputStream(server.getOutputStream());
+			// fromServer = new DataInputStream(server.getInputStream());
+			
+			toServer = new BufferedWriter(new OutputStreamWriter(server.getOutputStream()));
+			fromServer = new BufferedReader(new InputStreamReader(server.getInputStream()));
+			printer = new ListenFromSystem(fromServer);
+		} catch (UnknownHostException e) {
+			System.out.println("Unknown host: " + serverName);
+		} catch (IOException e) {
+			System.out.println("Couldn't get I/O for the connection to " + serverName);
+		}
+		
+		
+		isLogin = false;
+		fromUser = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Connected to Server:" + server.getPort());
+		
+		
+		
 	}
 
-	private String[] input;
-   
+
+	public void finalize() {
+		try {
+			// Let server know we are done.
+			// Our convention is to send "0" to indicate this.
+			
+			toServer.write(Protocol.DISCONNECTION);
+			toServer.newLine();
+			toServer.flush();
+			System.out.println("End the connection");
+
+			// Close the streams:
+			
+			toServer.close();
+			fromServer.close();
+			fromUser.close();
+
+			// Close the connection:
+
+			server.close();
+		} catch (IOException e) {
+			System.out.println("Something went wrong ending the client");
+		}
+	}
+
+	// This is what this class does:
+
+	public void run() {
+		try {
+			ListenFromSystem printer = new ListenFromSystem(fromServer);
+			printer.start();
+			System.out.println("Please enter command: ");
+			while (true) {
+
+				
+				String command = fromUser.readLine();
+				if (!command.startsWith("END")) {
+
+					toServer.write(command);
+					toServer.newLine();
+					toServer.flush();
+
+					// System.out.println("Waiting for server respond...");
+
+
+
+
+				} else {
+					finalize();
+				}
+
+			}
+
+		} catch (IOException e) {
+			
+			 finalize();
+		}
+	}
+
 	public void setController(Controller controller) {
+		// TODO Auto-generated method stub
 		this.controller = controller;
 	}
 
-	Client(String serverName, Main main) throws ClassNotFoundException {
-        try {
-        	this.main = main;
-            server = new Socket(serverName, 50000);
-            toServer = new ObjectOutputStream(server.getOutputStream());
-            fromServer = new ObjectInputStream(server.getInputStream());
-            toServer.flush();
-            //fromUser = new BufferedReader(new InputStreamReader(System.in));
-            String[] connected = {"Connected"};
-            toServer.writeObject(connected); //server connected
-            Thread fromServerThread = new Thread(new FromServer(fromServer, main));
-			fromServerThread.start();
-//            	 try {
-//          		   input = (String[]) fromServer.readObject();
-//          		   } catch (EOFException eof) {
-//          			  String[] empty = {""};
-//          			  input = empty;
-//          		   }
-//            	 if(input[0].equals("login")) {
-//            		 if(input[1].equals("1"));
-//            		 System.out.println("logged in");;
-//            	 }
-//            }
-            
-        } catch (UnknownHostException e) {
-            System.out.println("Unknown Host");
-        } catch (IOException e) {
-            System.out.println("I/O error");
-        }
-    }
-
-    public ObjectOutputStream getToServer () {
-        return toServer;
-    }
-
-    public ObjectInputStream getFromServer () {
-        return fromServer;
-    }
-    
-    public void login(String loginDetails) throws IOException {
-    	toServer.writeObject(loginDetails.split(" "));
-    }
-    
-    public void register(String loginDetails) throws IOException {
-    	toServer.writeObject(loginDetails.split(" "));
-    }
-
-}
-
-class FromServer implements Runnable {
-	
-	ObjectInputStream fromServer;
-	String[] nextLine;
-	Main main;
-	
-	public FromServer(ObjectInputStream fromServer, Main main) {
-		this.fromServer = fromServer;
-		this.main=main;
-	}
-	
-	@Override
-	public void run() {
+	public void setMainMenuController(MainMenuController controller2) {
 		// TODO Auto-generated method stub
-		while (true) {
-				try {
-					String[] nextLine = (String[]) fromServer.readObject();
-					if(nextLine[0].equals("login")) {
-						if(nextLine[1].equals("1")) {
-							System.out.println("you are logged in");
-							main.setMainMenuStage();
-						}
-					}
-					if(nextLine[0].equals("register")) {
-						if(nextLine[1].equals("1")) {
-							System.out.println("you can now log in");
-							main.setMainMenuStage();
-						}
-					}
-					
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("From Server: " + Arrays.toString(nextLine));
-		}
+		this.mainMenuController = controller2;
 	}
+
+	public void register(String registerToServer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void login(String loginToServer) throws IOException {
+		// TODO Auto-generated method stub
+		toServer.write(loginToServer);
+	}
+
+//	public static void main(String[] args) {
+//		if (args.length != 1) {
+//			System.err.println("Usage: java LaunchClient hostname");
+//			System.exit(1);
+//		}
+//
+//		ClientTest2 client = new ClientTest2(args[0]);
+//
+//		client.run();
+//	}
+
 }
-
-
-//    //todo Finalise problems
-//    @Override
-//    public void finally () {
-//        try {
-//            // Let server know we are done.
-//            // Our convention is to send "0" to indicate this.
-//
-//            toServer.writeInt(0);
-//
-//            toServer.close();
-//            fromServer.close();
-//            fromUser.close();
-//
-//            server.close();
-//        }
-//        catch (IOException e) {
-//            System.err.println("Something went wrong ending the client");
-//        }
-//    }
-
-
-
-    //    public static Group root = new Group();
-//    Stage primaryStage;
-//    static PrintWriter out;
-//    static ObjectOutputStream toServer;
-//    static ObjectInputStream fromServer;
-//    //    private BufferedReader fromUser;
-//
-//    public static void main(String[] args) throws IOException {
-//        if (args.length != 1) {
-//            System.err.println("Pass the server IP as the sole command line argument");
-//            return;
-//        }
-//        try (Socket server = new Socket(args[0], 50000)) {
-//            while(true) {
-//                toServer = new ObjectOutputStream(server.getOutputStream());
-//                fromServer = new ObjectInputStream(server.getInputStream());
-//                //fromUser = new BufferedReader(new InputStreamReader(System.in));
-////                out = new PrintWriter(server.getOutputStream(), true);
-////
-////                out.println("con");
-//                toServer.writeUTF("Connected"); //server connected
-//                toServer.flush();
-//                launch(args);
-//            }
-//
-////                out.println(scanner.nextLine());
-//
-//        }
-//
-//    }
-//
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        // TODO Auto-generated method stub
-//        primaryStage.setTitle("Battleships");
-//
-//        TextField usernameField = new TextField();
-//        usernameField.setLayoutX(100);
-//        usernameField.setLayoutY(100);
-//        usernameField.setPromptText("Username");
-//        PasswordField passwordField = new PasswordField();
-//        passwordField.setPromptText("Password");
-//        passwordField.setLayoutX(100);
-//        passwordField.setLayoutY(150);
-//
-//        Button loginButton = new Button();
-//        loginButton.setText("Login");
-//        loginButton.setOnAction(new EventHandler<ActionEvent>() {
-//
-//            @Override
-//            public void handle(ActionEvent event) {
-//                try {
-//                    toServer.writeUTF("login "+usernameField.getText()+" "+passwordField.getText());
-//                    toServer.flush();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//        loginButton.setLayoutX(140);
-//        loginButton.setLayoutY(200);
-//
-//        Button registerButton = new Button();
-//        registerButton.setText("Register");
-//        registerButton.setOnAction(new EventHandler<ActionEvent>() {
-//
-//            @Override
-//            public void handle(ActionEvent event) {
-//
-//                try {
-//                    toServer.writeUTF("register "+usernameField.getText()+" "+passwordField.getText());
-//                    toServer.flush();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//            }
-//        });
-//        registerButton.setLayoutX(130);
-//        registerButton.setLayoutY(250);
-//
-//        Pane root = new Pane();
-//
-//        root.getChildren().add(registerButton);
-//        root.getChildren().add(loginButton);
-//        root.getChildren().add(usernameField);
-//        root.getChildren().add(passwordField);
-//        primaryStage.setScene(new Scene(root, 300, 300));
-//        primaryStage.show();
-//    }
-//
-//}

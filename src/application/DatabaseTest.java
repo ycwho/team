@@ -1,4 +1,4 @@
-package merge;
+package application;
 
 import java.net.*;
 import java.sql.*;

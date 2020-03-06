@@ -1,4 +1,4 @@
-package application;
+package copyOfHenryApplication;
 
 import java.net.*;
 import java.io.*;

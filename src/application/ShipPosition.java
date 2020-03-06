@@ -1,4 +1,4 @@
-package merge;
+package application;
 
 /**
  * this class is for describe the type and position of a ship
