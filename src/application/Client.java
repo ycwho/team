@@ -14,7 +14,7 @@ public class Client {
 
 	private Socket server;
 	// private OutputStreamWriter toServer;
-	private BufferedWriter toServer;
+	public BufferedWriter toServer;
 	// private InputStreamReader fromServer;
 	private BufferedReader fromServer;
 	private BufferedReader fromUser;
@@ -127,9 +127,16 @@ public class Client {
 
 	public void login(String loginToServer) throws IOException {
 		// TODO Auto-generated method stub
-		toServer.write(loginToServer);
+		System.out.println("hi");
+		write(loginToServer);
+		
 	}
-
+	
+	public void write(String message) throws IOException {
+		toServer.write(message);
+		toServer.newLine();
+		toServer.flush();
+	}
 	
 	class FromServer implements Runnable {
 		
@@ -148,6 +155,7 @@ public class Client {
 			while (true) {
 				
 					try {
+						
 						String[] nextLine = fromServer.readLine().split(" ");
 						System.out.println(nextLine);
 						if(nextLine[0].equals("login")) {
@@ -180,6 +188,7 @@ public class Client {
 						e.printStackTrace();
 					}
 					System.out.println("From Server: " + Arrays.toString(nextLine));
+					
 			}
 		}
 	}	

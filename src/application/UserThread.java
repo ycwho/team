@@ -74,8 +74,10 @@ public class UserThread extends Thread {
 //
 //			}
 			while (true) {
+				
 				System.out.println("listening to client");
 				getCommand = fromClient.readLine();
+				System.out.println(getCommand);
 				if(getCommand != null)
 					System.out.println(getCommand);
 				if (userStatus == 0) {
