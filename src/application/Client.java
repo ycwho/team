@@ -3,7 +3,10 @@ package application;
 
 
 import java.io.*;
+
 import java.net.*;
+import java.util.Arrays;
+import javafx.application.Platform;
 
 public class Client {
 
@@ -19,9 +22,11 @@ public class Client {
 	private boolean isLogin;
 	private Controller controller;
 	private MainMenuController mainMenuController;
-
+	private Main main;
+	
 	Client(String serverName, Main main) {
 		try {
+			this.main = main;
 			server = new Socket(serverName, 50000);
 			// toServer = new DataOutputStream(server.getOutputStream());
 			// fromServer = new DataInputStream(server.getInputStream());
@@ -39,7 +44,8 @@ public class Client {
 		isLogin = false;
 		fromUser = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Connected to Server:" + server.getPort());
-		
+		Thread fromServerThread = new Thread(new FromServer(fromServer, main));
+		fromServerThread.start();
 		
 		
 	}
@@ -124,6 +130,58 @@ public class Client {
 		toServer.write(loginToServer);
 	}
 
+	
+	class FromServer implements Runnable {
+		
+		BufferedReader fromServer;
+		String[] nextLine;
+		Main main;
+		
+		public FromServer(BufferedReader fromServer, Main main) {
+			this.fromServer = fromServer;
+			this.main=main;
+		}
+		
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			while (true) {
+				
+					try {
+						String[] nextLine = fromServer.readLine().split(" ");
+						if(nextLine[0].equals("login")) {
+							if(nextLine[1].equals("1")) {
+								System.out.println("you are logged in");
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {
+										try {
+											main.setMainMenuStage();
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}
+								});
+								
+							}
+						}
+						if(nextLine[0].equals("register")) {
+							if(nextLine[1].equals("1")) {
+								System.out.println("you can now log in");
+								
+								
+							}
+						}
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println("From Server: " + Arrays.toString(nextLine));
+			}
+		}
+	}	
 //	public static void main(String[] args) {
 //		if (args.length != 1) {
 //			System.err.println("Usage: java LaunchClient hostname");

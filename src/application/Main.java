@@ -26,9 +26,9 @@ public class Main extends Application {
 //        primaryStage.setScene(new Scene(root, 300, 275));
 //        primaryStage.show();
     	this.primaryStage = primaryStage;
-    	setLoginStage(primaryStage);
     	client = new Client("localhost", this);
-    	client.run();
+    	setLoginStage(primaryStage);
+    	
     	
     	primaryStage.setOnCloseRequest(event -> {
 			System.out.println("Stage is closing");

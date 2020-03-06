@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 public class Controller {
 
     private Client client;
-    private Main main;
+    private Mainhenry main;
     @FXML
 	private TextField usernameField;
 	@FXML
@@ -50,10 +50,10 @@ public class Controller {
    		}
    	}
    
-    public Main getMain() {
+    public Mainhenry getMain() {
 		return main;
 	}
-	public void setMain(Main main) {
+	public void setMain(Mainhenry main) {
 		this.main = main;
 	}
 	public Client getClient() {

@@ -33,7 +33,7 @@ public class Client {
     //private BufferedReader fromUser;
     private Controller controller;
     private MainMenuController mainMenuController;
-    private Main main;
+    private Mainhenry main;
     
     public void setMainMenuController(MainMenuController mainMenuController) {
 		this.mainMenuController = mainMenuController;
@@ -45,7 +45,7 @@ public class Client {
 		this.controller = controller;
 	}
 
-	Client(String serverName, Main main) throws ClassNotFoundException {
+	Client(String serverName, Mainhenry main) throws ClassNotFoundException {
         try {
         	this.main = main;
             server = new Socket(serverName, 50000);
@@ -98,9 +98,9 @@ class FromServer implements Runnable {
 	
 	ObjectInputStream fromServer;
 	String[] nextLine;
-	Main main;
+	Mainhenry main;
 	
-	public FromServer(ObjectInputStream fromServer, Main main) {
+	public FromServer(ObjectInputStream fromServer, Mainhenry main) {
 		this.fromServer = fromServer;
 		this.main=main;
 	}

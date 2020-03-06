@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class MainMenuController {
 
 	 private Client client;
-	    private Main main;
+	    private Mainhenry main;
 	    public Stage primaryStage;
 	    
 		public void setPrimaryStage(Stage primaryStage) {
@@ -40,11 +40,11 @@ public class MainMenuController {
 			this.client = client;
 		}
 
-		public Main getMain() {
+		public Mainhenry getMain() {
 			return main;
 		}
 
-		public void setMain(Main main) {
+		public void setMain(Mainhenry main) {
 			this.main = main;
 		}
 
