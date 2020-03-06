@@ -29,7 +29,6 @@ public class Main extends Application {
     	client = new Client("localhost", this);
     	setLoginStage(primaryStage);
     	
-    	
     	primaryStage.setOnCloseRequest(event -> {
 			System.out.println("Stage is closing");
 			System.exit(0);

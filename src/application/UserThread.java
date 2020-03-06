@@ -8,6 +8,9 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
+import database.Database;
+import server.Protocol;
+
 //import database.Database;
 //import database.DatabaseTest;
 
@@ -16,7 +19,7 @@ public class UserThread extends Thread {
 	BufferedReader fromClient;
 	BufferedWriter toClient;
 	private Socket client;
-	private DatabaseTest database;
+	private Database database;
 
 	// 0 means not log in, 1 means log in
 	private int userStatus;
@@ -48,8 +51,10 @@ public class UserThread extends Thread {
 	public void run() {
 		try {
 
-			database = new DatabaseTest();
-			database.run();
+//			database = new DatabaseTest();
+//			database.run();
+			database = new Database();
+			System.out.println("databaseup");
 			toClient = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 			fromClient = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
@@ -59,14 +64,28 @@ public class UserThread extends Thread {
 
 			while (!(getCommand = fromClient.readLine()).equals(Protocol.DISCONNECTION)) {
 				if (userStatus == 0) {
+					System.out.println("hi");
 					tellClient("[REPLY]"+logCommand(getCommand));
 				} else if (userStatus == 1) {
 					tellClient("[REPLY]"+userCommand(getCommand));
 				} else if (userStatus == 2) {
 					tellClient("[REPLY]"+gameCommand(getCommand));
 				}
+				
 
 			}
+//			while (true) {
+//				
+//				if (userStatus == 0) {
+//					tellClient("[REPLY]"+logCommand(getCommand));
+//				} else if (userStatus == 1) {
+//					tellClient("[REPLY]"+userCommand(getCommand));
+//				} else if (userStatus == 2) {
+//					tellClient("[REPLY]"+gameCommand(getCommand));
+//				}
+//				
+//
+//			}
 
 			System.out.println(Thread.currentThread().getName() + ":" + username + "Client want to disconnect");
 
@@ -83,6 +102,7 @@ public class UserThread extends Thread {
 
 	public String logCommand(String getCommand) {
 		int i = 0;
+		System.out.println(getCommand);
 		String[] commandElements = getCommand.split(" ");
 		// login
 		if (getCommand.startsWith(Protocol.CLIENT_LOGIN)) {
@@ -95,12 +115,14 @@ public class UserThread extends Thread {
 			if (onlineUsers.containsKey(username)) {
 				return "have been logged";
 			}
-
-			i = database.userLogIn(username, password);
-			if (i == 0) {
-				userStatus = 1;
-				this.username = username;
-				onlineUsers.forEach((k, v) -> {
+			boolean logInResult = database.checkExistUser(commandElements[1], commandElements[2]);
+            boolean passwordCorrect = database.checkPassword(commandElements[1], commandElements[2]);
+            System.out.println("password check: " + passwordCorrect);
+            if (logInResult && passwordCorrect) {
+                userStatus = 1;
+    			System.out.println("logged in");
+                this.username = commandElements[1];
+                onlineUsers.forEach((k, v) -> {
 					try {
 						v.tellClient(Protocol.SERVER_NOTICE_OTHER_LOGIN + username);
 					} catch (IOException e) {
@@ -108,24 +130,28 @@ public class UserThread extends Thread {
 						e.printStackTrace();
 					}
 				});
-
 				onlineUsers.put(username, this);
-				
-			}
-			return Protocol.CLIENT_LOGIN_REPLY[i];
-
+				return Protocol.CLIENT_LOGIN_REPLY[i];
+//                String[] returnString = {"login", "1"};
+//                toClient.writeObject(returnString);
+//                System.out.println(loggedIn);
+            } else { // handle specific cases here e.g. -1 or -2
+                //out.println("Please try again");
+            }
+           
 		}
-		// sign up
-		else if (getCommand.startsWith(Protocol.CLIENT_SIGNUP)) {
-
-			String username = commandElements[1];
-			String password = commandElements[2];
-
-			i = database.userSignIn(username, password);
-
-			return Protocol.CLIENT_SIGNUP_REPLY[i];
-		}
-		return Protocol.CLIENT_NEED_RESENT_COMMAND;
+//		// sign up
+//		else if (getCommand.startsWith(Protocol.CLIENT_SIGNUP)) {
+//
+//			String username = commandElements[1];
+//			String password = commandElements[2];
+//
+//			i = database.userSignIn(username, password);
+//
+//			return Protocol.CLIENT_SIGNUP_REPLY[i];
+//		}
+//		return Protocol.CLIENT_NEED_RESENT_COMMAND;
+		 return Protocol.CLIENT_NEED_RESENT_COMMAND;
 	}
 
 	public String userCommand(String getCommand) {
@@ -295,7 +321,6 @@ public class UserThread extends Thread {
 			toClient.close();
 			fromClient.close();
 			client.close();
-			database.quit();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

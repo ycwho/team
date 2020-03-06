@@ -30,7 +30,8 @@ public class Controller {
     @FXML
 	protected void login(MouseEvent event) throws IOException {
 		if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
-			String loginToServer = "login " + usernameField.getText() + " "+ passwordField.getText();
+			String loginToServer = "log " + usernameField.getText() + " "+ passwordField.getText();
+			System.out.println(loginToServer);
 			this.client.login(loginToServer);
 		} else {
 			System.out.println("login failed");

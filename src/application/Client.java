@@ -149,8 +149,9 @@ public class Client {
 				
 					try {
 						String[] nextLine = fromServer.readLine().split(" ");
+						System.out.println(nextLine);
 						if(nextLine[0].equals("login")) {
-							if(nextLine[1].equals("1")) {
+							if(nextLine[1].equals("success")) {
 								System.out.println("you are logged in");
 								Platform.runLater(new Runnable() {
 									@Override
