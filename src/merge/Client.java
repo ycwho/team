@@ -5,7 +5,7 @@ package merge;
 import java.io.*;
 import java.net.*;
 
-public class ClientTest2 {
+public class Client {
 
 	// Communication:
 
@@ -17,8 +17,10 @@ public class ClientTest2 {
 	private BufferedReader fromUser;
 	ListenFromSystem printer;
 	private boolean isLogin;
+	private Controller controller;
+	private MainMenuController mainMenuController;
 
-	ClientTest2(String serverName) {
+	Client(String serverName, Main main) {
 		try {
 			server = new Socket(serverName, 50000);
 			// toServer = new DataOutputStream(server.getOutputStream());
@@ -101,15 +103,25 @@ public class ClientTest2 {
 		}
 	}
 
-	public static void main(String[] args) {
-		if (args.length != 1) {
-			System.err.println("Usage: java LaunchClient hostname");
-			System.exit(1);
-		}
-
-		ClientTest2 client = new ClientTest2(args[0]);
-
-		client.run();
+	public void setController(Controller controller) {
+		// TODO Auto-generated method stub
+		this.controller = controller;
 	}
+
+	public void setMainMenuController(MainMenuController controller2) {
+		// TODO Auto-generated method stub
+		this.mainMenuController = controller2;
+	}
+
+//	public static void main(String[] args) {
+//		if (args.length != 1) {
+//			System.err.println("Usage: java LaunchClient hostname");
+//			System.exit(1);
+//		}
+//
+//		ClientTest2 client = new ClientTest2(args[0]);
+//
+//		client.run();
+//	}
 
 }

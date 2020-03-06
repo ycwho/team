@@ -18,7 +18,6 @@ public class Main extends Application {
 	
 	Stage primaryStage;
 	Client client;
-	AnchorPane rootPane;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -26,10 +25,16 @@ public class Main extends Application {
 //        primaryStage.setTitle("BattleShips");
 //        primaryStage.setScene(new Scene(root, 300, 275));
 //        primaryStage.show();
+    	this.primaryStage = primaryStage;
     	client = new Client("localhost", this);
+    	client.run();
+    	
+    	primaryStage.setOnCloseRequest(event -> {
+			System.out.println("Stage is closing");
+			System.exit(0);
+		});
+    	
     	setLoginStage(primaryStage);
-    	
-    	
     	
     }
 
@@ -38,48 +43,34 @@ public class Main extends Application {
     }
     
 	public void setLoginStage(Stage primaryStage) throws IOException {
-		 FXMLLoader loader = new FXMLLoader();
-	        URL url = new File("res/loginFX.fxml").toURI().toURL();
-	        loader.setLocation(url);
-	        VBox vbox = loader.<VBox>load();
-	        Scene scene = new Scene(vbox);
-	        primaryStage.setScene(scene);
-	        primaryStage.getIcons().add(new Image("icon.png"));
-	        
-		Controller controller = loader.getController();
-		controller.setClient(client);
-		controller.setMain(this);// pointing to this instance
-		this.client.setController(controller);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("loginFX.fxml"));
+	    Parent root = loader.load();
+	    Controller controller = loader.getController();
+	    controller.setClient(client);
+	    controller.setMain(this);
+	    this.client.setController(controller);
+	    Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.sizeToScene();
-		primaryStage.setTitle("Battleships Asos");
-
-
-	        primaryStage.show(); 
-
+		primaryStage.setTitle("Asos Battleships");
+		primaryStage.show();
 	}
 	
 	public void setMainMenuStage() throws IOException {
-		 FXMLLoader loader = new FXMLLoader();
-	        URL url = new File("res/mainMenuFX.fxml").toURI().toURL();
-	        loader.setLocation(url);
-	        VBox vbox = loader.<VBox>load();
-	        Scene scene2 = new Scene(vbox);
-	        primaryStage.setScene(scene2);
-	        primaryStage.getIcons().add(new Image("icon.png"));
-	        
-		Controller controller = loader.getController();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenuFX.fxml"));
+		Parent root = fxmlLoader.load();
+		MainMenuController controller = fxmlLoader.getController();
 		controller.setClient(client);
-		controller.setMain(this);// pointing to this instance
-		this.client.setController(controller);
+		controller.setMain(this);
+		this.client.setMainMenuController(controller);
+
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.sizeToScene();
-		primaryStage.setTitle("Battleships Asos");
-
-
-	        primaryStage.show(); 
-		System.out.println("to main menu");
-	        rootPane.getChildren().setAll(pane);
+		primaryStage.setTitle("Battleships Register User");
+		primaryStage.show();
 
 	}
 	
