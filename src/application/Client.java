@@ -157,8 +157,10 @@ public class Client {
 					try {
 						
 						String[] nextLine = fromServer.readLine().split(" ");
-						System.out.println(nextLine);
-						if(nextLine[0].equals("login")) {
+						System.out.println(nextLine[0]);
+						System.out.println(nextLine[1]);
+//						System.out.println(nextLine);
+						if(nextLine[0].equals("[REPLY]login")) {
 							if(nextLine[1].equals("success")) {
 								System.out.println("you are logged in");
 								Platform.runLater(new Runnable() {
@@ -169,6 +171,7 @@ public class Client {
 										} catch (IOException e) {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
+											System.out.println("error switchign stages");
 										}
 									}
 								});
