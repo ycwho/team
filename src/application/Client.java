@@ -121,7 +121,7 @@ public class Client {
 
 	public void register(String registerToServer) throws IOException {
 		// TODO Auto-generated method stub
-		toServer.write("log Jim Pass");
+		write(registerToServer);
 	}
 
 
@@ -178,8 +178,8 @@ public class Client {
 								
 							}
 						}
-						if(nextLine[0].equals("register")) {
-							if(nextLine[1].equals("1")) {
+						if(nextLine[0].equals("[REPLY]register")) {
+							if(nextLine[1].equals("success")) {
 								System.out.println("you can now log in");
 								
 								
