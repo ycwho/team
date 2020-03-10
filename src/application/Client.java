@@ -118,7 +118,7 @@ public class Client {
 
 	public void register(String registerToServer) throws IOException {
 		// TODO Auto-generated method stub
-		toServer.write("log Jim Pass");
+		write(registerToServer);
 	}
 
 

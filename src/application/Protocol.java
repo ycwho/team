@@ -8,9 +8,9 @@ public interface Protocol {
 	
 
 	
-	String CLIENT_SIGNUP = "sign";
+	String CLIENT_SIGNUP = "register";
 	
-	String[] CLIENT_SIGNUP_REPLY = {"sign up success" , "sign up failed because the username already exists", "sign up because reason 2"};
+	String[] CLIENT_SIGNUP_REPLY = {"register success" , "sign up failed because the username already exists", "sign up because reason 2"};
 	
 	//log username password
 	String CLIENT_LOGIN = "log";

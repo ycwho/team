@@ -41,6 +41,14 @@ public class Controller {
     
     @FXML
    	protected void register(MouseEvent event) throws IOException {
+    	if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
+			String registerToServer = "register " + usernameField.getText() + " "+ passwordField.getText();
+			System.out.println(registerToServer);
+			this.client.register(registerToServer);
+		} else {
+			System.out.println("login failed");
+
+		}
 //    	System.out.println("pressed");
 //   		if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
 //   			String registerToServer = "register " + usernameField.getText() + " "+ passwordField.getText();
@@ -49,7 +57,7 @@ public class Controller {
 //   			System.out.println("login failed");
 //
 //   		}
-    	this.client.register("REG PRESSED");
+//    	this.client.register("REG PRESSED");
    	}
    
     public Main getMain() {

@@ -1,6 +1,7 @@
 package application;
 
 import java.io.*;
+
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 import database.Database;
-import server.Protocol;
+import application.Protocol;
 
 //import database.Database;
 //import database.DatabaseTest;
@@ -110,7 +111,7 @@ public class UserThread extends Thread {
 		String[] commandElements = getCommand.split(" ");
 		// login
 		if (getCommand.startsWith(Protocol.CLIENT_LOGIN)) {
-
+			System.out.println("revieved login request from client");
 			String username = commandElements[1];
 			String password = commandElements[2];
 			if (commandElements.length != 3) {
@@ -143,6 +144,19 @@ public class UserThread extends Thread {
                 //out.println("Please try again");
             }
            
+		}
+		//sign up
+		else if (commandElements[0].equals(Protocol.CLIENT_SIGNUP)) {
+			System.out.println("register request recieved");
+			String username = commandElements[1];
+			String password = commandElements[2];
+			boolean userAlreadyExists = database.checkExistUser(commandElements[1], commandElements[2]);
+            System.out.println("user exists already: " + userAlreadyExists);
+            if (userAlreadyExists == false) {
+                database.insertUser(commandElements[1], commandElements[2]);
+                return Protocol.CLIENT_SIGNUP_REPLY[i];
+            }
+            System.out.println("registered");
 		}
 //		// sign up
 //		else if (getCommand.startsWith(Protocol.CLIENT_SIGNUP)) {

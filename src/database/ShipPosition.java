@@ -1,10 +1,6 @@
 package database;
-/**
- * this class is for describe the type and position of a ship
- * @version 2020-02-28
- * @author Yuanchao Hu
- *
- */
+
+
 public class ShipPosition {
 	private int type;
 	private int status;
@@ -18,10 +14,42 @@ public class ShipPosition {
 	 * @param yPosition	the coordinates of the ship (head) in y-axis
 	 */
 	public ShipPosition(int type, int status, int xPosition, int yPosition) {
-		super();
+
 		this.type = type;
 		this.status = status;
 		this.xPosition = xPosition;
+		this.yPosition = yPosition;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getxPosition() {
+		return xPosition;
+	}
+
+	public void setxPosition(int xPosition) {
+		this.xPosition = xPosition;
+	}
+
+	public int getyPosition() {
+		return yPosition;
+	}
+
+	public void setyPosition(int yPosition) {
 		this.yPosition = yPosition;
 	}
 	
