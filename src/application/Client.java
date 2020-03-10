@@ -131,6 +131,11 @@ public class Client {
 		// TODO Auto-generated method stub
 		write(checkServer);
 	}
+	
+	public void checkGames(String checkServer) throws IOException {
+		// TODO Auto-generated method stub
+		write(checkServer);
+	}
 
 	public void createGame(String createGameToServer) throws IOException {
 		// TODO Auto-generated method stub
@@ -168,7 +173,7 @@ public class Client {
 					try {
 						String[] nextLine = fromServer.readLine().split(" ");
 						System.out.println(nextLine[0]);
-						System.out.println(nextLine[1]);
+//						System.out.println(nextLine[1]);
 //						System.out.println(nextLine);
 						if(nextLine[0].equals("[REPLY]login")) {
 							if(nextLine[1].equals("success")) {
@@ -227,6 +232,17 @@ public class Client {
 								toTextArea +=nextLine[i]+ "\n";
 							}
 							mainMenuController.setTextArea(toTextArea);
+						}
+						if (nextLine[0].startsWith("[REPLY]Games:")) {
+							String toTextArea = "Games:\n";
+							System.out.println("Games:");
+							if(nextLine.length>1) {
+							for(int i=1; i<nextLine.length; i++) {
+								System.out.println(nextLine[i]);
+								toTextArea +=nextLine[i]+ "\n";
+							}
+							}
+							mainMenuController.setGamesListTextArea(toTextArea);
 						}
 						else if (nextLine[0].startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
 							System.out.println("Game created, waiting for other player(s)");

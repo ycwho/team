@@ -25,8 +25,13 @@ public class MainMenuController {
 	@FXML
 	private Button joinGame;
 	@FXML
+	private Button gamesListButton;
+	@FXML
 	private TextArea usersList;
+	@FXML
+	private TextArea gamesList;
 	private boolean userPressed = false;
+	private boolean gamesPressed = false;
 
 //	public void setPrimaryStage(Stage primaryStage) {
 //			this.primaryStage = primaryStage;
@@ -39,7 +44,26 @@ public class MainMenuController {
 	public void setTextArea(String text) {
 		this.usersList.setText(text);
 	}
+	
+	public void setGamesListTextArea(String text) {
+		this.gamesList.setText(text);
+	}
 
+	@FXML
+	protected void listGames(MouseEvent event) throws IOException {
+		if(!gamesPressed) {
+		String checkServer = Protocol.CLIENT_CHECK_GAME;
+		//System.out.println(checkToServer);
+		this.gamesList.setVisible(true);
+		this.client.checkGames(checkServer);
+		gamesPressed = true;
+		}
+		else {
+			this.gamesList.setVisible(false);
+			gamesPressed = false;
+		}
+	}
+	
 	@FXML
 	protected void checkOnline(MouseEvent event) throws IOException {
 		if(!userPressed) {

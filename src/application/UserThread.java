@@ -193,6 +193,22 @@ public class UserThread extends Thread {
 			return result;
 
 		}
+		if (getCommand.equals(Protocol.CLIENT_CHECK_GAME)) {
+			System.out.println("gameCommand block reached");
+			String result = "Games:";
+//			for (String a : onlineUsers.keySet()) {
+//				result += a + " ";
+//			}
+			//check online games
+//			result += "online games : ";
+			for (String a : onlineGames.keySet()) {
+				result += a + " ";
+			}
+			System.out.println(result);
+//			String result = "other online users: you";
+			return result;
+
+		}
 
 		// create game
 		else if (getCommand.startsWith(Protocol.CLIENT_CREATE_GAME)) {

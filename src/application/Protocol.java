@@ -23,6 +23,7 @@ public interface Protocol {
 	
 	
 	String CLIENT_CHECK_ONLINE_USER = "check";
+	String CLIENT_CHECK_GAME = "gamesList";
 	
 	
 	String CLIENT_CREATE_GAME = "create";

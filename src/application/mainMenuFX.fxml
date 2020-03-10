@@ -29,9 +29,9 @@
                   <Glow level="1.0" />
                </effect>
             </Text>
-            <TextField fx:id="gameNameField" layoutX="252.0" layoutY="152.0" />
-            <Button fx:id="createGame" layoutX="200.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#createGame" text="Create Game" />
-            <Button fx:id="joinGame" layoutX="328.0" layoutY="200.0" mnemonicParsing="false" onMousePressed="#joinGame" text="Join Game" />
+            <TextField fx:id="gameNameField" layoutX="219.0" layoutY="250.0" />
+            <Button fx:id="createGame" layoutX="195.0" layoutY="291.0" mnemonicParsing="false" onMouseClicked="#createGame" text="Create Game" />
+            <Button fx:id="joinGame" layoutX="319.0" layoutY="291.0" mnemonicParsing="false" onMousePressed="#joinGame" text="Join Game" />
 <!--      <RadioButton fx:id="usersButton" layoutX="371.0" layoutY="329.0" mnemonicParsing="false" onMouseClicked="#users" prefHeight="73.0" prefWidth="64.0">-->
 <!--          <font>-->
 <!--              <Font size="50.0" />-->
@@ -45,12 +45,15 @@
               <DropShadow height="85.99" radius="37.305" spread="0.87" width="65.23" />
           </effect>
       </Text>
-            <TextArea fx:id="usersList" layoutX="509.0" layoutY="87.0" prefHeight="204.0" prefWidth="143.0" visible="false" />
+            <TextArea fx:id="usersList" layoutX="511.0" layoutY="87.0" prefHeight="213.0" prefWidth="130.0" visible="false" />
             <ImageView fx:id="checkUserIcon" fitHeight="102.0" fitWidth="72.0" layoutX="548.0" layoutY="15.0" onMouseClicked="#checkOnline" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@userIcon.png" />
                </image>
             </ImageView>
+            <Button fx:id="gameListButton" layoutX="212.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#listGames" text="Game List" />
+            <Text fill="WHITE" layoutX="570.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="users" />
+            <TextArea fx:id="gamesList" layoutX="287.0" layoutY="50.0" prefHeight="191.0" prefWidth="136.0" visible="false" />
       </children>
     </AnchorPane>
   </children>
