@@ -45,7 +45,7 @@
               <DropShadow height="85.99" radius="37.305" spread="0.87" width="65.23" />
           </effect>
       </Text>
-            <TextArea fx:id="usersList" layoutX="420.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
+            <TextArea fx:id="usersList" layoutX="509.0" layoutY="87.0" prefHeight="204.0" prefWidth="143.0" visible="false" />
             <ImageView fx:id="checkUserIcon" fitHeight="102.0" fitWidth="72.0" layoutX="548.0" layoutY="15.0" onMouseClicked="#checkOnline" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@userIcon.png" />
