@@ -1,3 +1,5 @@
+package GUI;
+
 import javafx.application.*;
 import javafx.event.EventHandler;
 import javafx.scene.Group;

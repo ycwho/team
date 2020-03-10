@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import sun.net.www.content.image.jpeg;
+//import sun.net.www.content.image.jpeg;
 
 /**
  * 

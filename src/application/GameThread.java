@@ -8,12 +8,14 @@ import java.util.Vector;
 
 public class GameThread extends Thread {
 	private UserThread host;
+	int playerNumber; ///////////
 	private Vector<UserThread> players;
 	private Vector<Player> playersInfo;
 
 	Map<String, UserThread> onlineUsers;
 	Map<String, GameThread> onlineGames;
 	private static int threadCounter = 1;
+	//todo change max player system
 	public static final int MAX_PLAYER = 3;
 	String gameName;
 
@@ -25,7 +27,7 @@ public class GameThread extends Thread {
 	 */
 	private int gameStatus;
 
-	public GameThread(UserThread host, String gameName, Map<String, UserThread> onlineUsers,
+	public GameThread(UserThread host, String gameName, int playerNumber, Map<String, UserThread> onlineUsers,
 			Map<String, GameThread> onlineGames) {
 
 		super("Game-" + threadCounter);
@@ -33,6 +35,7 @@ public class GameThread extends Thread {
 
 		this.host = host;
 		this.gameName = gameName;
+		this.playerNumber = playerNumber;
 		this.onlineUsers = onlineUsers;
 		this.onlineGames = onlineGames;
 

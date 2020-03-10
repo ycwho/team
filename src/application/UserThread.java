@@ -185,7 +185,9 @@ public class UserThread extends Thread {
 			if (!onlineGames.containsKey(gameName)) {
 
 				try {
-					GameThread newGame = new GameThread(this, gameName, onlineUsers, onlineGames);
+                    int playerNum = playerNumber();
+
+					GameThread newGame = new GameThread(this, gameName, playerNum, onlineUsers, onlineGames);
 					newGame.start();
 					
 					onlineGames.put(gameName, newGame);
@@ -249,8 +251,12 @@ public class UserThread extends Thread {
 			}catch(Exception e) {
 				return Protocol.CLIENT_NEED_RESENT_COMMAND;
 			}
-			
+
 			result = joinedGame.uploadShips(this, data);
+
+			//database.saveShipPosition(ShipPosition[] positions, int slot)
+
+
 			
 			return Protocol.CLIENT_UPLOAD_REPLY[result];
 		}
@@ -289,6 +295,28 @@ public class UserThread extends Thread {
 		
 		
 	}
+
+	public int playerNumber() throws  IOException{
+		tellClient("Select Number of Players (2-4)");
+		String input = fromClient.readLine();
+		try {
+				int number = Integer.parseInt(input);
+				if (2 <= number && number <=4) {
+					tellClient(number + " players Selected");
+					return number;
+				}
+				else {
+					tellClient("Select a number between 1 and 4");
+					return playerNumber();
+				}
+			}catch (NumberFormatException e) {
+				tellClient(input + "Not a number");
+				return playerNumber();
+			}
+
+
+
+    }
 
 	public synchronized void tellClient(String message) throws IOException {
 		toClient.write(message);

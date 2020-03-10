@@ -76,7 +76,6 @@ public class Client {
 	}
 
 	// This is what this class does:
-
 	public void run() {
 		try {
 			ListenFromSystem printer = new ListenFromSystem(fromServer);
@@ -93,8 +92,6 @@ public class Client {
 					toServer.flush();
 
 					// System.out.println("Waiting for server respond...");
-
-
 
 
 				} else {
@@ -129,8 +126,23 @@ public class Client {
 		// TODO Auto-generated method stub
 		System.out.println("hi");
 		write(loginToServer);
-		
 	}
+
+	public void checkOnline(String checkServer) throws IOException {
+		// TODO Auto-generated method stub
+		write(checkServer);
+	}
+
+	public void createGame(String createGameToServer) throws IOException {
+		// TODO Auto-generated method stub
+		write(createGameToServer);
+	}
+
+	public void joinGame(String joinRequest) throws IOException {
+		// TODO Auto-generated method stub
+		write(joinRequest);
+	}
+
 	
 	public void write(String message) throws IOException {
 		toServer.write(message);
@@ -155,7 +167,6 @@ public class Client {
 			while (true) {
 				
 					try {
-						
 						String[] nextLine = fromServer.readLine().split(" ");
 						System.out.println(nextLine[0]);
 						System.out.println(nextLine[1]);
@@ -168,6 +179,32 @@ public class Client {
 									public void run() {
 										try {
 											main.setMainMenuStage();
+
+											// Menu Options
+											String nextLine = fromServer.readLine();
+//											String[] nextCommands = nextLine.split(" ");
+											System.out.println(nextLine);
+											if (nextLine.startsWith("other online users")) {
+												System.out.println(nextLine);
+											}
+											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
+												System.out.println("Game created, waiting for other player(s)");
+											}
+											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[1])){
+												System.out.println("Game Already Exists");
+											}
+											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[2])){
+												System.out.println("Game Creation Failed");
+											}
+											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[0])) {
+												System.out.println("Game Joined");
+											}
+											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[1])){
+												System.out.println("No Game Found With That Name");
+											}
+											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[2])){
+												System.out.println("Game Join Unsuccessful");
+											}
 										} catch (IOException e) {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
@@ -178,13 +215,12 @@ public class Client {
 								
 							}
 						}
-						if(nextLine[0].equals("register")) {
-							if(nextLine[1].equals("1")) {
+						if(nextLine[0].equals("[REPLY]register")) {
+							if(nextLine[1].equals("success")) {
 								System.out.println("you can now log in");
-								
-								
 							}
 						}
+
 						
 					} catch (IOException e) {
 						// TODO Auto-generated catch block

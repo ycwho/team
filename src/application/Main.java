@@ -1,17 +1,11 @@
 package application;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -64,7 +58,6 @@ public class Main extends Application {
 		controller.setClient(client);
 		controller.setMain(this);
 		this.client.setMainMenuController(controller);
-
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
@@ -73,6 +66,21 @@ public class Main extends Application {
 		primaryStage.show();
 
 	}
+
+//	public void setGameStage(Stage primaryStage) throws IOException {
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("gameFX.fxml"));
+//		Parent root = loader.load();
+//		GameController controller = loader.getController();
+//		controller.setClient(client);
+//		controller.setMain(this);
+//		this.client.setGameController(controller);
+//		Scene scene = new Scene(root);
+//		primaryStage.setScene(scene);
+//		primaryStage.setResizable(false);
+//		primaryStage.sizeToScene();
+//		primaryStage.setTitle("Battleships");
+//		primaryStage.show();
+//	}
 	
 	
 }

@@ -27,7 +27,7 @@ public interface Protocol {
 	
 	String CLIENT_CREATE_GAME = "create";
 	
-	String[] CLIENT_CREATE_REPLY = {"create game successfully" , "already has the game", "create game for unknown reason"};
+	String[] CLIENT_CREATE_REPLY = {"create game successfully" , "game already exists", "create game failed for unknown reason"};
 	
 	String GAME_NOTICE_CREATE = "new_game_created";
 	
