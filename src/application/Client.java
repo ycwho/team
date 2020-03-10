@@ -124,7 +124,6 @@ public class Client {
 
 	public void login(String loginToServer) throws IOException {
 		// TODO Auto-generated method stub
-		System.out.println("hi");
 		write(loginToServer);
 	}
 
@@ -179,32 +178,32 @@ public class Client {
 									public void run() {
 										try {
 											main.setMainMenuStage();
-
-											// Menu Options
-											String nextLine = fromServer.readLine();
-//											String[] nextCommands = nextLine.split(" ");
-											System.out.println(nextLine);
-											if (nextLine.startsWith("other online users")) {
-												System.out.println(nextLine);
-											}
-											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
-												System.out.println("Game created, waiting for other player(s)");
-											}
-											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[1])){
-												System.out.println("Game Already Exists");
-											}
-											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[2])){
-												System.out.println("Game Creation Failed");
-											}
-											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[0])) {
-												System.out.println("Game Joined");
-											}
-											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[1])){
-												System.out.println("No Game Found With That Name");
-											}
-											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[2])){
-												System.out.println("Game Join Unsuccessful");
-											}
+											// commented out think this should be in the loop not inside this try
+											
+//											String nextLine = fromServer.readLine();
+////											String[] nextCommands = nextLine.split(" ");
+//											System.out.println(nextLine);
+//											if (nextLine.startsWith("other online users")) {
+//												System.out.println(nextLine);
+//											}
+//											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
+//												System.out.println("Game created, waiting for other player(s)");
+//											}
+//											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[1])){
+//												System.out.println("Game Already Exists");
+//											}
+//											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[2])){
+//												System.out.println("Game Creation Failed");
+//											}
+//											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[0])) {
+//												System.out.println("Game Joined");
+//											}
+//											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[1])){
+//												System.out.println("No Game Found With That Name");
+//											}
+//											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[2])){
+//												System.out.println("Game Join Unsuccessful");
+//											}
 										} catch (IOException e) {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
@@ -219,6 +218,29 @@ public class Client {
 							if(nextLine[1].equals("success")) {
 								System.out.println("you can now log in");
 							}
+						}
+						if (nextLine[0].startsWith("[REPLY]other")) {
+							System.out.println("Online users:");
+							for(int i=3; i<nextLine.length; i++)
+								System.out.println(nextLine[i]);
+						}
+						else if (nextLine[0].startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
+							System.out.println("Game created, waiting for other player(s)");
+						}
+						else if (nextLine[0].startsWith(Protocol.CLIENT_CREATE_REPLY[1])){
+							System.out.println("Game Already Exists");
+						}
+						else if (nextLine[0].startsWith(Protocol.CLIENT_CREATE_REPLY[2])){
+							System.out.println("Game Creation Failed");
+						}
+						else if (nextLine[0].startsWith(Protocol.CLIENT_JOIN_REPLY[0])) {
+							System.out.println("Game Joined");
+						}
+						else if (nextLine[0].startsWith(Protocol.CLIENT_JOIN_REPLY[1])){
+							System.out.println("No Game Found With That Name");
+						}
+						else if (nextLine[0].startsWith(Protocol.CLIENT_JOIN_REPLY[2])){
+							System.out.println("Game Join Unsuccessful");
 						}
 
 						

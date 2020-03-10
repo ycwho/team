@@ -124,7 +124,7 @@ public class UserThread extends Thread {
             boolean passwordCorrect = database.checkPassword(commandElements[1], commandElements[2]);
             System.out.println("password check: " + passwordCorrect);
             if (logInResult && passwordCorrect) {
-                userStatus = 1;
+                this.userStatus = 1;
     			System.out.println("logged in");
                 this.username = commandElements[1];
                 onlineUsers.forEach((k, v) -> {
@@ -177,18 +177,19 @@ public class UserThread extends Thread {
 		String[] commandElements = getCommand.split(" ");
 
 		// check online user
-		if (getCommand.startsWith(Protocol.CLIENT_CHECK_ONLINE_USER)) {
-
-			String result = "other online users : ";
+		if (getCommand.equals(Protocol.CLIENT_CHECK_ONLINE_USER)) {
+			System.out.println("userCommand block reached");
+			String result = "other online users: ";
 
 			for (String a : onlineUsers.keySet()) {
 				result += a + " ";
 			}
-			result += "online games : ";
-			for (String a : onlineGames.keySet()) {
-				result += a + " ";
-			}
-
+			//check online games
+//			result += "online games : ";
+//			for (String a : onlineGames.keySet()) {
+//				result += a + " ";
+//			}
+//			String result = "other online users: you";
 			return result;
 
 		}
