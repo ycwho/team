@@ -5,7 +5,9 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -17,16 +19,14 @@ public class MainMenuController {
 	@FXML
 	private TextField gameNameField;
 	@FXML
-	private Button checkUsers;
+	private ImageView checkUsersIcon;
 	@FXML
 	private Button createGame;
 	@FXML
 	private Button joinGame;
-
-
-
 	@FXML
-	private RadioButton usersButton;
+	private TextArea usersList;
+	private boolean userPressed = false;
 
 //	public void setPrimaryStage(Stage primaryStage) {
 //			this.primaryStage = primaryStage;
@@ -35,12 +35,24 @@ public class MainMenuController {
 	//todo work out host for client argument
 	public MainMenuController() {
 	}
+	
+	public void setTextArea(String text) {
+		this.usersList.setText(text);
+	}
 
 	@FXML
 	protected void checkOnline(MouseEvent event) throws IOException {
+		if(!userPressed) {
 		String checkServer = Protocol.CLIENT_CHECK_ONLINE_USER;
 		//System.out.println(checkToServer);
+		this.usersList.setVisible(true);
 		this.client.checkOnline(checkServer);
+		userPressed = true;
+		}
+		else {
+			this.usersList.setVisible(false);
+			userPressed = false;
+		}
 	}
 
 	@FXML

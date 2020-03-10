@@ -220,9 +220,13 @@ public class Client {
 							}
 						}
 						if (nextLine[0].startsWith("[REPLY]other")) {
+							String toTextArea = "Online users:\n";
 							System.out.println("Online users:");
-							for(int i=3; i<nextLine.length; i++)
+							for(int i=3; i<nextLine.length; i++) {
 								System.out.println(nextLine[i]);
+								toTextArea +=nextLine[i]+ "\n";
+							}
+							mainMenuController.setTextArea(toTextArea);
 						}
 						else if (nextLine[0].startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
 							System.out.println("Game created, waiting for other player(s)");
