@@ -57,9 +57,13 @@ public class MainMenuController {
 
 	@FXML
 	protected void joinGame(MouseEvent event) throws IOException {
-		String joinRequest = Protocol.CLIENT_JOIN_GAME + " " + gameNameField.getText();
-		//System.out.println(joinRequest);
-		this.client.joinGame(joinRequest);
+		if (!gameNameField.getText().isEmpty()) {
+			String joinRequest = Protocol.CLIENT_JOIN_GAME + " " + gameNameField.getText();
+			//System.out.println(joinRequest);
+			this.client.joinGame(joinRequest);
+		}else {
+			System.out.println("Join Game Failed");
+		}
 	}
 
 

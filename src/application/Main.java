@@ -39,7 +39,7 @@ public class Main extends Application {
 	public void setLoginStage(Stage primaryStage) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("loginFX.fxml"));
 	    Parent root = loader.load();
-	    Controller controller = loader.getController();
+	    LoginController controller = loader.getController();
 	    controller.setClient(client);
 	    controller.setMain(this);
 	    this.client.setController(controller);

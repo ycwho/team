@@ -8,7 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class Controller {
+public class LoginController {
 
     private Client client;
     private Main main;
@@ -24,7 +24,7 @@ public class Controller {
 
 	
 	//todo work out host for client argument
-    public Controller() {
+    public LoginController() {
     }
     
     @FXML
