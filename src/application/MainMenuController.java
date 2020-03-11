@@ -118,7 +118,6 @@ public class MainMenuController {
 
 	@FXML
 	protected void createGame(MouseEvent event) throws IOException {
-
 		if (!gameNameField.getText().isEmpty()) {
 		String createGameToServer = Protocol.CLIENT_CREATE_GAME + " " + gameNameField.getText();
 			System.out.println(createGameToServer);
