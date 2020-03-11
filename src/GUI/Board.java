@@ -169,6 +169,9 @@ public class Board {
 				
 			}
 		}
+		public boolean isShip() {
+			return isShip;
+		}
 		public boolean isHit() {
 			return hit;
 		}
