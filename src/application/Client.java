@@ -126,6 +126,11 @@ public class Client {
 		// TODO Auto-generated method stub
 		write(loginToServer);
 	}
+	
+	public void logout() throws IOException {
+		// TODO Auto-generated method stub
+		write(Protocol.CLIENT_LOGOUT);
+	}
 
 	public void checkOnline(String checkServer) throws IOException {
 		// TODO Auto-generated method stub
@@ -183,37 +188,11 @@ public class Client {
 									public void run() {
 										try {
 											main.setMainMenuStage();
-											// commented out think this should be in the loop not inside this try
-											
-//											String nextLine = fromServer.readLine();
-////											String[] nextCommands = nextLine.split(" ");
-//											System.out.println(nextLine);
-//											if (nextLine.startsWith("other online users")) {
-//												System.out.println(nextLine);
-//											}
-//											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
-//												System.out.println("Game created, waiting for other player(s)");
-//											}
-//											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[1])){
-//												System.out.println("Game Already Exists");
-//											}
-//											else if (nextLine.startsWith(Protocol.CLIENT_CREATE_REPLY[2])){
-//												System.out.println("Game Creation Failed");
-//											}
-//											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[0])) {
-//												System.out.println("Game Joined");
-//											}
-//											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[1])){
-//												System.out.println("No Game Found With That Name");
-//											}
-//											else if (nextLine.startsWith(Protocol.CLIENT_JOIN_REPLY[2])){
-//												System.out.println("Game Join Unsuccessful");
-//											}
-										} catch (IOException e) {
+										} catch (Exception e) {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
-											System.out.println("error switchign stages");
 										}
+										// commented out think this should be in the loop not inside this try
 									}
 								});
 								

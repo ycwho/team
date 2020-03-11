@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import GUI.GUIMain;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +22,7 @@ public class Main extends Application {
 //        primaryStage.show();
     	this.primaryStage = primaryStage;
     	client = new Client("localhost", this);
-    	setLoginStage(primaryStage);
+    	setLoginStage();
     	
     	primaryStage.setOnCloseRequest(event -> {
 			System.out.println("Stage is closing");
@@ -36,7 +37,7 @@ public class Main extends Application {
         launch(args);
     }
     
-	public void setLoginStage(Stage primaryStage) throws IOException {
+	public void setLoginStage() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("loginFX.fxml"));
 	    Parent root = loader.load();
 	    Controller controller = loader.getController();
@@ -51,7 +52,14 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 	
-	public void setMainMenuStage() throws IOException {
+	public void setSinglePlayerGame() throws Exception {
+		Stage singleStage = new Stage();
+		GUIMain guimain = new GUIMain();
+		GUI.GUIMain.setUp();
+		guimain.start(singleStage);
+	}
+	
+	public void setMainMenuStage() throws Exception {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenuFX.fxml"));
 		Parent root = fxmlLoader.load();
 		MainMenuController controller = fxmlLoader.getController();

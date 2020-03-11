@@ -14,6 +14,7 @@ public interface Protocol {
 	
 	//log username password
 	String CLIENT_LOGIN = "log";
+	String CLIENT_LOGOUT = "logout";
 	
 	String[] CLIENT_LOGIN_REPLY = {"login success" , "log in failed because wrong username/password", "log in failed because reason 2"};
 	

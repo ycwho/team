@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -27,6 +28,10 @@ public class MainMenuController {
 	@FXML
 	private Button gamesListButton;
 	@FXML
+	private Button backButton;
+	@FXML
+	private Button playSinglePlayer;
+	@FXML
 	private TextArea usersList;
 	@FXML
 	private TextArea gamesList;
@@ -48,7 +53,39 @@ public class MainMenuController {
 	public void setGamesListTextArea(String text) {
 		this.gamesList.setText(text);
 	}
-
+	
+	@FXML
+	protected void changeToSinglePlayer(MouseEvent event) throws IOException {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					main.setSinglePlayerGame();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	@FXML
+	protected void toLoginScreen(MouseEvent event) throws IOException {
+		this.client.logout();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					main.setLoginStage();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("error switchign stages");
+				}
+			}
+		});
+	}
+	
 	@FXML
 	protected void listGames(MouseEvent event) throws IOException {
 		if(!gamesPressed) {

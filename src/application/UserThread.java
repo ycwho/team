@@ -193,6 +193,12 @@ public class UserThread extends Thread {
 			return result;
 
 		}
+		if (getCommand.equals(Protocol.CLIENT_LOGOUT)) {
+			onlineUsers.remove(username);
+			this.username = null;
+			this.userStatus = 0;
+			
+		}
 		if (getCommand.equals(Protocol.CLIENT_CHECK_GAME)) {
 			System.out.println("gameCommand block reached");
 			String result = "Games:";
