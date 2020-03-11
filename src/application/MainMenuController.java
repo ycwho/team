@@ -3,8 +3,12 @@ package application;
 import java.io.IOException;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -13,10 +17,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class MainMenuController {
-
+	
+	ObservableList<String> playerNumber = FXCollections.observableArrayList("2","3","4");
 	private Client client;
 	private Main main;
 //	public Stage primaryStage;
+	@FXML
+	private ComboBox<String> comboBox;
 	@FXML
 	private TextField gameNameField;
 	@FXML
@@ -44,6 +51,7 @@ public class MainMenuController {
 
 	//todo work out host for client argument
 	public MainMenuController() {
+		
 	}
 	
 	public void setTextArea(String text) {
@@ -115,11 +123,16 @@ public class MainMenuController {
 			userPressed = false;
 		}
 	}
+	
+	 @FXML
+	 private void initialize() {
+		 comboBox.getItems().setAll(playerNumber);
+	 }
 
 	@FXML
 	protected void createGame(MouseEvent event) throws IOException {
 		if (!gameNameField.getText().isEmpty()) {
-		String createGameToServer = Protocol.CLIENT_CREATE_GAME + " " + gameNameField.getText();
+		String createGameToServer = Protocol.CLIENT_CREATE_GAME + " " + comboBox.getValue() + " " + gameNameField.getText();
 			System.out.println(createGameToServer);
 			this.client.createGame(createGameToServer);
 		} else {

@@ -1,9 +1,9 @@
 package application;
 
 import java.io.IOException;
-
 import GUI.GUIMain;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,7 +28,6 @@ public class Main extends Application {
 			System.out.println("Stage is closing");
 			System.exit(0);
 		});
-    	
     	
     	
     }

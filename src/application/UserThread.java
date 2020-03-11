@@ -201,7 +201,7 @@ public class UserThread extends Thread {
 		}
 		if (getCommand.equals(Protocol.CLIENT_CHECK_GAME)) {
 			System.out.println("gameCommand block reached");
-			String result = "Games:";
+			String result = "Games: ";
 //			for (String a : onlineUsers.keySet()) {
 //				result += a + " ";
 //			}
@@ -218,19 +218,18 @@ public class UserThread extends Thread {
 
 		// create game
 		else if (getCommand.startsWith(Protocol.CLIENT_CREATE_GAME)) {
-			System.out.println("createrecieved");
-			String gameName = commandElements[1];
+			String gameName = commandElements[2];
 			if (!onlineGames.containsKey(gameName)) {
-
 				try {
-                    int playerNum = playerNumber();
-
+                    int playerNum = Integer.parseInt(commandElements[1]);
+                    System.out.println("try1");
 					GameThread newGame = new GameThread(this, gameName, playerNum, onlineUsers, onlineGames);
 					newGame.start();
-					
 					onlineGames.put(gameName, newGame);
 					joinedGame = newGame;
-					userStatus = 2;
+//					userStatus = 2;
+					//change this to when game starts
+					System.out.println("finished creating game");
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -334,27 +333,27 @@ public class UserThread extends Thread {
 		
 	}
 
-	public int playerNumber() throws  IOException{
-		tellClient("Select Number of Players (2-4)");
-		String input = fromClient.readLine();
-		try {
-				int number = Integer.parseInt(input);
-				if (2 <= number && number <=4) {
-					tellClient(number + " players Selected");
-					return number;
-				}
-				else {
-					tellClient("Select a number between 1 and 4");
-					return playerNumber();
-				}
-			}catch (NumberFormatException e) {
-				tellClient(input + "Not a number");
-				return playerNumber();
-			}
-
-
-
-    }
+//	public int playerNumber() throws  IOException{
+//		tellClient("Select Number of Players (2-4)");
+//		String input = fromClient.readLine();
+//		try {
+//				int number = Integer.parseInt(input);
+//				if (2 <= number && number <=4) {
+//					tellClient(number + " players Selected");
+//					return number;
+//				}
+//				else {
+//					tellClient("Select a number between 1 and 4");
+//					return playerNumber();
+//				}
+//			}catch (NumberFormatException e) {
+//				tellClient(input + "Not a number");
+//				return playerNumber();
+//			}
+//
+//
+//
+//    }
 
 	public synchronized void tellClient(String message) throws IOException {
 		toClient.write(message);
