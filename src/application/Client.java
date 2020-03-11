@@ -131,17 +131,21 @@ public class Client {
 		// TODO Auto-generated method stub
 		write(Protocol.CLIENT_LOGOUT);
 	}
-
+	
 	public void checkOnline(String checkServer) throws IOException {
 		// TODO Auto-generated method stub
 		write(checkServer);
+	}
+	
+	public void sendShipLocations(String shipLocations) throws IOException {
+		write(shipLocations);
 	}
 	
 	public void checkGames(String checkServer) throws IOException {
 		// TODO Auto-generated method stub
 		write(checkServer);
 	}
-
+	
 	public void createGame(String createGameToServer) throws IOException {
 		// TODO Auto-generated method stub
 		write(createGameToServer);

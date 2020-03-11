@@ -218,6 +218,7 @@ public class UserThread extends Thread {
 
 		// create game
 		else if (getCommand.startsWith(Protocol.CLIENT_CREATE_GAME)) {
+			System.out.println("createrecieved");
 			String gameName = commandElements[1];
 			if (!onlineGames.containsKey(gameName)) {
 
