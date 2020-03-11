@@ -268,8 +268,9 @@ public class Client {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					System.out.println("From Server: " + Arrays.toString(nextLine));
-					
+					if(!Arrays.toString(nextLine).isEmpty()) {
+						System.out.println("From Server: " + Arrays.toString(nextLine));
+					}
 			}
 		}
 	}	
