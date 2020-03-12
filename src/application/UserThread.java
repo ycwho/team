@@ -285,6 +285,7 @@ public class UserThread extends Thread {
 
 			result = joinedGame.uploadShips(this, data);
 
+
 			//database.saveShipPosition(ShipPosition[] positions, int slot)
 
 
