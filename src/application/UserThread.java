@@ -1,16 +1,12 @@
-package application;
+import application.GameThread;
+import application.Protocol;
+import database.Database;
 
 import java.io.*;
-
-import java.net.*;
-import java.util.ArrayList;
+import java.net.Socket;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
-
-import database.Database;
-import application.Protocol;
 
 //import database.Database;
 //import database.DatabaseTest;
@@ -26,11 +22,11 @@ public class UserThread extends Thread {
 	private int userStatus;
 	private String username;
 	public static int threadCounter = 1;
-	Map<String, UserThread> onlineUsers;
+	Map<String, application.UserThread> onlineUsers;
 	Map<String, GameThread> onlineGames;
 	GameThread joinedGame;
 
-	public UserThread(Socket client, Map<String, UserThread> onlineUsers, Map<String, GameThread> onlineGames) {
+	public UserThread(Socket client, Map<String, application.UserThread> onlineUsers, Map<String, GameThread> onlineGames) {
 		super("UserThread-" + threadCounter);
 		threadCounter++;
 		this.client = client;
@@ -193,12 +189,6 @@ public class UserThread extends Thread {
 			return result;
 
 		}
-		if (getCommand.equals(Protocol.CLIENT_LOGOUT)) {
-			onlineUsers.remove(username);
-			this.username = null;
-			this.userStatus = 0;
-			
-		}
 		if (getCommand.equals(Protocol.CLIENT_CHECK_GAME)) {
 			System.out.println("gameCommand block reached");
 			String result = "Games:";
@@ -218,7 +208,6 @@ public class UserThread extends Thread {
 
 		// create game
 		else if (getCommand.startsWith(Protocol.CLIENT_CREATE_GAME)) {
-			System.out.println("createrecieved");
 			String gameName = commandElements[1];
 			if (!onlineGames.containsKey(gameName)) {
 
@@ -291,6 +280,7 @@ public class UserThread extends Thread {
 			}
 
 			result = joinedGame.uploadShips(this, data);
+
 
 			//database.saveShipPosition(ShipPosition[] positions, int slot)
 
