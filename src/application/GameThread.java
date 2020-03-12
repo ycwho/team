@@ -1,22 +1,23 @@
-package application;
+import application.Player;
+import application.Protocol;
+import application.UserThread;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
 public class GameThread extends Thread {
 	private UserThread host;
-	int playerNumber; ///////////
+	int playerNumber;
 	private Vector<UserThread> players;
 	private Vector<Player> playersInfo;
 
 	Map<String, UserThread> onlineUsers;
-	Map<String, GameThread> onlineGames;
+	Map<String, application.GameThread> onlineGames;
 	private static int threadCounter = 1;
 	//todo change max player system
-	public static final int MAX_PLAYER = 3;
+	//public static final int MAX_PLAYER = 3;
 	String gameName;
 
 	boolean turnEnd;
@@ -28,7 +29,7 @@ public class GameThread extends Thread {
 	private int gameStatus;
 
 	public GameThread(UserThread host, String gameName, int playerNumber, Map<String, UserThread> onlineUsers,
-			Map<String, GameThread> onlineGames) {
+                      Map<String, application.GameThread> onlineGames) {
 
 		super("Game-" + threadCounter);
 		threadCounter++;
@@ -54,7 +55,7 @@ public class GameThread extends Thread {
 		gameStatus = 1;
 		System.out.println(this.getName() + " is running. host is " + host.getUsername() + "game name :" + gameName);
 		int counter = 0;
-		int attackerCounter = MAX_PLAYER-1;
+		int attackerCounter = playerNumber-1;
 		broadcastMessage(Protocol.GAME_NOTICE_CREATE);
 		String message = "";
 
@@ -73,19 +74,21 @@ public class GameThread extends Thread {
 						
 						attackerCounter = nextAttacker(attackerCounter);
 
-						message = "now it is " + playersInfo.get(attackerCounter).getUsername() + "'s turn.";
-						inGameMessage(message);
+						message = Protocol.TURN + " " + playersInfo.get(attackerCounter).getUsername() + "'s turn.";
+						broadcastMessage(message);
+						//inGameMessage(message);
 						playersInfo.get(attackerCounter).setPlayerStatus(4);
 						turnEnd = false;
 
 						//nextAttacker(attackerCounter);
 
 					}else {
-						message = "now it is " + playersInfo.get(attackerCounter).getUsername() + "'s turn.";
+						message = Protocol.TURN + " " + playersInfo.get(attackerCounter).getUsername() + "'s turn.";
 					}
 				} else if (gameStatus == 3) {
-					System.out.println("game is end");
-					inGameMessage("Game is end , winner is " + winner());
+					System.out.println("game finished");
+					//inGameMessage("Game is end , winner is " + winner());
+					broadcastMessage(Protocol.GAME_OVER + ", winner is " + winner());
 					break;
 				}
 				wait();
@@ -102,7 +105,7 @@ public class GameThread extends Thread {
 
 	public synchronized int joinGame(UserThread joiner) {
 
-		if (players.size() < MAX_PLAYER && gameStatus == 1) {
+		if (players.size() <= playerNumber && gameStatus == 1) {
 			players.add(joiner);
 			playersInfo.add(new Player(joiner.getUsername()));
 			checkGameStatus();
@@ -154,6 +157,12 @@ public class GameThread extends Thread {
 			
 			int playerSlot = players.indexOf(uploader);
 			playersInfo.get(playerSlot).setShips(shipPositions);
+
+
+
+
+
+
 		} else {
 			result = 1;
 		}
@@ -178,10 +187,17 @@ public class GameThread extends Thread {
 					playersInfo.get(defenderSlot).addBeAttacked(position);
 					
 					turnEnd = true;
-					inGameMessage("[Player-" + defenderSlot + ", postion-" + position + "] has been attacked,"
-							+ " attack ship:" + playersInfo.get(defenderSlot).isHit(position));
+					broadcastMessage(Protocol.HIT + " " + defenderSlot + " " + position + " " + playersInfo.get(defenderSlot).isHit(position));
+					//inGameMessage("[Player-" + defenderSlot + ", postion-" + position + "] has been attacked,"
+					//		+ " attack ship:" + playersInfo.get(defenderSlot).isHit(position));
+
+					//if(shipsunk){
+					// broadcastMessage(Protocol.SHIP_SUNK + shipname);
+					// }
+
 					if(playersInfo.get(defenderSlot).getPlayerStatus()==5) {
-						inGameMessage(playersInfo.get(defenderSlot).getUsername() + " has dead.");
+						broadcastMessage(Protocol.PLAYER_DEAD + " " + playersInfo.get(defenderSlot).getUsername());
+						//	inGameMessage(playersInfo.get(defenderSlot).getUsername() + " has died.");
 					}
 				} else {
 					//attack position illegal
@@ -209,10 +225,10 @@ public class GameThread extends Thread {
 		
 		if (players.size() == 0) {
 			gameStatus = -1;
-		} else if (gameStatus == 1 && readyPlayer() == MAX_PLAYER) {
+		} else if (gameStatus == 1 && readyPlayer() == playerNumber) {
 			gameStart();
 
-		} else if (deadPlayer() == MAX_PLAYER - 1) {
+		} else if (deadPlayer() == playerNumber - 1) {
 			gameStatus = 3;
 		}
 
@@ -226,7 +242,7 @@ public class GameThread extends Thread {
 				p.setPlayerStatus(3);
 			}
 		}
-		inGameMessage("Game Start!");
+		broadcastMessage(Protocol.GAME_START);
 
 	}
 
