@@ -52,15 +52,6 @@ public class LoginController {
 		} else {
 			System.out.println("login failed");
 		}
-//    	System.out.println("pressed");
-//   		if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
-//   			String registerToServer = "register " + usernameField.getText() + " "+ passwordField.getText();
-//   			this.client.register(registerToServer);
-//   		} else {
-//   			System.out.println("login failed");
-//
-//   		}
-//    	this.client.register("REG PRESSED");
    	}
 
 	@FXML
@@ -68,8 +59,7 @@ public class LoginController {
 		this.infoBox.setText(message);
 		this.infoBox.setVisible(true);
 
-		try {
-			TimeUnit.SECONDS.sleep(2);}
+		try { Thread.sleep(2000);}
 		catch(InterruptedException ex)
 		{ Thread.currentThread().interrupt(); }
 

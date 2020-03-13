@@ -116,7 +116,7 @@ public class UserThread extends Thread {
 			String username = commandElements[1];
 			String password = commandElements[2];
 			if (commandElements.length != 3) {
-				return Protocol.CLIENT_NEED_RESENT_COMMAND;
+				return Protocol.CLIENT_MISSING_LOGIN_INFORMATION;
 			}
 			if (onlineUsers.containsKey(username)) {
 				return "have been logged";
@@ -141,9 +141,13 @@ public class UserThread extends Thread {
 //                String[] returnString = {"login", "1"};
 //                toClient.writeObject(returnString);
 //                System.out.println(loggedIn);
-            } else { // handle specific cases here e.g. -1 or -2
+            } else if (!logInResult) {
+				return Protocol.USER_NAME_MISSING;
+			} else {
+            	return Protocol.PASSWORD_INCORRECT;
+            	// handle specific cases here e.g. -1 or -2
                 //out.println("Please try again");
-            }
+            } /////incorrect password etc
            
 		}
 		//sign up

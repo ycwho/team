@@ -206,6 +206,17 @@ public class Client {
 							else if (command.startsWith(Protocol.CLIENT_LOGIN_REPLY[1]) || command.startsWith(Protocol.CLIENT_LOGIN_REPLY[2])) {
 								loginController.displayMessage(command);
 							}
+							else if (command.startsWith(Protocol.CLIENT_MISSING_LOGIN_INFORMATION)){
+								loginController.displayMessage(command);
+							}
+							else if (command.startsWith(Protocol.USER_NAME_MISSING)){
+								loginController.displayMessage(command);
+							}
+							else if (command.startsWith(Protocol.PASSWORD_INCORRECT)){
+								loginController.displayMessage(command);
+							}
+
+							//
 							// Successful Registry
 							else if (command.startsWith(Protocol.CLIENT_SIGNUP_REPLY[0])) {
 								System.out.println("you can now log in");

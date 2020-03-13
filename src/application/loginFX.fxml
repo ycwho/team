@@ -23,7 +23,7 @@
                </image>
             </ImageView>
 
-          <TextArea fx:id="infoBox" layoutX="100.0" layoutY="400.0" prefHeight="50.0" prefWidth="500.0" visible="false">
+          <TextArea fx:id="infoBox" layoutX="100.0" layoutY="350.0" prefHeight="50.0" prefWidth="500.0" visible="false">
               <effect>
                   <InnerShadow />
               </effect></TextArea>

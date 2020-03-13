@@ -132,7 +132,7 @@ public class MainMenuController {
 		this.infoBox.setText(message);
 		this.infoBox.setVisible(true);
 
-		try {TimeUnit.SECONDS.sleep(2);}
+		try {Thread.sleep(2000);}
 		catch(InterruptedException ex)
 		{ Thread.currentThread().interrupt(); }
 

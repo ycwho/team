@@ -16,6 +16,9 @@ public interface Protocol {
 	String CLIENT_LOGIN = "log";
 	String CLIENT_LOGOUT = "logout";
 	String[] CLIENT_LOGIN_REPLY = {"login success" , "log in failed because wrong username/password", "log in failed because reason 2"};
+	String CLIENT_MISSING_LOGIN_INFORMATION = "Missing Username or Password";
+	String USER_NAME_MISSING = "Username does not exist";
+	String PASSWORD_INCORRECT = "Incorrect Password";
 
 	// Notification Protocols
 	String SERVER_NOTICE_OTHER_LOGIN = "otheruser_has_logged_in ";
