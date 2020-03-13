@@ -74,7 +74,7 @@ public class GameThread extends Thread {
 						attackerCounter = nextAttacker(attackerCounter);
 
 						message = Protocol.TURN + " " + playersInfo.get(attackerCounter).getUsername() + "'s turn.";
-						broadcastMessage(message);
+						broadcastPlayerMessage(message);
 						//inGameMessage(message);
 						playersInfo.get(attackerCounter).setPlayerStatus(4);
 						turnEnd = false;
@@ -87,7 +87,7 @@ public class GameThread extends Thread {
 				} else if (gameStatus == 3) {
 					System.out.println("game finished");
 					//inGameMessage("Game is end , winner is " + winner());
-					broadcastMessage(Protocol.GAME_OVER + ", winner is " + winner());
+					broadcastPlayerMessage(Protocol.GAME_OVER + ", winner is " + winner());
 					break;
 				}
 				wait();
@@ -161,7 +161,6 @@ public class GameThread extends Thread {
 
 
 
-
 		} else {
 			result = 1;
 		}
@@ -186,7 +185,7 @@ public class GameThread extends Thread {
 					playersInfo.get(defenderSlot).addBeAttacked(position);
 					
 					turnEnd = true;
-					broadcastMessage(Protocol.HIT + " " + defenderSlot + " " + position + " " + playersInfo.get(defenderSlot).isHit(position));
+					broadcastPlayerMessage(Protocol.HIT + " " + defenderSlot + " " + position + " " + playersInfo.get(defenderSlot).isHit(position));
 					//inGameMessage("[Player-" + defenderSlot + ", postion-" + position + "] has been attacked,"
 					//		+ " attack ship:" + playersInfo.get(defenderSlot).isHit(position));
 
@@ -195,7 +194,7 @@ public class GameThread extends Thread {
 					// }
 
 					if(playersInfo.get(defenderSlot).getPlayerStatus()==5) {
-						broadcastMessage(Protocol.PLAYER_DEAD + " " + playersInfo.get(defenderSlot).getUsername());
+						broadcastPlayerMessage(Protocol.PLAYER_DEAD + " " + playersInfo.get(defenderSlot).getUsername());
 						//	inGameMessage(playersInfo.get(defenderSlot).getUsername() + " has died.");
 					}
 				} else {
@@ -241,8 +240,12 @@ public class GameThread extends Thread {
 				p.setPlayerStatus(3);
 			}
 		}
-		broadcastMessage(Protocol.GAME_START);
+		broadcastPlayerMessage(Protocol.GAME_START);
 
+	}
+
+	public synchronized Vector getPlayers() {
+		return this.players;
 	}
 
 	public int nextAttacker(int attackerCounter) {
@@ -308,13 +311,22 @@ public class GameThread extends Thread {
 			}
 		});
 	}
-	
+
+	public void broadcastPlayerMessage(String message) {
+		players.forEach(x -> {
+			try {
+				x.tellClient(message);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
+
 	public void broadcastMessage(String message) {
 		onlineUsers.forEach((k,v) -> {
 			try {
 				v.tellClient(message + " " + gameName);
 			} catch (IOException e) {
-
 				e.printStackTrace();
 			}
 		});

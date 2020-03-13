@@ -196,30 +196,26 @@ public class Client {
 							System.out.println(command);
 						}
 						else {
-							if (nextLine[0].equals("[REPLY]login")) {
-								if (nextLine[1].equals("success")) {
-									System.out.println("you are logged in");
-									Platform.runLater(new Runnable() {
-										@Override
-										public void run() {
-											try {
-												main.setMainMenuStage();
-											} catch (IOException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-												System.out.println("error switchign stages");
-											}
+							if (command.startsWith(Protocol.CLIENT_LOGIN_REPLY[0])) {
+								System.out.println("you are logged in");
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {
+										try {
+											main.setMainMenuStage();
+										} catch (Exception e) { // no longer I/OException
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+											//System.out.println("error switchign stages");
 										}
-									});
+									}
+								});
 
-								}
 							}
-							if (command.startsWith("[REPLY]register")) {
-								if (nextLine[1].equals("success")) {
-									System.out.println("you can now log in");
-								}
+							else if (command.startsWith(Protocol.CLIENT_SIGNUP_REPLY[0])) {
+								System.out.println("you can now log in");
 							}
-							if (command.startsWith("[REPLY]other")) {
+							if (command.startsWith("other")) {
 								String toTextArea = "Online users:\n";
 								System.out.println("Online users:");
 								for (int i = 3; i < nextLine.length; i++) {
@@ -228,7 +224,7 @@ public class Client {
 								}
 								mainMenuController.setTextArea(toTextArea);
 							}
-							if (command.startsWith("[REPLY]Games:")) {
+							if (command.startsWith("Games:")) {
 								String toTextArea = "Games:\n";
 								System.out.println("Games:");
 								if (nextLine.length > 1) {
@@ -258,6 +254,18 @@ public class Client {
 
 							if (command.startsWith(Protocol.SERVER_NOTICE_OTHER_LOGOUT)){
 								//game.broadcast(nextLine[1] + " has logged out")
+							}
+
+
+							if (command.startsWith(Protocol.GAME_START)){
+								write(Protocol.PLAYER_NAME_REQUEST);
+							}
+
+							if (command.startsWith(Protocol.PLAYER_NAMES)){//////////////////todo////////////////////////////////
+								String[] split = command.split(":");
+								String[] totalNames = split[1].split("/");
+								String[] names = totalNames[1].split(" ");
+								//Game game = new Game(totalNames[0], names);
 							}
 
 							if (command.startsWith(Protocol.TURN)){
@@ -296,10 +304,10 @@ public class Client {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
 										}
-										// commented out think this should be in the loop not inside this try
 									}
 								});
 							}
+
 
 							if (command.startsWith(Protocol.GAME_NOTICE_CREATE)){
 								System.out.println(command);

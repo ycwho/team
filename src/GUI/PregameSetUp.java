@@ -14,7 +14,7 @@ public class PregameSetUp extends Application{
 	private static Board board;
 	private static Text text;
 	private static ArrayList<Integer> shipPositions;
-	private static Client client;
+	private static application.Client client;
 	public static void setUp() {
 		text = new Text("Ships placed: 0");
 		shipPositions = new ArrayList<Integer>();
@@ -76,7 +76,7 @@ public class PregameSetUp extends Application{
 		}
 		System.out.println(shipPositions);
 	}
-	public PregameSetUp(Client client) {
+	public PregameSetUp(application.Client client) {
 		this.client = client;
 	}
 

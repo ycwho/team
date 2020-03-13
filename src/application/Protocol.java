@@ -3,6 +3,7 @@ package application;
 public interface Protocol {
 
 	//todo check all protocols are used and called by both server and client
+	//todo - what happens when trying to join a game that already exists
 
 	String DISCONNECTION = "END"; //unsure if used properly
 	
@@ -22,9 +23,9 @@ public interface Protocol {
 
 
 	
-	String SERVER_NOTICE_OTHER_LOGIN = "otheruser_is_login ";
+	String SERVER_NOTICE_OTHER_LOGIN = "otheruser_has_logged_in ";
 	
-	String SERVER_NOTICE_OTHER_LOGOUT = "otheruser_is_logout ";
+	String SERVER_NOTICE_OTHER_LOGOUT = "otheruser_has_logged_out ";
 	
 	String CLIENT_CHECK_ONLINE_USER = "check";
 
@@ -67,5 +68,9 @@ public interface Protocol {
 	String SHIP_SUNK = "Sunk";
 
 	String HIT = "Hit:";
+
+	String PLAYER_NAME_REQUEST = "Request Player Names";
+
+	String PLAYER_NAMES = "Player Names:";
 
 }

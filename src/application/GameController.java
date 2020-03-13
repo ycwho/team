@@ -12,6 +12,11 @@ public class GameController {
 
 
 //Methods to receive from server (client will take a string and call a method of the following format):
+
+        //public Game(String ownPlayerName, String[] Player_Names){
+                //constructor for the game so that it knows how many players and who is who
+        //}
+
         public void broadcast(String message){
             //display a message for the player - this will have stuff like player disconnected, if its your turn, etc etc
         }
