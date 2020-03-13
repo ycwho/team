@@ -2,11 +2,9 @@ package application;
 
 import java.io.*;
 
+import java.lang.reflect.Array;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import database.Database;
@@ -82,11 +80,14 @@ public class UserThread extends Thread {
 				if(getCommand != null)
 					System.out.println(getCommand);
 				if (userStatus == 0) {
-					tellClient("[REPLY]"+logCommand(getCommand));
+					//tellClient("[REPLY]"+logCommand(getCommand));
+					tellClient(logCommand(getCommand));
 				} else if (userStatus == 1) {
-					tellClient("[REPLY]"+userCommand(getCommand));
+					//tellClient("[REPLY]"+userCommand(getCommand));
+					tellClient(userCommand(getCommand));
 				} else if (userStatus == 2) {
-					tellClient("[REPLY]"+gameCommand(getCommand));
+					//tellClient("[REPLY]"+gameCommand(getCommand));
+					tellClient(gameCommand(getCommand));
 				}
 				
 
@@ -262,6 +263,17 @@ public class UserThread extends Thread {
 			return Protocol.CLIENT_JOIN_REPLY[i];
 		}
 
+		else if (getCommand.startsWith(Protocol.PLAYER_NAME_REQUEST)) {
+			String nameString = Protocol.PLAYER_NAMES;
+			nameString += username + "/";
+			Vector players = joinedGame.getPlayers();
+			Iterator<UserThread> iterator = players.iterator();
+			while(iterator.hasNext()){
+				nameString += iterator.next().getUsername() + " ";
+			}
+			return nameString;
+		}
+
 		return Protocol.CLIENT_NEED_RESENT_COMMAND;
 	}
 
@@ -290,6 +302,7 @@ public class UserThread extends Thread {
 			}
 
 			result = joinedGame.uploadShips(this, data);
+
 
 			//database.saveShipPosition(ShipPosition[] positions, int slot)
 
@@ -354,6 +367,10 @@ public class UserThread extends Thread {
 //
 //
 //    }
+
+    public String getUserName() {
+		return this.username;
+	}
 
 	public synchronized void tellClient(String message) throws IOException {
 		toClient.write(message);

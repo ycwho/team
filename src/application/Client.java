@@ -6,6 +6,8 @@ import java.io.*;
 
 import java.net.*;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
 import javafx.application.Platform;
 
 public class Client {
@@ -156,6 +158,11 @@ public class Client {
 		write(joinRequest);
 	}
 
+	public void saveShipPositions(String shipPositions) throws IOException {
+		// TODO Auto-generated method stub
+		write(shipPositions);
+	}
+
 	
 	public void write(String message) throws IOException {
 		toServer.write(message);
@@ -180,13 +187,114 @@ public class Client {
 			while (true) {
 				
 					try {
-						String[] nextLine = fromServer.readLine().split(" ");
+						String command = fromServer.readLine();
+						String[] nextLine = command.split(" ");
 						System.out.println(nextLine[0]);
 //						System.out.println(nextLine[1]);
 //						System.out.println(nextLine);
-						if(nextLine[0].equals("[REPLY]login")) {
-							if(nextLine[1].equals("success")) {
+						if (command.startsWith(Protocol.CLIENT_NEED_RESENT_COMMAND)){
+							System.out.println(command);
+						}
+						else {
+							if (command.startsWith(Protocol.CLIENT_LOGIN_REPLY[0])) {
 								System.out.println("you are logged in");
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {
+										try {
+											main.setMainMenuStage();
+										} catch (Exception e) { // no longer I/OException
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+											//System.out.println("error switchign stages");
+										}
+									}
+								});
+
+							}
+							else if (command.startsWith(Protocol.CLIENT_SIGNUP_REPLY[0])) {
+								System.out.println("you can now log in");
+							}
+							if (command.startsWith("other")) {
+								String toTextArea = "Online users:\n";
+								System.out.println("Online users:");
+								for (int i = 3; i < nextLine.length; i++) {
+									System.out.println(nextLine[i]);
+									toTextArea += nextLine[i] + "\n";
+								}
+								mainMenuController.setTextArea(toTextArea);
+							}
+							if (command.startsWith("Games:")) {
+								String toTextArea = "Games:\n";
+								System.out.println("Games:");
+								if (nextLine.length > 1) {
+									for (int i = 1; i < nextLine.length; i++) {
+										System.out.println(nextLine[i]);
+										toTextArea += nextLine[i] + "\n";
+									}
+								}
+								mainMenuController.setGamesListTextArea(toTextArea);
+							} else if (command.startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
+								System.out.println("Game created, waiting for other player(s)");
+							} else if (command.startsWith(Protocol.CLIENT_CREATE_REPLY[1])) {
+								System.out.println("Game Already Exists");
+							} else if (command.startsWith(Protocol.CLIENT_CREATE_REPLY[2])) {
+								System.out.println("Game Creation Failed");
+							} else if (command.startsWith(Protocol.CLIENT_JOIN_REPLY[0])) {
+								System.out.println("Game Joined");
+							} else if (command.startsWith(Protocol.CLIENT_JOIN_REPLY[1])) {
+								System.out.println("No Game Found With That Name");
+							} else if (command.startsWith(Protocol.CLIENT_JOIN_REPLY[2])) {
+								System.out.println("Game Join Unsuccessful");
+							}
+
+							if (command.startsWith(Protocol.SERVER_NOTICE_OTHER_LOGIN)){
+								//game.broadcast(nextLine[1] + " has logged in")
+							}
+
+							if (command.startsWith(Protocol.SERVER_NOTICE_OTHER_LOGOUT)){
+								//game.broadcast(nextLine[1] + " has logged out")
+							}
+
+
+							if (command.startsWith(Protocol.GAME_START)){
+								write(Protocol.PLAYER_NAME_REQUEST);
+							}
+
+							if (command.startsWith(Protocol.PLAYER_NAMES)){//////////////////todo////////////////////////////////
+								String[] split = command.split(":");
+								String[] totalNames = split[1].split("/");
+								String[] names = totalNames[1].split(" ");
+								//Game game = new Game(totalNames[0], names);
+							}
+
+							if (command.startsWith(Protocol.TURN)){
+								//game.broadcast(nextLine[1] + "'s turn")
+							}
+
+							if (command.startsWith(Protocol.HIT)){
+								int position = Integer.parseInt(nextLine[2]);
+								boolean hit = nextLine[3].equals("true");
+								//game.hit(nextLine[1],position,hit);
+							}
+
+							if (command.startsWith(Protocol.SHIP_SUNK)){
+								//game.broadcast(nextLine[1] + " sunk")
+							}
+
+							if (command.startsWith(Protocol.PLAYER_DEAD)){
+								//game.broadcast(nextLine[1] + " sunk")
+							}
+
+							if (command.startsWith(Protocol.GAME_OVER)){
+								System.out.println(nextLine[1]);
+								//game.broadcast(command);
+								//pauses for 3 seconds then takes back to main menu
+								try
+								{ Thread.sleep(3000);
+								} catch(InterruptedException ex)
+								{ Thread.currentThread().interrupt();
+								}
 								Platform.runLater(new Runnable() {
 									@Override
 									public void run() {
@@ -196,57 +304,28 @@ public class Client {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
 										}
-										// commented out think this should be in the loop not inside this try
 									}
 								});
-								
 							}
-						}
-						if(nextLine[0].equals("[REPLY]register")) {
-							if(nextLine[1].equals("success")) {
-								System.out.println("you can now log in");
-							}
-						}
-						if (nextLine[0].startsWith("[REPLY]other")) {
-							String toTextArea = "Online users:\n";
-							System.out.println("Online users:");
-							for(int i=3; i<nextLine.length; i++) {
-								System.out.println(nextLine[i]);
-								toTextArea +=nextLine[i]+ "\n";
-							}
-							mainMenuController.setTextArea(toTextArea);
-						}
-						if (nextLine[0].startsWith("[REPLY]Games:")) {
-							String toTextArea = "Games:\n";
-							System.out.println("Games:");
-							if(nextLine.length>1) {
-							for(int i=1; i<nextLine.length; i++) {
-								System.out.println(nextLine[i]);
-								toTextArea +=nextLine[i]+ "\n";
-							}
-							}
-							mainMenuController.setGamesListTextArea(toTextArea);
-						}
-						else if (nextLine[0].startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
-							System.out.println("Game created, waiting for other player(s)");
-						}
-						else if (nextLine[0].startsWith(Protocol.CLIENT_CREATE_REPLY[1])){
-							System.out.println("Game Already Exists");
-						}
-						else if (nextLine[0].startsWith(Protocol.CLIENT_CREATE_REPLY[2])){
-							System.out.println("Game Creation Failed");
-						}
-						else if (nextLine[0].startsWith(Protocol.CLIENT_JOIN_REPLY[0])) {
-							System.out.println("Game Joined");
-						}
-						else if (nextLine[0].startsWith(Protocol.CLIENT_JOIN_REPLY[1])){
-							System.out.println("No Game Found With That Name");
-						}
-						else if (nextLine[0].startsWith(Protocol.CLIENT_JOIN_REPLY[2])){
-							System.out.println("Game Join Unsuccessful");
-						}
 
-						
+
+							if (command.startsWith(Protocol.GAME_NOTICE_CREATE)){
+								System.out.println(command);
+							}
+
+							if (command.startsWith(Protocol.GAME_NOTICE_END)){
+								System.out.println(command);
+							}
+
+							if (command.startsWith(Protocol.CLIENT_QUIT_REPLY[0])){
+								System.out.println(command);
+							}
+
+							if (command.startsWith(Protocol.CLIENT_QUIT_REPLY[1])){
+								System.out.println(command);
+							}
+
+						}
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

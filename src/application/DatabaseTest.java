@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import java.sql.*;
 import org.postgresql.core.JavaVersion;
 import org.postgresql.util.PSQLException;
 import org.postgresql.Driver;

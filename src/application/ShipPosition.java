@@ -7,6 +7,27 @@ package application;
  *
  */
 public class ShipPosition implements java.io.Serializable{
+	private String name;
+	private int pos1;
+	private boolean pos1Hit;
+	private int pos2;
+	private boolean pos2Hit;
+	private int pos3;
+	//-1 means position not in use
+	private int pos4;
+	private int pos5;
+
+
+
+
+
+
+
+
+
+
+
+
 	private int type;
 	private int status;
 	private int xPosition;
@@ -25,9 +46,20 @@ public class ShipPosition implements java.io.Serializable{
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
 	}
-	
-	
-	
 
+	public int getType() {
+		return type;
+	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public int getxPosition() {
+		return xPosition;
+	}
+
+	public int getyPosition() {
+		return yPosition;
+	}
 }

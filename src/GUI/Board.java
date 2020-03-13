@@ -146,6 +146,8 @@ public class Board {
 	public void setShipLength(int shipLength) {
 		this.shipLength = shipLength;
 	}
+
+
 	public class Cell extends Rectangle{
 		private boolean hit;
 		private boolean isShip;
@@ -158,6 +160,7 @@ public class Board {
 			this.setX(x);
 			this.setY(y);
 		}
+
 		public void strike() {
 			if(isShip == false) {
 				hit = true;
@@ -169,6 +172,10 @@ public class Board {
 				
 			}
 		}
+		public boolean isShip() {
+			return isShip;
+		}
+
 		public boolean isHit() {
 			return hit;
 		}

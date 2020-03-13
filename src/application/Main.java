@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import GUI.GUIMain;
+import GUI.PregameSetUp;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +57,12 @@ public class Main extends Application {
 		GUIMain guimain = new GUIMain();
 		GUI.GUIMain.setUp();
 		guimain.start(singleStage);
+	}
+
+	public void setSetup() throws Exception {
+		Stage singleStage = new Stage();
+		PregameSetUp pregameSetUp = new PregameSetUp(this.client);
+		pregameSetUp.start(singleStage);
 	}
 	
 	public void setMainMenuStage() throws Exception {

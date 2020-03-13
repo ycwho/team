@@ -1,15 +1,18 @@
 package application;
 
 public interface Protocol {
-	
-	String DISCONNECTION = "END";
-	
-	String CLIENT_NEED_RESENT_COMMAND = "illeagl command, please resent command";
-	
 
+	//todo check all protocols are used and called by both server and client
+	//todo - what happens when trying to join a game that already exists
+
+	String DISCONNECTION = "END"; //unsure if used properly
 	
+	String CLIENT_NEED_RESENT_COMMAND = "illegal command, please resent command";
+
+
+	// all unused properly as Henry's method was used
 	String CLIENT_SIGNUP = "register";
-	
+
 	String[] CLIENT_SIGNUP_REPLY = {"register success" , "sign up failed because the username already exists", "sign up because reason 2"};
 	
 	//log username password
@@ -17,15 +20,16 @@ public interface Protocol {
 	String CLIENT_LOGOUT = "logout";
 	
 	String[] CLIENT_LOGIN_REPLY = {"login success" , "log in failed because wrong username/password", "log in failed because reason 2"};
+
+
 	
-	String SERVER_NOTICE_OTHER_LOGIN = "otheruser_is_login ";
+	String SERVER_NOTICE_OTHER_LOGIN = "otheruser_has_logged_in ";
 	
-	String SERVER_NOTICE_OTHER_LOGOUT = "otheruser_is_logout";
-	
+	String SERVER_NOTICE_OTHER_LOGOUT = "otheruser_has_logged_out ";
 	
 	String CLIENT_CHECK_ONLINE_USER = "check";
+
 	String CLIENT_CHECK_GAME = "gamesList";
-	
 	
 	String CLIENT_CREATE_GAME = "create";
 	
@@ -51,6 +55,22 @@ public interface Protocol {
 	
 	String[] CLIENT_ATTACK_REPLY = {"attack successfully", "it is not your turn", "attack illegal"};
 	
-	
+
+	//new protocols
+	String GAME_OVER = "Game over";
+
+	String TURN = "Turn:";
+
+	String GAME_START = "Game Start";
+
+	String PLAYER_DEAD = "Player Dead";
+
+	String SHIP_SUNK = "Sunk";
+
+	String HIT = "Hit:";
+
+	String PLAYER_NAME_REQUEST = "Request Player Names";
+
+	String PLAYER_NAMES = "Player Names:";
 
 }
