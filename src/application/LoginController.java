@@ -1,14 +1,16 @@
 package application;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class Controller {
+public class LoginController {
 
     private Client client;
     private Main main;
@@ -17,6 +19,8 @@ public class Controller {
 	@FXML
 	private PasswordField passwordField;
 	@FXML
+	private TextArea infoBox;
+	@FXML
 	private Button logInButton;
 	@FXML
 	private Button registerButton;
@@ -24,7 +28,7 @@ public class Controller {
 
 	
 	//todo work out host for client argument
-    public Controller() {
+    public LoginController() {
     }
     
     @FXML
@@ -47,7 +51,6 @@ public class Controller {
 			this.client.register(registerToServer);
 		} else {
 			System.out.println("login failed");
-
 		}
 //    	System.out.println("pressed");
 //   		if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
@@ -59,6 +62,19 @@ public class Controller {
 //   		}
 //    	this.client.register("REG PRESSED");
    	}
+
+	@FXML
+	protected void displayMessage(String message) {
+		this.infoBox.setText(message);
+		this.infoBox.setVisible(true);
+
+		try {
+			TimeUnit.SECONDS.sleep(2);}
+		catch(InterruptedException ex)
+		{ Thread.currentThread().interrupt(); }
+
+		this.infoBox.setVisible(false);
+	}
    
     public Main getMain() {
 		return main;

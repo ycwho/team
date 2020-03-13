@@ -180,7 +180,7 @@ public class UserThread extends Thread {
 		// check online user
 		if (getCommand.equals(Protocol.CLIENT_CHECK_ONLINE_USER)) {
 			System.out.println("userCommand block reached");
-			String result = "other online users: ";
+			String result = Protocol.CLIENT_CHECK_ONLINE_USER_RESPONSE;
 
 			for (String a : onlineUsers.keySet()) {
 				result += a + " ";
@@ -202,7 +202,7 @@ public class UserThread extends Thread {
 		}
 		if (getCommand.equals(Protocol.CLIENT_CHECK_GAME)) {
 			System.out.println("gameCommand block reached");
-			String result = "Games: ";
+			String result = Protocol.CLIENT_CHECK_GAME_RESPONSE;
 //			for (String a : onlineUsers.keySet()) {
 //				result += a + " ";
 //			}

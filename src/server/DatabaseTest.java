@@ -25,9 +25,9 @@ public class DatabaseTest implements DatabaseInterface {
 	private Connection connection;
 
 	public DatabaseTest() {
-		url = "jdbc:postgresql://localhost:5432/postgres";
-		user = "postgres";
-		password = "postgres";
+		url = "jdbc:postgresql://mod-msc-sw1.cs.bham.ac.uk:5432/asos";
+		user = "asos";
+		password = "as2xv9i16m";
 
 	}
 

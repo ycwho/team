@@ -20,14 +20,6 @@ public class ShipPosition implements java.io.Serializable{
 
 
 
-
-
-
-
-
-
-
-
 	private int type;
 	private int status;
 	private int xPosition;

@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -40,6 +41,8 @@ public class MainMenuController {
 	private Button playSinglePlayer;
 	@FXML
 	private TextArea usersList;
+	@FXML
+	private TextArea infoBox;
 	@FXML
 	private TextArea gamesList;
 	private boolean userPressed = false;
@@ -123,7 +126,19 @@ public class MainMenuController {
 			userPressed = false;
 		}
 	}
-	
+
+	@FXML
+	protected void displayMessage(String message) {
+		this.infoBox.setText(message);
+		this.infoBox.setVisible(true);
+
+		try {TimeUnit.SECONDS.sleep(2);}
+		catch(InterruptedException ex)
+		{ Thread.currentThread().interrupt(); }
+
+		this.infoBox.setVisible(false);
+	}
+
 	 @FXML
 	 private void initialize() {
 		 comboBox.getItems().setAll(playerNumber);

@@ -4,7 +4,6 @@ import java.io.IOException;
 import GUI.GUIMain;
 import GUI.PregameSetUp;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,10 +39,10 @@ public class Main extends Application {
 	public void setLoginStage() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("loginFX.fxml"));
 	    Parent root = loader.load();
-	    Controller controller = loader.getController();
-	    controller.setClient(client);
-	    controller.setMain(this);
-	    this.client.setController(controller);
+	    LoginController loginController = loader.getController();
+	    loginController.setClient(client);
+	    loginController.setMain(this);
+	    this.client.setLoginController(loginController);
 	    Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);

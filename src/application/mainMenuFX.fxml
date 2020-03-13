@@ -57,6 +57,12 @@
               <DropShadow height="85.99" radius="37.305" spread="0.87" width="65.23" />
           </effect>
       </Text>
+
+          <TextArea fx:id="infoBox" layoutX="100.0" layoutY="400.0" prefHeight="50.0" prefWidth="500.0" visible="false">
+              <effect>
+                  <InnerShadow />
+              </effect></TextArea>
+
             <TextArea fx:id="usersList" layoutX="511.0" layoutY="87.0" prefHeight="213.0" prefWidth="130.0" visible="false">
                <effect>
                   <InnerShadow />
