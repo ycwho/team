@@ -81,7 +81,7 @@ public class Main extends Application {
 	}
 	
 	public void setMainMenuStage() throws Exception {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenuFX.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("aaaaaaaaaa.fxml"));
 		Parent root = fxmlLoader.load();
 		MainMenuController controller = fxmlLoader.getController();
 		controller.setClient(client);

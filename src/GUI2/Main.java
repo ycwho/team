@@ -1,7 +1,8 @@
-package application;
+package GUI2;
 
 import java.io.IOException;
 
+import application.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -14,14 +15,31 @@ import javafx.scene.shape.Rectangle;
 
 
 public class Main extends Application {
+	
+	Stage primaryStage;
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		 FXMLLoader loader = FXMLLoader.load(getClass().getResource("aaaaaaaaaa.fxml"));
-		 Parent root = loader.load();
-		 GameController gc = loader.getController();
-		 Scene scene = new Scene(root);
-		 primaryStage.setScene(scene);
-		 primaryStage.show();
+//		this.primaryStage = primaryStage;
+//		 FXMLLoader loader = FXMLLoader.load(getClass().getResource("aaaaaaaaaa.fxml"));
+//		 Parent root = loader.load();
+//		 GameController gc = loader.getController();
+//		 Scene scene = new Scene(root);
+//		 primaryStage.setScene(scene);
+//		 primaryStage.show();
+		 
+		 FXMLLoader loader = new FXMLLoader(getClass().getResource("gameFX.fxml"));
+		    Parent root = loader.load();
+		    GameController gameController = loader.getController();
+		    gameController.setMain(this);
+		    gameController.setName("name");
+		    gameController.hit("name", 10, false);
+		    Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
+			primaryStage.sizeToScene();
+			primaryStage.setTitle("Asos Battleships");
+			primaryStage.show();
 	}
 
 	public static void main(String[] args) {

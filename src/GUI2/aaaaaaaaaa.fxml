@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="application.GameController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="GUI2.GameController">
    <children>
       <GridPane fx:id="grid">
         <columnConstraints>
