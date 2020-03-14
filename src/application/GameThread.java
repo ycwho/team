@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
@@ -149,7 +150,7 @@ public class GameThread extends Thread {
 		
 	}
 	
-	public synchronized int uploadShips(UserThread uploader, Set<Integer> shipPositions) {
+	public synchronized int uploadShips(UserThread uploader, List<Integer> shipPositions) {
 		int result = 0;
 		
 		if (gameStatus == 1) {
@@ -186,6 +187,16 @@ public class GameThread extends Thread {
 					
 					turnEnd = true;
 					broadcastPlayerMessage(Protocol.HIT + " " + defenderSlot + " " + position + " " + playersInfo.get(defenderSlot).isHit(position));
+					
+					
+					int index = playersInfo.get(defenderSlot).checkShipSunk(position);
+					if(index >= 0) {
+						inGameMessage("[Player-" + defenderSlot + ", Ship - " + index + "] has sunk, positions["
+								+ playersInfo.get(defenderSlot).oneShipPositions(index));
+					}
+					
+					
+					
 					//inGameMessage("[Player-" + defenderSlot + ", postion-" + position + "] has been attacked,"
 					//		+ " attack ship:" + playersInfo.get(defenderSlot).isHit(position));
 

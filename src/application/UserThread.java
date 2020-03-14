@@ -296,7 +296,7 @@ public class UserThread extends Thread {
 		
 		//upload
 		else if(getCommand.startsWith(Protocol.CLIENT_UPLOAD_SHIP_POSITIONS)) {
-			Set<Integer> data = new TreeSet();
+			List<Integer> data = new ArrayList();
 			try {
 				for(int i = 1; i < commandElements.length; i++) {
 					data.add(Integer.parseInt(commandElements[i]));
