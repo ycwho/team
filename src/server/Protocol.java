@@ -51,5 +51,7 @@ public interface Protocol {
 	
 	int[] SHIPS_LENGTH = {5, 4, 3, 3, 2};
 	String [] SHIPS_NAME = {"A", "B" , "C", "D", "E"};
+	
+	String CLIENT_STORE_POSITIONS = "store";
 
 }
