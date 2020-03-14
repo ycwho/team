@@ -6,14 +6,14 @@ public interface Protocol {
 	//todo - what happens when trying to join a game that already exists
 
 	// Misc Protocols
-	String DISCONNECTION = "END"; //unsure if used properly
+	String DISCONNECTION = "END";
 	String CLIENT_NEED_RESENT_COMMAND = "illegal command, please resent command";
 
 	// login and registration
-	String CLIENT_SIGNUP = "register";
+	String CLIENT_SIGNUP = "register"; // "register [username] [password]"
 	String[] CLIENT_SIGNUP_REPLY = {"register success" , "sign up failed because the username already exists", "sign up because reason 2"};
 	//log username password
-	String CLIENT_LOGIN = "log";
+	String CLIENT_LOGIN = "log"; // "log [username] [password]"
 	String CLIENT_LOGOUT = "logout";
 	String[] CLIENT_LOGIN_REPLY = {"login success" , "log in failed because wrong username/password", "log in failed because reason 2"};
 	String CLIENT_MISSING_LOGIN_INFORMATION = "Missing Username or Password";
@@ -25,11 +25,11 @@ public interface Protocol {
 	String SERVER_NOTICE_OTHER_LOGOUT = "otheruser_has_logged_out ";
 
 	// Main Menu Protocols
-	String CLIENT_CHECK_ONLINE_USER = "check";
+	String CLIENT_CHECK_ONLINE_USER = "check"; // just Protocol
 	String CLIENT_CHECK_ONLINE_USER_RESPONSE = "Other online users: ";
-	String CLIENT_CHECK_GAME = "gamesList";
+	String CLIENT_CHECK_GAME = "gamesList"; // just Protocol
 	String CLIENT_CHECK_GAME_RESPONSE = "Games: ";
-	String CLIENT_CREATE_GAME = "create";
+	String CLIENT_CREATE_GAME = "create"; // "create [playernumber] [gamename]"
 	String[] CLIENT_CREATE_REPLY = {"create game successfully" , "game already exists", "create game failed for unknown reason"};
 	String GAME_NOTICE_CREATE = "new_game_created";
 	String CLIENT_JOIN_GAME = "join";
