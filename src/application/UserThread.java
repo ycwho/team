@@ -304,33 +304,41 @@ public class UserThread extends Thread {
 		}
 		
 		//upload
-		else if(getCommand.startsWith(Protocol.CLIENT_UPLOAD_SHIP_POSITIONS)) {
-//			List<Integer> data = new ArrayList();
+//		else if(getCommand.startsWith(Protocol.CLIENT_UPLOAD_SHIP_POSITIONS)) {
+////			List<Integer> data = new ArrayList();
+////			try {
+////				for(int i = 1; i < commandElements.length; i++) {
+////					data.add(Integer.parseInt(commandElements[i]));
+////				}
+////			}catch(Exception e) {
+////				return Protocol.CLIENT_NEED_RESENT_COMMAND;
+////			}
+////
+////			result = joinedGame.uploadShips(this, data);
+////
+////
+////			//database.saveShipPosition(ShipPosition[] positions, int slot)
+////
+////
+////			
+////			return Protocol.CLIENT_UPLOAD_REPLY[result];
+//			
 //			try {
-//				for(int i = 1; i < commandElements.length; i++) {
-//					data.add(Integer.parseInt(commandElements[i]));
-//				}
-//			}catch(Exception e) {
+//			result = joinedGame.uploadShips(this, commandElements[1]);
+//			}catch(NumberFormatException e) {
 //				return Protocol.CLIENT_NEED_RESENT_COMMAND;
 //			}
 //
-//			result = joinedGame.uploadShips(this, data);
-//
-//
-//			//database.saveShipPosition(ShipPosition[] positions, int slot)
-//
-//
-//			
 //			return Protocol.CLIENT_UPLOAD_REPLY[result];
-			
-			try {
-			result = joinedGame.uploadShips(this, commandElements[1]);
-			}catch(NumberFormatException e) {
-				return Protocol.CLIENT_NEED_RESENT_COMMAND;
-			}
+//		}
+		else if(getCommand.startsWith(Protocol.CLIENT_UPLOAD_SHIP_POSITIONS)) {
+            String option = commandElements[1];
+            String position = commandElements[2];
 
-			return Protocol.CLIENT_UPLOAD_REPLY[result];
-		}
+            int i = database.saveShipPosition(username, option, position);
+            return Protocol.CLIENT_UPLOAD_REPLY[i];
+        }
+
 
         //load(form database to game)
         else if (getCommand.startsWith("load")) {
