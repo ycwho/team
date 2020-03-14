@@ -232,7 +232,7 @@ public class UserThread extends Thread {
 					newGame.start();
 					onlineGames.put(gameName, newGame);
 					joinedGame = newGame;
-//					userStatus = 2;
+					userStatus = 2;
 					//change this to when game starts
 					System.out.println("finished creating game");
 

@@ -16,7 +16,7 @@ public class PregameSetUp extends Application{
 	private static ArrayList<Integer> shipPositions;
 	private static application.Client client;
 	public static void setUp() {
-		text = new Text("Ships placed: 0");
+		text = new Text("Ships placed: 0 \n V to place vertically H to place horizontally");
 		shipPositions = new ArrayList<Integer>();
 		board = new Board(false, event -> {
 			if(board.getShips() == 0) {
@@ -30,7 +30,7 @@ public class PregameSetUp extends Application{
 			}
 			Board.Cell cell = (Board.Cell) event.getSource();
 			board.placeShip(board.getCells().indexOf(cell));
-			text.setText("Ships placed: " + board.getShips());
+			text.setText("Ships placed: " + board.getShips() +"\n V to place vertically H to place horizontally");
 		});
 	}
 	@Override

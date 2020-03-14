@@ -51,6 +51,21 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 	
+	public void setGameLobbyStage() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gameLobbyFX.fxml"));
+		Parent root = fxmlLoader.load();
+		GameLobbyController controller = fxmlLoader.getController();
+		controller.setClient(client);
+		controller.setMain(this);
+		this.client.setGameLobbyController(controller);
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		primaryStage.sizeToScene();
+		primaryStage.setTitle("Game Lobby");
+		primaryStage.show();
+	}
+	
 	public void setSinglePlayerGame() throws Exception {
 		Stage singleStage = new Stage();
 		GUIMain guimain = new GUIMain();
@@ -61,6 +76,7 @@ public class Main extends Application {
 	public void setSetup() throws Exception {
 		Stage singleStage = new Stage();
 		PregameSetUp pregameSetUp = new PregameSetUp(this.client);
+		pregameSetUp.setUp();
 		pregameSetUp.start(singleStage);
 	}
 	
@@ -75,7 +91,7 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.sizeToScene();
-		primaryStage.setTitle("Battleships Register User");
+		primaryStage.setTitle("Battleships Main Menu");
 		primaryStage.show();
 
 	}

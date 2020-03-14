@@ -18,6 +18,7 @@ public class Client {
 	private boolean isLogin;
 	private LoginController loginController;
 	private MainMenuController mainMenuController;
+	private GameLobbyController gameLobbyController;
 	private Main main;
 	
 	Client(String serverName, Main main) {
@@ -101,6 +102,10 @@ public class Client {
 	public void setLoginController(LoginController loginController) {
 		// TODO Auto-generated method stub
 		this.loginController = loginController;
+	}
+	
+	public void setGameLobbyController(GameLobbyController gameLobbyController) {
+		this.gameLobbyController = gameLobbyController;
 	}
 
 	public void setMainMenuController(MainMenuController controller2) {
@@ -250,6 +255,17 @@ public class Client {
 								//System.out.println("Game created, waiting for other player(s)");
 								mainMenuController.displayMessage("Game created, waiting for other player(s)");
 								checkGames(Protocol.CLIENT_CHECK_GAME);
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {
+										try {
+											main.setGameLobbyStage();
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}
+								});
 							} else if (command.startsWith(Protocol.CLIENT_CREATE_REPLY[1])) {
 								//System.out.println("Game Already Exists");
 								mainMenuController.displayMessage("Game Already Exists");
@@ -259,6 +275,17 @@ public class Client {
 							} else if (command.startsWith(Protocol.CLIENT_JOIN_REPLY[0])) {
 								//System.out.println("Game Joined");
 								mainMenuController.displayMessage("Game Joined");
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {
+										try {
+											main.setGameLobbyStage();
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}
+								});
 							} else if (command.startsWith(Protocol.CLIENT_JOIN_REPLY[1])) {
 								//System.out.println("No Game Found With That Name");
 								mainMenuController.displayMessage("No Game Found With That Name");
