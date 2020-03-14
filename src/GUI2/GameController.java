@@ -1,4 +1,4 @@
-package application;
+package GUI2;
 
 import java.io.IOException;
 
@@ -20,8 +20,8 @@ import javafx.stage.Stage;
 public class GameController {
 private static  String name;
 private static String nameEnemy;
-//private Client client;
 private Main main;
+//private Client client;
 @FXML static GridPane grid;
 @FXML Rectangle rectangle0;
 @FXML Rectangle rectangle1;
@@ -157,11 +157,12 @@ private Main main;
  //public void setClient(Client newClient){
  //	 client = newClient;
  //}
- public void setMain(Main newMain){
-	 main = newMain;
- }
  public Scene makeScene(){
 	 return new Scene(grid);
+ }
+ 
+ public void setMain(Main main) {
+	 this.main = main;
  }
 
 }

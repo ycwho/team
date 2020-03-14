@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 
-<GridPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GameController">
+<GridPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI2.GameController">
    <columnConstraints>
       <ColumnConstraints minWidth="10.0" prefWidth="50.0" />
       <ColumnConstraints minWidth="10.0" prefWidth="50.0" />
