@@ -18,6 +18,7 @@ public class Main extends Application {
 		for(String s : names){
 			Parent root = FXMLLoader.load(getClass().getResource("gameFX.fxml"));
 			gc.setMain(this);
+			gc.setUserName("Player");
 			gc.setGrid((GridPane)root);
 			gc.panes.add(gc.getGrid());
 			gc.setName(s);
