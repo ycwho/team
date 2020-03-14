@@ -2,6 +2,7 @@ package server;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
@@ -14,7 +15,7 @@ public class GameThread extends Thread {
 	Map<String, UserThread> onlineUsers;
 	Map<String, GameThread> onlineGames;
 	private static int threadCounter = 1;
-	public static final int MAX_PLAYER = 3;
+	public int maxPlayer;
 	String gameName;
 
 	boolean turnEnd;
@@ -25,7 +26,7 @@ public class GameThread extends Thread {
 	 */
 	private int gameStatus;
 
-	public GameThread(UserThread host, String gameName, Map<String, UserThread> onlineUsers,
+	public GameThread(UserThread host, String gameName, int maxPlayer , Map<String, UserThread> onlineUsers,
 			Map<String, GameThread> onlineGames) {
 
 		super("Game-" + threadCounter);
@@ -35,6 +36,8 @@ public class GameThread extends Thread {
 		this.gameName = gameName;
 		this.onlineUsers = onlineUsers;
 		this.onlineGames = onlineGames;
+		
+		this.maxPlayer = maxPlayer;
 
 		players = new Vector();
 
@@ -51,7 +54,7 @@ public class GameThread extends Thread {
 		gameStatus = 1;
 		System.out.println(this.getName() + " is running. host is " + host.getUsername() + "game name :" + gameName);
 		int counter = 0;
-		int attackerCounter = MAX_PLAYER-1;
+		int attackerCounter = maxPlayer-1;
 		broadcastMessage(Protocol.GAME_NOTICE_CREATE);
 		String message = "";
 
@@ -99,7 +102,7 @@ public class GameThread extends Thread {
 
 	public synchronized int joinGame(UserThread joiner) {
 
-		if (players.size() < MAX_PLAYER && gameStatus == 1) {
+		if (players.size() < maxPlayer && gameStatus == 1) {
 			players.add(joiner);
 			playersInfo.add(new Player(joiner.getUsername()));
 			checkGameStatus();
@@ -144,7 +147,7 @@ public class GameThread extends Thread {
 		
 	}
 	
-	public synchronized int uploadShips(UserThread uploader, Set<Integer> shipPositions) {
+	public synchronized int uploadShips(UserThread uploader, List<Integer> shipPositions) {
 		int result = 0;
 		
 		if (gameStatus == 1) {
@@ -177,6 +180,14 @@ public class GameThread extends Thread {
 					turnEnd = true;
 					inGameMessage("[Player-" + defenderSlot + ", postion-" + position + "] has been attacked,"
 							+ " attack ship:" + playersInfo.get(defenderSlot).isHit(position));
+					
+					//check if the ship sunk,return [player index] [ship index] [positions of the ship]
+					int index = playersInfo.get(defenderSlot).checkShipSunk(position);
+					if(index >= 0) {
+						inGameMessage("[Player-" + defenderSlot + ", Ship - " + index + "] has sunk, positions["
+								+ playersInfo.get(defenderSlot).oneShipPositions(index));
+					}
+					
 					if(playersInfo.get(defenderSlot).getPlayerStatus()==5) {
 						inGameMessage(playersInfo.get(defenderSlot).getUsername() + " has dead.");
 					}
@@ -206,10 +217,10 @@ public class GameThread extends Thread {
 		
 		if (players.size() == 0) {
 			gameStatus = -1;
-		} else if (gameStatus == 1 && readyPlayer() == MAX_PLAYER) {
+		} else if (gameStatus == 1 && readyPlayer() == maxPlayer) {
 			gameStart();
 
-		} else if (deadPlayer() == MAX_PLAYER - 1) {
+		} else if (deadPlayer() == maxPlayer - 1) {
 			gameStatus = 3;
 		}
 

@@ -3,13 +3,13 @@ package server;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
-//import database.Database;
-//import database.DatabaseTest;
+
 
 public class UserThread extends Thread {
 
@@ -152,10 +152,11 @@ public class UserThread extends Thread {
 		// create game
 		else if (getCommand.startsWith(Protocol.CLIENT_CREATE_GAME)) {
 			String gameName = commandElements[1];
+			int maxPlayer = Integer.parseInt(commandElements[2]);
 			if (!onlineGames.containsKey(gameName)) {
 
 				try {
-					GameThread newGame = new GameThread(this, gameName, onlineUsers, onlineGames);
+					GameThread newGame = new GameThread(this, gameName, maxPlayer, onlineUsers, onlineGames);
 					newGame.start();
 					
 					onlineGames.put(gameName, newGame);
@@ -211,7 +212,7 @@ public class UserThread extends Thread {
 		
 		//upload
 		else if(getCommand.startsWith(Protocol.CLIENT_UPLOAD_SHIP_POSITIONS)) {
-			Set<Integer> data = new TreeSet();
+			List<Integer> data = new ArrayList();
 			try {
 				for(int i = 1; i < commandElements.length; i++) {
 					data.add(Integer.parseInt(commandElements[i]));

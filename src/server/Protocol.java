@@ -49,6 +49,7 @@ public interface Protocol {
 	
 	String[] CLIENT_ATTACK_REPLY = {"attack successfully", "it is not your turn", "attack illegal"};
 	
-	
+	int[] SHIPS_LENGTH = {5, 4, 3, 3, 2};
+	String [] SHIPS_NAME = {"A", "B" , "C", "D", "E"};
 
 }
