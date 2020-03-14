@@ -23,6 +23,7 @@ public class GameController {
 private String name;
 //private Client client;
 private Main main;
+private static String userName;
 private static String[] names = new String[4];
 public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
 @FXML private static GridPane grid;
@@ -127,17 +128,18 @@ public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
 @FXML Rectangle rectangle98;
 @FXML Rectangle rectangle99;
 
-
+ public GameController(){
+ }
  public void shoot(MouseEvent e){
 	 Node source = (Node)e.getSource();
 	 grid = (GridPane) source.getParent();
 	 System.out.println(grid.getChildren().indexOf(source) + " " + names[panes.indexOf((GridPane)source.getParent())]);
+	 if(names[panes.indexOf((GridPane)source.getParent())] != userName){
 	 Rectangle rect = (Rectangle)source;
 	 rect.setFill(Color.BLACK);
 	 //client.write(Protocol.CLIENT_ATTACK + " " + names[panes.indexOf((GridPane)source.getParent())] + " " + position);
- }
- public GameController(){
- }
+	 }
+}
  public void broadcast(String message){
      Text text = new Text(message);
      text.setX((message.length())*15);
@@ -176,6 +178,9 @@ public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
  public void setName(String newName){
 	 name = newName;
  }
+ public void setUserName(String newName){
+	 userName = newName;
+ }
  public String getName(){
 	 return name;
  }
@@ -193,4 +198,3 @@ public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
  }
 
 }
-
