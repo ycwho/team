@@ -196,7 +196,7 @@ public class MainMenuController {
 	@FXML
 	protected void loadShips(MouseEvent event) throws IOException {
 		try {
-			main.setSetup();
+			//write protocol load ships
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
