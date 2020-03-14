@@ -407,7 +407,6 @@ public class Client {
 		this.shipSetupController = shipSetupController;
 	}
 
-
 	public void setShipSetupLobbyController(ShipSetupLobbyController shipSetupLobbyController) {
 		// TODO Auto-generated method stub
 		this.shipSetupLobbyController = shipSetupLobbyController;
