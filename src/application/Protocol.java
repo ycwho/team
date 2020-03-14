@@ -35,9 +35,10 @@ public interface Protocol {
 	String CLIENT_JOIN_GAME = "join"; // "join [gamename]"
 	String[] CLIENT_JOIN_REPLY = {"join game successfully" , "join game failed no game founded", "failed for unknown reason"};
 
-	String CLIENT_LOAD_POSITIONS_REQUEST = "LoadSetup"; // "LoadSetup [Username] [optionName]"
+	String CLIENT_LOAD_POSITIONS_REQUEST = "LoadSetup"; // "LoadSetup [optionName]"
+	String CLIENT_RESPONSE_EMPTY_LOAD = "EMPTY";
 	String LOAD_POSITIONS_RESPONSE = "ShipPositions"; // "Ship Positions s1p1+s1p2+s1p3+s1p4+s1p5-s2p1+s2p2+s2p3+s2p4-s3p1+s3p2+s3p3-s4p1+s4p2+s4p3-s5p1+s5p2"
-	String CLIENT_UPLOAD_SHIP_POSITIONS = "UploadShipPositions"; // "UploadShipPositions [playerName] [optionName] s1p1+s1p2+s1p3+s1p4+s1p5-s2p1+s2p2+s2p3+s2p4-s3p1+s3p2+s3p3-s4p1+s4p2+s4p3-s5p1+s5p2"
+	String CLIENT_UPLOAD_SHIP_POSITIONS = "UploadShipPositions"; // "UploadShipPositions [optionName] s1p1+s1p2+s1p3+s1p4+s1p5-s2p1+s2p2+s2p3+s2p4-s3p1+s3p2+s3p3-s4p1+s4p2+s4p3-s5p1+s5p2"
 
 	String[] CLIENT_UPLOAD_REPLY = {"upload successfully", "upload failed" };
 

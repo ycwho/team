@@ -280,8 +280,11 @@ public class UserThread extends Thread {
 		
 		// save positions(upload to database)
 		else if(getCommand.startsWith(Protocol.PLAYER_NAME_REQUEST)) {
-			i = 0;//database.saveShipPosition(getCommand);
-			return "reply";
+			String option = commandElements[1];
+			String position = commandElements[2];
+			
+			i = database.saveShipPosition(username, option, position);
+			return Protocol.CLIENT_UPLOAD_REPLY[i];
 		}
 
 		return Protocol.CLIENT_NEED_RESENT_COMMAND;
@@ -331,9 +334,9 @@ public class UserThread extends Thread {
 		
 		//load(form database to game)
 		else if (getCommand.startsWith("load")) {
-			String loadPositions = "EMPTY"; //database.loadShipPosition(getCommand);
+			String loadPositions = database.loadShipPosition(username, commandElements[1]);
 			if(loadPositions.equals("EMPTY")) {
-				return "empty slot!";
+				return Protocol.CLIENT_RESPONSE_EMPTY_LOAD;
 			}
 			
 			
