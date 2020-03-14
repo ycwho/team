@@ -150,7 +150,7 @@ public class GameThread extends Thread {
 		
 	}
 	
-	public synchronized int uploadShips(UserThread uploader, List<Integer> shipPositions) {
+	public synchronized int uploadShips(UserThread uploader, String shipPositions) throws NumberFormatException{
 		int result = 0;
 		
 		if (gameStatus == 1) {

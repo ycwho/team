@@ -277,6 +277,12 @@ public class UserThread extends Thread {
 			}
 			return nameString;
 		}
+		
+		// save positions(upload to database)
+		else if(getCommand.startsWith(Protocol.PLAYER_NAME_REQUEST)) {
+			i = 0;//database.saveShipPosition(getCommand);
+			return "reply";
+		}
 
 		return Protocol.CLIENT_NEED_RESENT_COMMAND;
 	}
@@ -296,24 +302,49 @@ public class UserThread extends Thread {
 		
 		//upload
 		else if(getCommand.startsWith(Protocol.CLIENT_UPLOAD_SHIP_POSITIONS)) {
-			List<Integer> data = new ArrayList();
+//			List<Integer> data = new ArrayList();
+//			try {
+//				for(int i = 1; i < commandElements.length; i++) {
+//					data.add(Integer.parseInt(commandElements[i]));
+//				}
+//			}catch(Exception e) {
+//				return Protocol.CLIENT_NEED_RESENT_COMMAND;
+//			}
+//
+//			result = joinedGame.uploadShips(this, data);
+//
+//
+//			//database.saveShipPosition(ShipPosition[] positions, int slot)
+//
+//
+//			
+//			return Protocol.CLIENT_UPLOAD_REPLY[result];
+			
 			try {
-				for(int i = 1; i < commandElements.length; i++) {
-					data.add(Integer.parseInt(commandElements[i]));
-				}
-			}catch(Exception e) {
+			result = joinedGame.uploadShips(this, commandElements[1]);
+			}catch(NumberFormatException e) {
 				return Protocol.CLIENT_NEED_RESENT_COMMAND;
 			}
 
-			result = joinedGame.uploadShips(this, data);
-
-
-			//database.saveShipPosition(ShipPosition[] positions, int slot)
-
-
-			
 			return Protocol.CLIENT_UPLOAD_REPLY[result];
 		}
+		
+		//load(form database to game)
+		else if (getCommand.startsWith("load")) {
+			String loadPositions = "EMPTY"; //database.loadShipPosition(getCommand);
+			if(loadPositions.equals("EMPTY")) {
+				return "empty slot!";
+			}
+			
+			
+			result = joinedGame.uploadShips(this, loadPositions);
+			
+			return Protocol.LOAD_POSITIONS_RESPONSE + " " + loadPositions;
+		}
+		
+		
+		
+		
 		
 		//attack
 		else if(getCommand.startsWith(Protocol.CLIENT_ATTACK)) {

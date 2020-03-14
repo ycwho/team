@@ -25,13 +25,17 @@ public class Player {
 	private List<Integer> shipPositions;
 	
 	
-	private int[] ShipBeAttackedCounter= new int[Protocol.SHIPS_LENGTH.length];
-	//every ships first index [0, 5, 9, 12, 15]
-	private int[] shipsIndex = new int[Protocol.SHIPS_LENGTH.length];
+	private int[] shipBeAttackedCounter;
 
+	
+	List<Integer> shipLength;
+	List<Set<Integer>> eachShipPosition;
+	
 	private String username;
 	
 	private int hited;
+	
+	private String positionString;
 
 	public Player(String username) {
 		
@@ -40,16 +44,6 @@ public class Player {
 		hited = 0;
 		this.username = username;
 
-		
-		
-		for(int a : ShipBeAttackedCounter) {
-			a = 0;
-		}
-		
-		shipsIndex[0] = 0;
-		for(int i = 1; i < Protocol.SHIPS_LENGTH.length; i++) {
-			shipsIndex[i] =  shipsIndex[i-1]+Protocol.SHIPS_LENGTH[i-1];
-		}
 	}
 	
 	
@@ -88,8 +82,35 @@ public class Player {
 	}
 	
 	
-	
-
+	//format: s1p1+s1p2-s2p1+s2p2-s3p1+s3p2
+	public void setShips(String positionString) throws NumberFormatException{
+		int shipNumber = positionString.split("-").length; 
+		
+		//initialize counter
+		shipBeAttackedCounter= new int[shipNumber];
+		
+		shipLength = new ArrayList();
+		shipPositions = new ArrayList();
+		
+		//split by "-"
+		for(String singleShipPositions : positionString.split("-")) {
+			shipLength.add(singleShipPositions.split("+").length);
+			TreeSet<Integer> a = new TreeSet();
+			
+			//split by "+"
+			for(String singlePosition : singleShipPositions.split("+")) {
+				shipPositions.add(Integer.parseInt(singlePosition));
+				a.add(Integer.parseInt(singlePosition));
+			}
+			eachShipPosition.add(a);
+		}
+		
+		
+		
+		setShips(shipPositions);
+		
+		
+	}
 	
 	public void setShips(List<Integer> shipPositions) {
 		this.shipPositions = shipPositions;
@@ -148,23 +169,19 @@ public class Player {
 	 */
 	public int checkShipSunk(int position) {
 		int index = findBeAttackedShip(position);
-		ShipBeAttackedCounter[index] += 1;
+		shipBeAttackedCounter[index] += 1;
 		
 		
-		return ShipBeAttackedCounter[index] >= Protocol.SHIPS_LENGTH[index] ? index : -1;
+		return shipBeAttackedCounter[index] >= shipLength.get(index) ? index : -1;
 		
 	}
 	
 	public int findBeAttackedShip(int attackPoint) {
-		int a = shipPositions.indexOf(attackPoint);
-		for(int i = 0; i < Protocol.SHIPS_LENGTH.length; i++) {
-			if(a < Protocol.SHIPS_LENGTH[i]) {
+
+		for(int i = 0; i < eachShipPosition.size(); i++) {
+			if(eachShipPosition.get(i).contains(attackPoint)) {
 				return i;
 			}
-			else {
-				a = a - Protocol.SHIPS_LENGTH[i];
-			}
-			
 		}
 		System.out.println("Why i cannot find the be attacked ship?");
 		return 0;
@@ -172,8 +189,8 @@ public class Player {
 	
 	public String oneShipPositions(int index) {
 		String result = new String();
-		for(int i = shipsIndex[index]; i < shipsIndex[index] + Protocol.SHIPS_LENGTH[index]; i++) {
-			result += shipPositions.get(i) + " ";
+		for(int position : eachShipPosition.get(index)) {
+			result += position + " ";
 		}
 		return result;
 	}
