@@ -1,7 +1,5 @@
 package GUI2;
 
-package application;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -157,18 +155,22 @@ public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
  }
 
  public void hit (String newName, int position, boolean hit) {
-	 int k = 0;
-	 while(names[k] != newName){
-		 k++;
-	 }
-	 if(!hit){
-		 Node node = panes.get(k).getChildren().get(position);
-		 Rectangle rect = (Rectangle)node;
-		 rect.setFill(Color.BLACK);
-	 }else if(hit){
-		 Node node = panes.get(k).getChildren().get(position);
-		 Rectangle rect = (Rectangle)node;
-		 rect.setFill(Color.ORANGE);
+	 for(String s : names){
+		if(newName == s){
+			int k = 0;
+			while(names[k] != newName){
+				k++;
+			}
+			if(!hit){
+				Node node = panes.get(k).getChildren().get(position);
+				Rectangle rect = (Rectangle)node;
+				rect.setFill(Color.BLACK);
+			}else if(hit){
+				Node node = panes.get(k).getChildren().get(position);
+				Rectangle rect = (Rectangle)node;
+				rect.setFill(Color.ORANGE);
+			}
+		}
 	 }
  }
  public void setName(String newName){
