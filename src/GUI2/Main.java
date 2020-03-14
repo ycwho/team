@@ -1,7 +1,5 @@
 package GUI2;
 
-package application;
-
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -23,7 +21,7 @@ public class Main extends Application {
 		 gc.setMain(this);
 		 gc.setName("Player");
 		 gc.setGrid((GridPane)root);
-		 gc.hit("Player", 10, true);
+		 gc.panes.add(gc.getGrid());
 		 //gc.broadcast("Enemy has disconnected");
 		 Scene scene = new Scene(root);
 		 primaryStage.setScene(scene);
@@ -33,9 +31,9 @@ public class Main extends Application {
 		 Parent root2 = FXMLLoader.load(getClass().getResource("gameFX.fxml"));
 		 GameController gc2 = new GameController();
 		 gc2.setMain(this);
-		 gc2.setName("Enemy");
 		 gc2.setGrid((GridPane)root2);
-		 gc2.hit("Player", 10, true);
+		 gc2.panes.add(gc2.getGrid());
+		 gc2.setName("Enemy");
 		 //gc.broadcast("Enemy has disconnected");
 		 Scene scene2 = new Scene(root2);
 		 Stage stage = new Stage();
@@ -46,8 +44,11 @@ public class Main extends Application {
 		 Parent root3 = FXMLLoader.load(getClass().getResource("gameFX.fxml"));
 		 GameController gc3 = new GameController();
 		 gc3.setMain(this);
-		 gc3.setName("Enemy2");
 		 gc3.setGrid((GridPane)root3);
+		 gc3.panes.add(gc3.getGrid());
+		 gc3.setName("Enemy2");
+		 String[] mainNames = {"Player","Enemy","Enemy2"};
+		 gc3.setNames(mainNames);
 		 gc3.hit("Enemy", 10, true);
 		 //gc.broadcast("Enemy has disconnected");
 		 Scene scene3 = new Scene(root3);
@@ -73,3 +74,4 @@ public class Main extends Application {
 		}
 	}
 }
+
