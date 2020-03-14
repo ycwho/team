@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 
 public class Main extends Application {
 	private String[] names;
+	private String username;
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		//String[] names = {"Player","Walter","Bob"};
@@ -21,7 +22,8 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("gameFX.fxml"));
 			gc.setMain(this);
 			//gc.setClient(client);
-			gc.setUserName("Player");
+			gc.setUserName(username);
+			System.out.println(username);
 			gc.setGrid((GridPane)root);
 			gc.getPanes().add(gc.getGrid());
 			gc.setNames(names);
@@ -48,7 +50,8 @@ public class Main extends Application {
 		//	}
 		//}
 	}
-	public Main(String[] newNames){
+	public Main(String[] newNames, String username){
 		this.names = newNames;
+		this.username = username;
 	}
 }

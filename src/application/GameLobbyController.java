@@ -55,7 +55,7 @@ public class GameLobbyController {
 			@Override
 			public void run() {
 				try {
-					main.setGameStage("Henry, Liz, Henry2");
+					main.setGameStage(client.getUsername() + " Henry Liz Henry2");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -70,7 +70,7 @@ public class GameLobbyController {
 			//write protocol load ships
 //			loadText.getText()
 			client.write(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " " + this.client.getUsername() + " " + loadText.getText());
-			System.out.println(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " " + this.client.getUsername() + " " + loadText.getText());
+			System.out.println(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " "+ loadText.getText());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

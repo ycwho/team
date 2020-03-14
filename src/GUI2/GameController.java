@@ -134,7 +134,8 @@ public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
 	 Node source = (Node)e.getSource();
 	 grid = (GridPane) source.getParent();
 	 System.out.println(grid.getChildren().indexOf(source) + " " + names[panes.indexOf((GridPane)source.getParent())]);
-	 if(names[panes.indexOf((GridPane)source.getParent())] != userName){
+	 System.out.println(userName);
+	 if(!names[panes.indexOf((GridPane)source.getParent())].equalsIgnoreCase(userName)){
 	 Rectangle rect = (Rectangle)source;
 	 rect.setFill(Color.BLACK);
 	 //client.write(Protocol.CLIENT_ATTACK + " " + names[panes.indexOf((GridPane)source.getParent())] + " " + position);
