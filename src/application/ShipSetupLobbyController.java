@@ -484,7 +484,7 @@ public class ShipSetupLobbyController {
 	@FXML
 	protected void save(MouseEvent event) throws IOException {
 		if(!name.getText().isEmpty()) {
-			String write = Protocol.CLIENT_UPLOAD_SHIP_POSITIONS + " " + client.getUsername() + " " + name.getText() + " " + shipPositions;
+			String write = Protocol.CLIENT_UPLOAD_SHIP_POSITIONS + " " + name.getText() + " " + shipPositions;
 			System.out.println(write);
 			client.write(write);
 		}

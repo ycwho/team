@@ -196,7 +196,7 @@ public class Client {
 						String command = fromServer.readLine();
 						String[] nextLine = command.split(" ");
 						System.out.println(command);
-						
+						System.out.println("hi");
 						if (command.startsWith(Protocol.CLIENT_NEED_RESENT_COMMAND)){
 							System.out.println(command);
 						}

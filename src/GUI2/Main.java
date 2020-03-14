@@ -23,7 +23,6 @@ public class Main extends Application {
 			gc.setMain(this);
 			//gc.setClient(client);
 			gc.setUserName(username);
-			System.out.println(username);
 			gc.setGrid((GridPane)root);
 			gc.getPanes().add(gc.getGrid());
 			gc.setNames(names);
