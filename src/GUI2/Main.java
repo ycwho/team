@@ -32,14 +32,15 @@ public class Main extends Application {
 		    Parent root = loader.load();
 		    GameController gameController = loader.getController();
 		    gameController.setMain(this);
-		    gameController.setName("name");
-		    gameController.hit("name", 10, false);
+
 		    Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.sizeToScene();
 			primaryStage.setTitle("Asos Battleships");
 			primaryStage.show();
+		    gameController.setName("name");
+		    gameController.hit("name", 9, false);
 	}
 
 	public static void main(String[] args) {
