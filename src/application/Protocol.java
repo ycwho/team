@@ -32,7 +32,7 @@ public interface Protocol {
 	String CLIENT_CREATE_GAME = "create"; // "create [playernumber] [gamename]"
 	String[] CLIENT_CREATE_REPLY = {"create game successfully" , "game already exists", "create game failed for unknown reason"};
 	String GAME_NOTICE_CREATE = "new_game_created";
-	String CLIENT_JOIN_GAME = "join";
+	String CLIENT_JOIN_GAME = "join"; // "join [gamename]"
 	String[] CLIENT_JOIN_REPLY = {"join game successfully" , "join game failed no game founded", "failed for unknown reason"};
 
 	// Ending game
