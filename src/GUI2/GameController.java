@@ -1,9 +1,11 @@
 package GUI2;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,11 +20,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GameController {
-private static  String name;
-private static String nameEnemy;
-private Main main;
+private String name;
 //private Client client;
-@FXML static GridPane grid;
+private Main main;
+private static String userName;
+private static String[] names = new String[4];
+public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
+@FXML private static GridPane grid;
 @FXML Rectangle rectangle0;
 @FXML Rectangle rectangle1;
 @FXML Rectangle rectangle2;
@@ -124,32 +128,57 @@ private Main main;
 @FXML Rectangle rectangle98;
 @FXML Rectangle rectangle99;
 
+ public GameController(){
+ }
  public void shoot(MouseEvent e){
 	 Node source = (Node)e.getSource();
-	 System.out.println(grid.getColumnIndex(source)+" " + grid.getRowIndex(source) + " " + name);
+	 grid = (GridPane) source.getParent();
+	 System.out.println(grid.getChildren().indexOf(source) + " " + names[panes.indexOf((GridPane)source.getParent())]);
+	 if(names[panes.indexOf((GridPane)source.getParent())] != userName){
 	 Rectangle rect = (Rectangle)source;
 	 rect.setFill(Color.BLACK);
-	 //client.write(Protocol.CLIENT_ATTACK + " " + name + " " + position);
- }
- public GameController(){
-
- }
+	 //client.write(Protocol.CLIENT_ATTACK + " " + names[panes.indexOf((GridPane)source.getParent())] + " " + position);
+	 }
+}
  public void broadcast(String message){
-     //display a message for the player - this will have stuff like player disconnected, if its your turn, etc etc
+     Text text = new Text(message);
+     text.setX((message.length())*15);
+     text.setY(50);
+     text.setScaleX(5);
+     text.setScaleY(5);
+     Group group = new Group(text);
+     Stage stage = new Stage();
+     stage.setScene(new Scene(group));
+     stage.sizeToScene();
+     stage.show();
  }
- public void setNames (String[] names){
-
+ public void setNames (String[] newNames){
+	 names = newNames;
  }
 
  public void hit (String newName, int position, boolean hit) {
-	 if(name == newName){
-		 Node node = grid.getChildren().get(position);
-		 Rectangle rect = (Rectangle)node;
-		 rect.setFill(Color.BLACK);
+	 int k = 0;
+	 while(names[k] != newName){
+		k++;
+	 }
+	 if(!hit){
+		Node node = panes.get(k).getChildren().get(position);
+		Rectangle rect = (Rectangle)node;
+		rect.setFill(Color.BLACK);
+	 }else if(hit){
+		Node node = panes.get(k).getChildren().get(position);
+		Rectangle rect = (Rectangle)node;
+		rect.setFill(Color.ORANGE);
 	 }
  }
  public void setName(String newName){
 	 name = newName;
+ }
+ public void setUserName(String newName){
+	 userName = newName;
+ }
+ public String getName(){
+	 return name;
  }
  public void setGrid(GridPane pane){
 	 grid = pane;
@@ -157,12 +186,14 @@ private Main main;
  //public void setClient(Client newClient){
  //	 client = newClient;
  //}
- public Scene makeScene(){
-	 return new Scene(grid);
+ public void setMain(Main newMain){
+	 main = newMain;
  }
- 
- public void setMain(Main main) {
-	 this.main = main;
+ public GridPane getGrid(){
+	 return grid;
+ }
+ public ArrayList<GridPane> getPanes(){
+	 return panes;
  }
 
 }

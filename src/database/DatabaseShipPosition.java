@@ -1,5 +1,3 @@
-
-
 import java.io.File;
 
 import java.io.FileInputStream;
@@ -12,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import com.sun.org.apache.regexp.internal.recompile;
+import com.sun.org.apache.xpath.internal.operations.And;
+
+import org.postgresql.Driver;
 
 /**
  * @author Ning Wei
@@ -45,76 +46,49 @@ public class DatabaseShipPosition {
 	 * ship position takes one row. Before use this method, Server should check
 	 * whether the ShipPosition[] is overlapped first
 	 * 
-	 * @param userName
-	 * @param slotName
-	 * @param positions positions of the ships
+	 * @param a string contains user name and option,ship positions data¡£
 	 * @return
 	 */
-	public int saveShipPosition(String shipPositionString) {
-		// int result = 0; the value returned based on server,so it will change after
-		// server finished
+	public int saveShipPosition(String username, String option, String position) {
+		int result = 0;// if database insert successfully,return 0.
 		boolean check = false;
-		String[] positions = shipPositionString.split(",");
-		String username = positions[0];
-		String option = positions[1];
-		String position = positions[2];
-		// Check if the player has pre-saved slots
+
 		try {
-			ResultSet resultTable = connection.getMetaData().getTables(null, null, username, null);
-			if (resultTable.next()) {
-				check = true;
 
-				StringBuffer sbInsert = new StringBuffer();
-				sbInsert.append("INSERT INTO " + username);
-				sbInsert.append(" (username,option,shipPositions) " + "VALUES (?,?,?)");
-				String sqlInsert = sbInsert.toString();
-				System.out.println(sqlInsert);
+			String selectSql = "SELECT * FROM SHIPPOSITION;";
+			PreparedStatement selectStatement = connection.prepareStatement(selectSql);
+			ResultSet resultSet = selectStatement.executeQuery();
+			while (resultSet.next()) {
+				String existedUsername = resultSet.getString("username");
+				String existedOption = resultSet.getString("option");
+				String existedPosition = resultSet.getString("shippositions");
 
-				PreparedStatement insertStatement = connection.prepareStatement(sqlInsert);
-				System.out.println("connect");
-
-				insertStatement.setString(1, username);
-				System.out.println("u");
-				insertStatement.setString(2, option);
-				System.out.println("o");
-				insertStatement.setString(3, position);
-				System.out.println("p");
-				insertStatement.executeUpdate();
-				// result = insertStatement.executeUpdate();
-				System.out.println("Insert successfully");
+				// Check if the player has pre-saved option,if existed update ship positions.
+				if (existedUsername.equals(username) && existedOption.equals(option)) {
+					check = true;
+					StringBuffer updateString = new StringBuffer();
+					updateString.append("UPDATE SHIPPOSITION SET SHIPPOSITIONS = '" + position
+							+ "' WHERE SHIPPOSITIONS = '" + existedPosition + "' AND USERNAME = '" + username + ""
+							+ "' AND OPTION = '" + option + "';");
+					String updateSql = updateString.toString();
+					System.out.println(updateSql);
+					Statement stmt = connection.createStatement();
+					stmt.executeUpdate(updateSql);
+					break;
+				}
 			}
-
-			// Create a new table according to the warship's information
 			if (check == false) {
+				PreparedStatement insertStatement = connection.prepareStatement(
+						"INSERT INTO SHIPPOSITION (username,option,shipPositions)" + "VALUES (?,?,?)");
 
-				StringBuffer sb = new StringBuffer();
-				sb.append("CREATE TABLE IF NOT EXISTS " + username);
-				sb.append(
-						" (userName varchar(7000) ,option varchar(7000) ,shipPositions varchar(7000),foreign key(username) references users(username));");
-				String str = sb.toString();
-				System.out.println(str);
-
-				Statement stmt = connection.createStatement();
-				stmt.executeUpdate(str);
-				System.out.println("The table created successfully!");
-
-				// insert values into a new table.
-
-				StringBuffer sbInsert = new StringBuffer();
-				sbInsert.append("INSERT INTO " + username);
-				sbInsert.append(" (username,option,shipPositions) " + "VALUES (?,?,?)");
-				String sqlInsert = sbInsert.toString();
-				System.out.println(sqlInsert);
-
-				PreparedStatement insertStatement = connection.prepareStatement(sqlInsert);
 				System.out.println("connect");
 				insertStatement.setString(1, username);
 				insertStatement.setString(2, option);
 				insertStatement.setString(3, position);
 				insertStatement.executeUpdate();
-				// result = insertStatement.executeUpdate();
 				System.out.println("Insert successfully");
 			}
+
 		}
 
 		catch (
@@ -123,38 +97,34 @@ public class DatabaseShipPosition {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return 1;
+		return result;
 	}
 
 	/**
 	 * load the ship Position from database
 	 * 
-	 * @param slotName
+	 * @param option
 	 * @param username
 	 * @return ship positions
 	 */
-	public String loadShipPosition(String shipPosition) {
-		String positions = null;
-		String[] loadPosition = shipPosition.split(",");
-
-		String username = loadPosition[0];
-		String option = loadPosition[1];
+	public String loadShipPosition(String username, String option) {
+		String positions = "";
+//		String[] loadPosition = shipPosition.split(" ");
+//
+//		String username = loadPosition[1];
+//		String option = loadPosition[2];
 		try {
-			// Check if the player has pre-saved slots
-			ResultSet resultTable = connection.getMetaData().getTables(null, null, username, null);
-			if (resultTable.next()) {
+			// Check if the player has pre-saved options
+			Statement stmt = connection.createStatement();
+			StringBuffer selectSql = new StringBuffer();
+			selectSql.append("SELECT shippositions FROM SHIPPOSITION WHERE USERNAME = '" + username + "' AND OPTION = '"
+					+ option + "';");
+			String selectString = selectSql.toString();
+			System.out.println(selectString);
 
-				Statement stmt = connection.createStatement();
-				StringBuffer selectSql = new StringBuffer();
-				selectSql.append("SELECT positions FROM ");
-				selectSql.append(username + "where option= ");
-				selectSql.append(option + ";");
-				String selectString = selectSql.toString();
-
-				ResultSet rs = stmt.executeQuery(selectString);
-				while (rs.next()) {
-					positions = rs.getString("shipPositions");
-				}
+			ResultSet rs = stmt.executeQuery(selectString);
+			while (rs.next()) {
+				positions = rs.getString("shipPositions");
 			}
 		} catch (
 
@@ -166,7 +136,7 @@ public class DatabaseShipPosition {
 
 	/**
 	 * 
-	 * @param slotName
+	 * @param OPTION
 	 * @return true if the player delete the slot successfully.
 	 */
 	public boolean deleteOption(String optionServer) {
@@ -176,8 +146,8 @@ public class DatabaseShipPosition {
 		String option = deleteOption[1];
 		try {
 			StringBuffer sbDelete = new StringBuffer();
-			sbDelete.append("delete from " + username);
-			sbDelete.append("where option = " + option + ";");
+			sbDelete.append("delete from shipposition where option =");
+			sbDelete.append(option + "and username =" + username + ";");
 			String sqlDelete = sbDelete.toString();
 
 			Statement st = connection.createStatement();

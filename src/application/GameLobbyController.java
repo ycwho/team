@@ -14,14 +14,16 @@ public class GameLobbyController {
 	private Client client;
     private Main main;
 	@FXML
-	private Button setupButton;
-	@FXML
-	private Button loadShipsButton;
-	@FXML
 	private ImageView image;
 	@FXML
 	private Text text;
-	
+	@FXML
+	private TextField loadText;
+	@FXML
+	private Button setupButton;
+	@FXML
+	private Button loadShipsButton;
+
 	@FXML
 	protected void setupShips(MouseEvent event) throws IOException {
 		try {
@@ -29,7 +31,7 @@ public class GameLobbyController {
 				@Override
 				public void run() {
 					try {
-						main.setSetup();
+						main.setGameLobbySetupStage();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -43,16 +45,20 @@ public class GameLobbyController {
 		}
 	}
 	
+
 	@FXML
 	protected void loadShips(MouseEvent event) throws IOException {
 		try {
-			main.setSetup();
+			//write protocol load ships
+//			loadText.getText()
+			client.write(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " " + this.client.getUsername() + " " + loadText.getText());
+			System.out.println(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " " + this.client.getUsername() + " " + loadText.getText());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
+	
 	public Client getClient() {
 		return client;
 	}

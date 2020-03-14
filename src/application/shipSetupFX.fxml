@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="496.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ShipSetupController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="547.0" prefWidth="925.0" VBox.vgrow="ALWAYS">
+         <children>
+            <ImageView fitHeight="547.0" fitWidth="972.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../bin/application/bgMainMenu.jpg" />
+               </image>
+            </ImageView>
+            <GridPane fx:id="playersGrid" alignment="CENTER" gridLinesVisible="true" layoutX="259.0" layoutY="69.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: green;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <effect>
+                  <DropShadow height="41.76" radius="18.8975" width="35.83" />
+               </effect>
+               <children>
+                  <Button fx:id="p00" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="0,0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p01" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="0,1" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p02" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="0,2" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p03" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="0,3" GridPane.columnIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p04" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="0,4" GridPane.columnIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p05" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="0,5" GridPane.columnIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p06" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="0,6" GridPane.columnIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p07" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="0,7" GridPane.columnIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p08" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="0,8" GridPane.columnIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p09" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="0,9" GridPane.columnIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p10" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="1,0" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p11" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="1,1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p12" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="1,2" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p13" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="1,3" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p14" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="1,4" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p15" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="1,5" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p16" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="1,6" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p17" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="1,7" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p18" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="1,8" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p19" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="1,9" GridPane.columnIndex="9" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p20" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="2,0" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p21" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="2,1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p22" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="2,2" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p23" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="2,3" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p24" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="2,4" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p25" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="2,5" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p26" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="2,6" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p27" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="2,7" GridPane.columnIndex="7" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p28" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="2,8" GridPane.columnIndex="8" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p29" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="2,9" GridPane.columnIndex="9" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p30" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="3,0" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p31" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="3,1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p32" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="3,2" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p33" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="3,3" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p34" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="3,4" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p35" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="3,5" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p36" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="3,6" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p37" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="3,7" GridPane.columnIndex="7" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p38" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="3,8" GridPane.columnIndex="8" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p39" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="3,9" GridPane.columnIndex="9" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p40" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="4,0" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p41" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="4,1" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p42" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="4,2" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p43" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="4,3" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p44" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="4,4" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p45" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="4,5" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p46" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="4,6" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p47" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="4,7" GridPane.columnIndex="7" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p48" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="4,8" GridPane.columnIndex="8" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p49" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="4,9" GridPane.columnIndex="9" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p50" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="5,0" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p51" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="5,1" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p52" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="5,2" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p53" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="5,3" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p54" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="5,4" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p55" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="5,5" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p56" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="5,6" GridPane.columnIndex="6" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p57" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="5,7" GridPane.columnIndex="7" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p58" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="5,8" GridPane.columnIndex="8" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p59" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="5,9" GridPane.columnIndex="9" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p60" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="6,0" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p61" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="6,1" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p62" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="6,2" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p63" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="6,3" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p64" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="6,4" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p65" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="6,5" GridPane.columnIndex="5" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p66" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="6,6" GridPane.columnIndex="6" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p67" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="6,7" GridPane.columnIndex="7" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p68" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="6,8" GridPane.columnIndex="8" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p69" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="6,9" GridPane.columnIndex="9" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p70" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="7,0" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p71" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="7,1" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p72" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="7,2" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p73" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="7,3" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p74" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="7,4" GridPane.columnIndex="4" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p75" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="7,5" GridPane.columnIndex="5" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p76" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="7,6" GridPane.columnIndex="6" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p77" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="7,7" GridPane.columnIndex="7" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p78" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="7,8" GridPane.columnIndex="8" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p79" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="7,9" GridPane.columnIndex="9" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2041" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="8,0" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2042" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="8,1" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2043" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="8,2" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2044" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="8,3" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2045" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="8,4" GridPane.columnIndex="4" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2046" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="8,5" GridPane.columnIndex="5" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2047" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="8,6" GridPane.columnIndex="6" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2048" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="8,7" GridPane.columnIndex="7" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2049" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="8,8" GridPane.columnIndex="8" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2050" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="8,9" GridPane.columnIndex="9" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2051" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="9,0" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2052" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="9,1" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2053" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="9,2" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2054" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="9,3" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2055" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="9,4" GridPane.columnIndex="4" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2056" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="9,5" GridPane.columnIndex="5" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2057" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="9,6" GridPane.columnIndex="6" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2058" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="9,7" GridPane.columnIndex="7" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2059" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="9,8" GridPane.columnIndex="8" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="p2060" mnemonicParsing="false" onMouseClicked="#attack" prefHeight="34.0" prefWidth="30.0" style="-fx-background-color: null;" text="9,9" GridPane.columnIndex="9" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
+            <TextField fx:id="name" layoutX="394.0" layoutY="402.0" promptText="name your setup">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </TextField>
+            <Text layoutX="124.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name and Save Ship Positions:" wrappingWidth="270.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Button fx:id="saveButton" layoutX="549.0" layoutY="402.0" mnemonicParsing="false" onMouseClicked="#save" text="Save">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="backButton" layoutX="28.0" layoutY="497.0" mnemonicParsing="false" onMouseClicked="#back" text="Back" />
+            <TextArea fx:id="instructions" layoutX="570.0" layoutY="69.0" prefHeight="160.0" prefWidth="323.0" text="Place the head of your first ship of length 5." />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

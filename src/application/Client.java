@@ -20,6 +20,10 @@ public class Client {
 	private MainMenuController mainMenuController;
 	private GameLobbyController gameLobbyController;
 	private Main main;
+	private ShipSetupController shipSetupController;
+	private String username;
+	private String shipLocations;
+	private ShipSetupLobbyController shipSetupLobbyController;
 	
 	Client(String serverName, Main main) {
 		try {
@@ -192,7 +196,7 @@ public class Client {
 						String command = fromServer.readLine();
 						String[] nextLine = command.split(" ");
 						System.out.println(command);
-
+						
 						if (command.startsWith(Protocol.CLIENT_NEED_RESENT_COMMAND)){
 							System.out.println(command);
 						}
@@ -205,6 +209,7 @@ public class Client {
 									@Override
 									public void run() {
 										try {
+											username = nextLine[2];
 											main.setMainMenuStage();
 										} catch (Exception e) { // no longer I/OException
 											// TODO Auto-generated catch block
@@ -398,5 +403,19 @@ public class Client {
 //
 //		client.run();
 //	}
+
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setShipSetupController(ShipSetupController shipSetupController) {
+		// TODO Auto-generated method stub
+		this.shipSetupController = shipSetupController;
+	}
+
+	public void setShipSetupLobbyController(ShipSetupLobbyController shipSetupLobbyController) {
+		// TODO Auto-generated method stub
+		this.shipSetupLobbyController = shipSetupLobbyController;
+	}
 
 }

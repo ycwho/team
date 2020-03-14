@@ -24,6 +24,10 @@ public class MainMenuController {
 	private Main main;
 //	public Stage primaryStage;
 	@FXML
+	private Button setupButton;
+	@FXML
+	private Button loadShipsButton;
+	@FXML
 	private ComboBox<String> comboBox;
 	@FXML
 	private TextField gameNameField;
@@ -45,8 +49,11 @@ public class MainMenuController {
 	private TextArea infoBox;
 	@FXML
 	private TextArea gamesList;
+	@FXML
+	private TextField loadText;
 	private boolean userPressed = false;
 	private boolean gamesPressed = false;
+	
 
 //	public void setPrimaryStage(Stage primaryStage) {
 //			this.primaryStage = primaryStage;
@@ -163,10 +170,44 @@ public class MainMenuController {
 	}
 
 
-	    @FXML
-		protected void users(MouseEvent event) throws IOException {
-			System.out.println("pressed");
+	@FXML
+	protected void users(MouseEvent event) throws IOException {
+		System.out.println("pressed");
+	}
+	
+	@FXML
+	protected void setupShips(MouseEvent event) throws IOException {
+		try {
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						main.setSetup();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	protected void loadShips(MouseEvent event) throws IOException {
+		try {
+			//write protocol load ships
+//			loadText.getText()
+			client.write(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " " + this.client.getUsername() + " " + loadText.getText());
+			System.out.println(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " " + this.client.getUsername() + " " + loadText.getText());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public Client getClient() {
 			return client;
