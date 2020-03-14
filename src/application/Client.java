@@ -397,6 +397,10 @@ public class Client {
 //		client.run();
 //	}
 
+	public String getUsername() {
+		return username;
+	}
+	
 	public void setShipSetupController(ShipSetupController shipSetupController) {
 		// TODO Auto-generated method stub
 		this.shipSetupController = shipSetupController;
