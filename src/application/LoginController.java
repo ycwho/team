@@ -39,6 +39,7 @@ public class LoginController {
 			this.client.login(loginToServer);
 		} else {
 			System.out.println("login failed");
+			displayMessage("empty");
 
 		}
 	}

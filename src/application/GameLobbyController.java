@@ -14,44 +14,11 @@ public class GameLobbyController {
 	private Client client;
     private Main main;
 	@FXML
-	private Button setupButton;
-	@FXML
-	private Button loadShipsButton;
-	@FXML
 	private ImageView image;
 	@FXML
 	private Text text;
 	
-	@FXML
-	protected void setupShips(MouseEvent event) throws IOException {
-		try {
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						main.setSetup();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			});
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
-	@FXML
-	protected void loadShips(MouseEvent event) throws IOException {
-		try {
-			main.setSetup();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	public Client getClient() {
 		return client;

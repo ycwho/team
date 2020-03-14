@@ -74,10 +74,22 @@ public class Main extends Application {
 	}
 
 	public void setSetup() throws Exception {
-		Stage singleStage = new Stage();
-		PregameSetUp pregameSetUp = new PregameSetUp(this.client);
-		pregameSetUp.setUp();
-		pregameSetUp.start(singleStage);
+//		Stage singleStage = new Stage();
+//		PregameSetUp pregameSetUp = new PregameSetUp(this.client);
+//		pregameSetUp.setUp();
+//		pregameSetUp.start(singleStage);
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("shipSetupFX.fxml"));
+		Parent root = fxmlLoader.load();
+		ShipSetupController controller = fxmlLoader.getController();
+		controller.setClient(client);
+		controller.setMain(this);
+		this.client.setShipSetupController(controller);
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		primaryStage.sizeToScene();
+		primaryStage.setTitle("Ship Setup");
+		primaryStage.show();
 	}
 	
 	public void setMainMenuStage() throws Exception {

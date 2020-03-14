@@ -87,6 +87,16 @@
             </Button>
             <Button fx:id="backButton" layoutX="26.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#toLoginScreen" text="Log Out" />
             <ComboBox fx:id="comboBox" layoutX="208.0" layoutY="291.0" prefHeight="25.0" prefWidth="36.0" value="2" />
+            <Button fx:id="setupButton" layoutX="154.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#setupShips" prefHeight="25.0" prefWidth="79.0" text="Setup Ships">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="loadShipsButton" layoutX="248.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#loadShips" prefHeight="25.0" prefWidth="79.0" text="Load Ship">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
 			
       </children>
     </AnchorPane>

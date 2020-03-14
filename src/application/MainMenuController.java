@@ -24,6 +24,10 @@ public class MainMenuController {
 	private Main main;
 //	public Stage primaryStage;
 	@FXML
+	private Button setupButton;
+	@FXML
+	private Button loadShipsButton;
+	@FXML
 	private ComboBox<String> comboBox;
 	@FXML
 	private TextField gameNameField;
@@ -163,10 +167,41 @@ public class MainMenuController {
 	}
 
 
-	    @FXML
-		protected void users(MouseEvent event) throws IOException {
-			System.out.println("pressed");
+	@FXML
+	protected void users(MouseEvent event) throws IOException {
+		System.out.println("pressed");
+	}
+	
+	@FXML
+	protected void setupShips(MouseEvent event) throws IOException {
+		try {
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						main.setSetup();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	protected void loadShips(MouseEvent event) throws IOException {
+		try {
+			main.setSetup();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public Client getClient() {
 			return client;

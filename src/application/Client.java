@@ -20,7 +20,9 @@ public class Client {
 	private MainMenuController mainMenuController;
 	private GameLobbyController gameLobbyController;
 	private Main main;
-	
+	private ShipSetupController shipSetupController;
+	private String username;
+	private String shipLocations;
 	Client(String serverName, Main main) {
 		try {
 			this.main = main;
@@ -392,5 +394,10 @@ public class Client {
 //
 //		client.run();
 //	}
+
+	public void setShipSetupController(ShipSetupController shipSetupController) {
+		// TODO Auto-generated method stub
+		this.shipSetupController = shipSetupController;
+	}
 
 }
