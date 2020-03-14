@@ -55,7 +55,7 @@ public class GameLobbyController {
 			@Override
 			public void run() {
 				try {
-					main.setGameStage();
+					main.setGameStage("Henry, Liz, Henry2");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
