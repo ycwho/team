@@ -122,7 +122,12 @@ public class Main extends Application {
 		primaryStage.show();
 
 	}
-
+	//arg String list of players separated by spaces
+	public void setGameStage(String string) throws Exception { 
+		String[] players = string.split(" ");
+		GUI2.Main m = new GUI2.Main(players);
+		m.start(new Stage());
+	}
 //	public void setGameStage(Stage primaryStage) throws IOException {
 //		FXMLLoader loader = new FXMLLoader(getClass().getResource("gameFX.fxml"));
 //		Parent root = loader.load();
