@@ -23,6 +23,8 @@ public class GameLobbyController {
 	private Button setupButton;
 	@FXML
 	private Button loadShipsButton;
+	@FXML
+	private Button startButton;
 
 	@FXML
 	protected void setupShips(MouseEvent event) throws IOException {
@@ -45,7 +47,23 @@ public class GameLobbyController {
 		}
 	}
 	
-
+	
+	//test button
+	@FXML
+	protected void start(MouseEvent event) throws IOException {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					main.setGameStage("Henry, Liz, Henry2");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	@FXML
 	protected void loadShips(MouseEvent event) throws IOException {
 		try {

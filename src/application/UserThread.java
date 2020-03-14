@@ -115,9 +115,9 @@ public class UserThread extends Thread {
 			System.out.println("revieved login request from client");
 			String username = commandElements[1];
 			String password = commandElements[2];
-//			if (commandElements.length != 3) {
-//				return Protocol.CLIENT_MISSING_LOGIN_INFORMATION;
-//			}
+			if (commandElements.length != 3) {
+				return Protocol.CLIENT_MISSING_LOGIN_INFORMATION;
+			}
 			if (onlineUsers.containsKey(username)) {
 				return "have been logged";
 			}
@@ -137,7 +137,7 @@ public class UserThread extends Thread {
 					}
 				});
 				onlineUsers.put(username, this);
-				return Protocol.CLIENT_LOGIN_REPLY[0] + " " + this.username;
+				return Protocol.CLIENT_LOGIN_REPLY[i] + " " + this.username;
 //                String[] returnString = {"login", "1"};
 //                toClient.writeObject(returnString);
 //                System.out.println(loggedIn);
@@ -159,12 +159,9 @@ public class UserThread extends Thread {
             System.out.println("user exists already: " + userAlreadyExists);
             if (userAlreadyExists == false) {
                 database.insertUser(commandElements[1], commandElements[2]);
-                System.out.println("registered");
-                return Protocol.CLIENT_SIGNUP_REPLY[0];
+                return Protocol.CLIENT_SIGNUP_REPLY[i];
             }
-            else {
-                return Protocol.CLIENT_SIGNUP_REPLY[1];
-            }
+            System.out.println("registered");
 		}
 //		// sign up
 //		else if (getCommand.startsWith(Protocol.CLIENT_SIGNUP)) {
@@ -237,15 +234,7 @@ public class UserThread extends Thread {
 					joinedGame = newGame;
 					userStatus = 2;
 					//change this to when game starts
-                    onlineUsers.forEach((k, v) -> {
-                        try {
-                            v.tellClient(Protocol.SERVER_NOTICE_NEW_GAME + gameName);
-                        } catch (IOException e) {
-
-                            e.printStackTrace();
-                        }
-                    });
-                    System.out.println("finished creating game");
+					System.out.println("finished creating game");
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -289,6 +278,15 @@ public class UserThread extends Thread {
 			return nameString;
 		}
 
+        // save positions(upload to database)
+        else if(getCommand.startsWith(Protocol.CLIENT_LOAD_POSITIONS_REQUEST)) {
+            String option = commandElements[1];
+            String position = commandElements[2];
+
+            i = database.saveShipPosition(username, option, position);
+            return Protocol.CLIENT_UPLOAD_REPLY[i];
+        }
+
 		return Protocol.CLIENT_NEED_RESENT_COMMAND;
 	}
 
@@ -304,9 +302,9 @@ public class UserThread extends Thread {
 
 			return Protocol.CLIENT_QUIT_REPLY[result];
 		}
-
-        //upload
-        else if(getCommand.startsWith(Protocol.CLIENT_UPLOAD_SHIP_POSITIONS)) {
+		
+		//upload
+		else if(getCommand.startsWith(Protocol.CLIENT_UPLOAD_SHIP_POSITIONS)) {
 //			List<Integer> data = new ArrayList();
 //			try {
 //				for(int i = 1; i < commandElements.length; i++) {
@@ -322,30 +320,34 @@ public class UserThread extends Thread {
 //			//database.saveShipPosition(ShipPosition[] positions, int slot)
 //
 //
-//
+//			
 //			return Protocol.CLIENT_UPLOAD_REPLY[result];
+			
+			try {
+			result = joinedGame.uploadShips(this, commandElements[1]);
+			}catch(NumberFormatException e) {
+				return Protocol.CLIENT_NEED_RESENT_COMMAND;
+			}
 
-            try {
-                result = joinedGame.uploadShips(this, commandElements[1]);
-            }catch(NumberFormatException e) {
-                return Protocol.CLIENT_NEED_RESENT_COMMAND;
-            }
-
-            return Protocol.CLIENT_UPLOAD_REPLY[result];
-        }
+			return Protocol.CLIENT_UPLOAD_REPLY[result];
+		}
 
         //load(form database to game)
         else if (getCommand.startsWith("load")) {
-            String loadPositions = "EMPTY"; //database.loadShipPosition(getCommand);
+            String loadPositions = database.loadShipPosition(username, commandElements[1]);
             if(loadPositions.equals("EMPTY")) {
-                return "empty slot!";
+                return Protocol.CLIENT_RESPONSE_EMPTY_LOAD;
             }
-
-
-            result = joinedGame.uploadShips(this, loadPositions);
-
-            return Protocol.LOAD_POSITIONS_RESPONSE + " " + loadPositions;
-        }
+			
+			
+			result = joinedGame.uploadShips(this, loadPositions);
+			
+			return Protocol.LOAD_POSITIONS_RESPONSE + " " + loadPositions;
+		}
+		
+		
+		
+		
 		
 		//attack
 		else if(getCommand.startsWith(Protocol.CLIENT_ATTACK)) {
