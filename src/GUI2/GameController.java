@@ -1,6 +1,9 @@
 package GUI2;
 
+package application;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +25,8 @@ public class GameController {
 private String name;
 //private Client client;
 private Main main;
+private static String[] names = new String[4];
+public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
 @FXML private static GridPane grid;
 @FXML Rectangle rectangle0;
 @FXML Rectangle rectangle1;
@@ -124,13 +129,16 @@ private Main main;
 @FXML Rectangle rectangle98;
 @FXML Rectangle rectangle99;
 
+
  public void shoot(MouseEvent e){
 	 Node source = (Node)e.getSource();
 	 grid = (GridPane) source.getParent();
-	 System.out.println(grid.getChildren().indexOf(source) + " " + name);
+	 System.out.println(grid.getChildren().indexOf(source) + " " + names[panes.indexOf((GridPane)source.getParent())]);
 	 Rectangle rect = (Rectangle)source;
 	 rect.setFill(Color.BLACK);
-	 //client.write(Protocol.CLIENT_ATTACK + " " + name + " " + position);
+	 //client.write(Protocol.CLIENT_ATTACK + " " + names[panes.indexOf((GridPane)source.getParent())] + " " + position);
+ }
+ public GameController(){
  }
  public void broadcast(String message){
      Text text = new Text(message);
@@ -144,17 +152,21 @@ private Main main;
      stage.sizeToScene();
      stage.show();
  }
- public void setNames (String[] names){
-
+ public void setNames (String[] newNames){
+	 names = newNames;
  }
 
  public void hit (String newName, int position, boolean hit) {
-	 if(name == newName && !hit){
-		 Node node = grid.getChildren().get(position);
+	 int k = 0;
+	 while(names[k] != newName){
+		 k++;
+	 }
+	 if(!hit){
+		 Node node = panes.get(k).getChildren().get(position);
 		 Rectangle rect = (Rectangle)node;
 		 rect.setFill(Color.BLACK);
-	 }else if(name == newName && hit){
-		 Node node = grid.getChildren().get(position);
+	 }else if(hit){
+		 Node node = panes.get(k).getChildren().get(position);
 		 Rectangle rect = (Rectangle)node;
 		 rect.setFill(Color.ORANGE);
 	 }
@@ -179,3 +191,4 @@ private Main main;
  }
 
 }
+
