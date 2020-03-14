@@ -34,6 +34,9 @@ public interface Protocol {
 	String GAME_NOTICE_CREATE = "new_game_created";
 	String CLIENT_JOIN_GAME = "join"; // "join [gamename]"
 	String[] CLIENT_JOIN_REPLY = {"join game successfully" , "join game failed no game founded", "failed for unknown reason"};
+	String LOAD_SETUP = "Load Setup"; // "Load Setup [Username] [SetupName]"
+	String CLIENT_UPLOAD_SHIP_POSITIONS = "UploadShipPositions"; // "UploadShipPositions,[playerName],[setupName],s1p1 s1p2 s1p3 s1p4 s1p5-s2p1 s2p2 s2p3 s2p4-s3p1 s3p2 s3p3-s4p1 s4p2 s4p3-s5p1 s5p2"
+	String[] CLIENT_UPLOAD_REPLY = {"upload successfully", "game is started" };
 
 	// Ending game
 	String GAME_NOTICE_END = "game_is_end";
@@ -41,8 +44,6 @@ public interface Protocol {
 	String[] CLIENT_QUIT_REPLY = {"quit game successfully" , "you are not in the game"}; 
 
 	// Game initialise protocols
-	String CLIENT_UPLOAD_SHIP_POSITIONS = "upload";
-	String[] CLIENT_UPLOAD_REPLY = {"upload successfully", "game is started" };
 	String CLIENT_ATTACK = "attack";
 	String[] CLIENT_ATTACK_REPLY = {"attack successfully", "it is not your turn", "attack illegal"};
 	String PLAYER_NAME_REQUEST = "Request Player Names";
