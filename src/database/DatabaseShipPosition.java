@@ -25,7 +25,7 @@ public class DatabaseShipPosition {
 	String url;
 
 	public DatabaseShipPosition() {
-		try (FileInputStream input = new FileInputStream(new File("db2.properties"))) {
+		try (FileInputStream input = new FileInputStream(new File("db.properties"))) {
 
 			Properties props = new Properties();
 			props.load(input);
@@ -46,7 +46,7 @@ public class DatabaseShipPosition {
 	 * ship position takes one row. Before use this method, Server should check
 	 * whether the ShipPosition[] is overlapped first
 	 * 
-	 * @param a string contains user name and option,ship positions data¡£
+	 * @param a string contains user name and option,ship positions dataÂ¡Â£
 	 * @return
 	 */
 	public int saveShipPosition(String username, String option, String position) {
@@ -122,9 +122,9 @@ public class DatabaseShipPosition {
 			String selectString = selectSql.toString();
 			System.out.println(selectString);
 
-			ResultSet rs = stmt.executeQuery(selectString);System.out.println("0");
+			ResultSet rs = stmt.executeQuery(selectString);
 			while (rs.next()) {
-				positions = rs.getString("shipPositions");System.out.println("llll");
+				positions = rs.getString("shipPositions");
 			}
 		} catch (
 
