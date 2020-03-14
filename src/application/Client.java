@@ -23,6 +23,7 @@ public class Client {
 	private ShipSetupController shipSetupController;
 	private String username;
 	private String shipLocations;
+	private ShipSetupLobbyController shipSetupLobbyController;
 	
 	Client(String serverName, Main main) {
 		try {
@@ -404,6 +405,12 @@ public class Client {
 	public void setShipSetupController(ShipSetupController shipSetupController) {
 		// TODO Auto-generated method stub
 		this.shipSetupController = shipSetupController;
+	}
+
+
+	public void setShipSetupLobbyController(ShipSetupLobbyController shipSetupLobbyController) {
+		// TODO Auto-generated method stub
+		this.shipSetupLobbyController = shipSetupLobbyController;
 	}
 
 }

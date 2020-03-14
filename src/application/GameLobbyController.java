@@ -17,9 +17,48 @@ public class GameLobbyController {
 	private ImageView image;
 	@FXML
 	private Text text;
-	
+	@FXML
+	private TextField loadText;
+	@FXML
+	private Button setupButton;
+	@FXML
+	private Button loadShipsButton;
+
+	@FXML
+	protected void setupShips(MouseEvent event) throws IOException {
+		try {
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						main.setGameLobbySetupStage();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 
+	@FXML
+	protected void loadShips(MouseEvent event) throws IOException {
+		try {
+			//write protocol load ships
+//			loadText.getText()
+			client.write(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " " + this.client.getUsername() + " " + loadText.getText());
+			System.out.println(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " " + this.client.getUsername() + " " + loadText.getText());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public Client getClient() {
 		return client;
 	}

@@ -66,6 +66,21 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 	
+	public void setGameLobbySetupStage() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("shipSetupLobby.fxml"));
+		Parent root = fxmlLoader.load();
+		ShipSetupLobbyController controller = fxmlLoader.getController();
+		controller.setClient(client);
+		controller.setMain(this);
+		this.client.setShipSetupLobbyController(controller);
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		primaryStage.sizeToScene();
+		primaryStage.setTitle("Game Lobby Ship Setup");
+		primaryStage.show();
+	}
+	
 	public void setSinglePlayerGame() throws Exception {
 		Stage singleStage = new Stage();
 		GUIMain guimain = new GUIMain();
