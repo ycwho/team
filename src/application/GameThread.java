@@ -12,7 +12,6 @@ public class GameThread extends Thread {
 	int playerNumber;
 	private Vector<UserThread> players;
 	private Vector<Player> playersInfo;
-
 	Map<String, UserThread> onlineUsers;
 	Map<String, GameThread> onlineGames;
 	private static int threadCounter = 1;
@@ -30,7 +29,7 @@ public class GameThread extends Thread {
 
 	public GameThread(UserThread host, String gameName, int playerNumber, Map<String, UserThread> onlineUsers,
 			Map<String, GameThread> onlineGames) {
-
+		
 		super("Game-" + threadCounter);
 		threadCounter++;
 

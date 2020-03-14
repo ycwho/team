@@ -137,7 +137,7 @@ public class UserThread extends Thread {
 					}
 				});
 				onlineUsers.put(username, this);
-				return Protocol.CLIENT_LOGIN_REPLY[i];
+				return Protocol.CLIENT_LOGIN_REPLY[i] + " " + this.username;
 //                String[] returnString = {"login", "1"};
 //                toClient.writeObject(returnString);
 //                System.out.println(loggedIn);

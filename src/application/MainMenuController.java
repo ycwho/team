@@ -49,8 +49,11 @@ public class MainMenuController {
 	private TextArea infoBox;
 	@FXML
 	private TextArea gamesList;
+	@FXML
+	private TextField loadText;
 	private boolean userPressed = false;
 	private boolean gamesPressed = false;
+	
 
 //	public void setPrimaryStage(Stage primaryStage) {
 //			this.primaryStage = primaryStage;
@@ -197,6 +200,7 @@ public class MainMenuController {
 	protected void loadShips(MouseEvent event) throws IOException {
 		try {
 			//write protocol load ships
+//			loadText.getText()
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

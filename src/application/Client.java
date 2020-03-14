@@ -23,6 +23,7 @@ public class Client {
 	private ShipSetupController shipSetupController;
 	private String username;
 	private String shipLocations;
+	
 	Client(String serverName, Main main) {
 		try {
 			this.main = main;
@@ -187,7 +188,7 @@ public class Client {
 						String command = fromServer.readLine();
 						String[] nextLine = command.split(" ");
 						System.out.println(command);
-
+						
 						if (command.startsWith(Protocol.CLIENT_NEED_RESENT_COMMAND)){
 							System.out.println(command);
 						}
@@ -200,6 +201,7 @@ public class Client {
 									@Override
 									public void run() {
 										try {
+											username = nextLine[2];
 											main.setMainMenuStage();
 										} catch (Exception e) { // no longer I/OException
 											// TODO Auto-generated catch block
