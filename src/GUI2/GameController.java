@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,11 +19,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GameController {
-private static  String name;
-private static String nameEnemy;
-private Main main;
+private String name;
 //private Client client;
-@FXML static GridPane grid;
+private Main main;
+@FXML private static GridPane grid;
 @FXML Rectangle rectangle0;
 @FXML Rectangle rectangle1;
 @FXML Rectangle rectangle2;
@@ -126,30 +126,44 @@ private Main main;
 
  public void shoot(MouseEvent e){
 	 Node source = (Node)e.getSource();
-	 System.out.println(grid.getColumnIndex(source)+" " + grid.getRowIndex(source) + " " + name);
+	 grid = (GridPane) source.getParent();
+	 System.out.println(grid.getChildren().indexOf(source) + " " + name);
 	 Rectangle rect = (Rectangle)source;
 	 rect.setFill(Color.BLACK);
 	 //client.write(Protocol.CLIENT_ATTACK + " " + name + " " + position);
  }
- public GameController(){
-
- }
  public void broadcast(String message){
-     //display a message for the player - this will have stuff like player disconnected, if its your turn, etc etc
+     Text text = new Text(message);
+     text.setX((message.length())*15);
+     text.setY(50);
+     text.setScaleX(5);
+     text.setScaleY(5);
+     Group group = new Group(text);
+     Stage stage = new Stage();
+     stage.setScene(new Scene(group));
+     stage.sizeToScene();
+     stage.show();
  }
  public void setNames (String[] names){
 
  }
 
  public void hit (String newName, int position, boolean hit) {
-	 if(name == newName){
+	 if(name == newName && !hit){
 		 Node node = grid.getChildren().get(position);
 		 Rectangle rect = (Rectangle)node;
 		 rect.setFill(Color.BLACK);
+	 }else if(name == newName && hit){
+		 Node node = grid.getChildren().get(position);
+		 Rectangle rect = (Rectangle)node;
+		 rect.setFill(Color.ORANGE);
 	 }
  }
  public void setName(String newName){
 	 name = newName;
+ }
+ public String getName(){
+	 return name;
  }
  public void setGrid(GridPane pane){
 	 grid = pane;
@@ -157,12 +171,11 @@ private Main main;
  //public void setClient(Client newClient){
  //	 client = newClient;
  //}
- public Scene makeScene(){
-	 return new Scene(grid);
+ public void setMain(Main newMain){
+	 main = newMain;
  }
- 
- public void setMain(Main main) {
-	 this.main = main;
+ public GridPane getGrid(){
+	 return grid;
  }
 
 }
