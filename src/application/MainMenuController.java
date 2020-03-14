@@ -103,7 +103,7 @@ public class MainMenuController {
 		String checkServer = Protocol.CLIENT_CHECK_GAME;
 		//System.out.println(checkToServer);
 		this.gamesList.setVisible(true);
-		this.client.checkGames(checkServer);
+		this.client.write(checkServer);
 		gamesPressed = true;
 		}
 		else {
@@ -118,7 +118,7 @@ public class MainMenuController {
 		String checkServer = Protocol.CLIENT_CHECK_ONLINE_USER;
 		//System.out.println(checkToServer);
 		this.usersList.setVisible(true);
-		this.client.checkOnline(checkServer);
+		this.client.write(checkServer);
 		userPressed = true;
 		}
 		else {
@@ -132,7 +132,7 @@ public class MainMenuController {
 		this.infoBox.setText(message);
 		this.infoBox.setVisible(true);
 
-		try {Thread.sleep(2000);}
+		try {Thread.sleep(1000);}
 		catch(InterruptedException ex)
 		{ Thread.currentThread().interrupt(); }
 
@@ -149,7 +149,7 @@ public class MainMenuController {
 		if (!gameNameField.getText().isEmpty()) {
 		String createGameToServer = Protocol.CLIENT_CREATE_GAME + " " + comboBox.getValue() + " " + gameNameField.getText();
 			System.out.println(createGameToServer);
-			this.client.createGame(createGameToServer);
+			this.client.write(createGameToServer);
 		} else {
 			System.out.println("Game Creation Failed");
 		}
@@ -159,7 +159,7 @@ public class MainMenuController {
 	protected void joinGame(MouseEvent event) throws IOException {
 		String joinRequest = Protocol.CLIENT_JOIN_GAME + " " + gameNameField.getText();
 		//System.out.println(joinRequest);
-		this.client.joinGame(joinRequest);
+		this.client.write(joinRequest);
 	}
 
 

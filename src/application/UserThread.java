@@ -115,9 +115,9 @@ public class UserThread extends Thread {
 			System.out.println("revieved login request from client");
 			String username = commandElements[1];
 			String password = commandElements[2];
-			if (commandElements.length != 3) {
-				return Protocol.CLIENT_MISSING_LOGIN_INFORMATION;
-			}
+//			if (commandElements.length != 3) {
+//				return Protocol.CLIENT_MISSING_LOGIN_INFORMATION;
+//			}
 			if (onlineUsers.containsKey(username)) {
 				return "have been logged";
 			}
@@ -137,7 +137,7 @@ public class UserThread extends Thread {
 					}
 				});
 				onlineUsers.put(username, this);
-				return Protocol.CLIENT_LOGIN_REPLY[i];
+				return Protocol.CLIENT_LOGIN_REPLY[0];
 //                String[] returnString = {"login", "1"};
 //                toClient.writeObject(returnString);
 //                System.out.println(loggedIn);
@@ -159,9 +159,13 @@ public class UserThread extends Thread {
             System.out.println("user exists already: " + userAlreadyExists);
             if (userAlreadyExists == false) {
                 database.insertUser(commandElements[1], commandElements[2]);
-                return Protocol.CLIENT_SIGNUP_REPLY[i];
+				System.out.println("registered");
+                return Protocol.CLIENT_SIGNUP_REPLY[0];
             }
-            System.out.println("registered");
+            else {
+            	return Protocol.CLIENT_SIGNUP_REPLY[1];
+			}
+
 		}
 //		// sign up
 //		else if (getCommand.startsWith(Protocol.CLIENT_SIGNUP)) {
@@ -234,6 +238,14 @@ public class UserThread extends Thread {
 					joinedGame = newGame;
 					userStatus = 2;
 					//change this to when game starts
+					onlineUsers.forEach((k, v) -> {
+						try {
+							v.tellClient(Protocol.SERVER_NOTICE_NEW_GAME + gameName);
+						} catch (IOException e) {
+
+							e.printStackTrace();
+						}
+					});
 					System.out.println("finished creating game");
 
 				} catch (Exception e) {

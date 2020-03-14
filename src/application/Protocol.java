@@ -23,6 +23,8 @@ public interface Protocol {
 	// Notification Protocols
 	String SERVER_NOTICE_OTHER_LOGIN = "otheruser_has_logged_in ";
 	String SERVER_NOTICE_OTHER_LOGOUT = "otheruser_has_logged_out ";
+	String SERVER_NOTICE_NEW_GAME = "New Game Created: ";
+	String SERVER_NOTICE_GAME_DELETED = "Game Deleted: ";
 
 	// Main Menu Protocols
 	String CLIENT_CHECK_ONLINE_USER = "check"; // just Protocol

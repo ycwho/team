@@ -113,50 +113,57 @@ public class Client {
 		this.mainMenuController = controller2;
 	}
 
-	public void register(String registerToServer) throws IOException {
-		// TODO Auto-generated method stub
-		write(registerToServer);
-	}
-
-
-	public void login(String loginToServer) throws IOException {
-		// TODO Auto-generated method stub
-		write(loginToServer);
-	}
-	
 	public void logout() throws IOException {
 		// TODO Auto-generated method stub
 		write(Protocol.CLIENT_LOGOUT);
 	}
-	
-	public void checkOnline(String checkServer) throws IOException {
-		// TODO Auto-generated method stub
-		write(checkServer);
-	}
-	
-	public void sendShipLocations(String shipLocations) throws IOException {
-		write(shipLocations);
-	}
-	
-	public void checkGames(String checkServer) throws IOException {
-		// TODO Auto-generated method stub
-		write(checkServer);
-	}
-	
-	public void createGame(String createGameToServer) throws IOException {
-		// TODO Auto-generated method stub
-		write(createGameToServer);
+
+	public LoginController getLoginController () {
+		return loginController;
 	}
 
-	public void joinGame(String joinRequest) throws IOException {
-		// TODO Auto-generated method stub
-		write(joinRequest);
-	}
 
-	public void saveShipPositions(String shipPositions) throws IOException {
-		// TODO Auto-generated method stub
-		write(shipPositions);
-	}
+//
+//	public void register(String registerToServer) throws IOException {
+//		// TODO Auto-generated method stub
+//		write(registerToServer);
+//	}
+//
+//
+//	public void login(String loginToServer) throws IOException {
+//		// TODO Auto-generated method stub
+//		write(loginToServer);
+//	}
+//
+//
+//	public void checkOnline(String checkServer) throws IOException {
+//		// TODO Auto-generated method stub
+//		write(checkServer);
+//	}
+//
+//	public void sendShipLocations(String shipLocations) throws IOException {
+//		write(shipLocations);
+//	}
+//
+//	public void checkGames(String checkServer) throws IOException {
+//		// TODO Auto-generated method stub
+//		write(checkServer);
+//	}
+//
+//	public void createGame(String createGameToServer) throws IOException {
+//		// TODO Auto-generated method stub
+//		write(createGameToServer);
+//	}
+//
+//	public void joinGame(String joinRequest) throws IOException {
+//		// TODO Auto-generated method stub
+//		write(joinRequest);
+//	}
+//
+//	public void saveShipPositions(String shipPositions) throws IOException {
+//		// TODO Auto-generated method stub
+//		write(shipPositions);
+//	}
 
 	
 	public void write(String message) throws IOException {
@@ -232,29 +239,10 @@ public class Client {
 								loginController.displayMessage(command);
 							}
 
-							else if (command.startsWith(Protocol.CLIENT_CHECK_ONLINE_USER_RESPONSE)) {
-								String toTextArea = "Online users:\n";
-								System.out.println("Online users:");
-								for (int i = 3; i < nextLine.length; i++) {
-									System.out.println(nextLine[i]);
-									toTextArea += nextLine[i] + "\n";
-								}
-								mainMenuController.setTextArea(toTextArea);
-							}
-							else if (command.startsWith(Protocol.CLIENT_CHECK_GAME_RESPONSE)) {
-								String toTextArea = "Games:\n";
-								System.out.println("Games:");
-								if (nextLine.length > 1) {
-									for (int i = 1; i < nextLine.length; i++) {
-										System.out.println(nextLine[i]);
-										toTextArea += nextLine[i] + "\n";
-									}
-								}
-								mainMenuController.setGamesListTextArea(toTextArea);
-							} else if (command.startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
+
+							else if (command.startsWith(Protocol.CLIENT_CREATE_REPLY[0])) {
 								//System.out.println("Game created, waiting for other player(s)");
 								mainMenuController.displayMessage("Game created, waiting for other player(s)");
-								checkGames(Protocol.CLIENT_CHECK_GAME);
 								Platform.runLater(new Runnable() {
 									@Override
 									public void run() {
@@ -295,18 +283,38 @@ public class Client {
 							}
 
 							else if (command.startsWith(Protocol.SERVER_NOTICE_OTHER_LOGIN)){
-								checkOnline(Protocol.CLIENT_CHECK_ONLINE_USER);
+								write(Protocol.CLIENT_CHECK_ONLINE_USER);/////////////todo
 							}
-
 							else if (command.startsWith(Protocol.SERVER_NOTICE_OTHER_LOGOUT)){
-								checkOnline(Protocol.CLIENT_CHECK_ONLINE_USER);
+								write(Protocol.CLIENT_CHECK_ONLINE_USER);
 							}
-
+							else if (command.startsWith(Protocol.CLIENT_CHECK_ONLINE_USER_RESPONSE)) {
+								String toTextArea = "Online users:\n";
+								System.out.println("Online users:");
+								for (int i = 3; i < nextLine.length; i++) {
+									System.out.println(nextLine[i]);
+									toTextArea += nextLine[i] + "\n";
+								}
+								mainMenuController.setTextArea(toTextArea);
+							}
+							else if (command.startsWith(Protocol.SERVER_NOTICE_NEW_GAME)){
+								write(Protocol.CLIENT_CHECK_GAME);
+							}
+							else if (command.startsWith(Protocol.CLIENT_CHECK_GAME_RESPONSE)) {
+								String toTextArea = "Games:\n";
+								System.out.println("Games:");
+								if (nextLine.length > 1) {
+									for (int i = 1; i < nextLine.length; i++) {
+										System.out.println(nextLine[i]);
+										toTextArea += nextLine[i] + "\n";
+									}
+								}
+								mainMenuController.setGamesListTextArea(toTextArea);
+							}
 
 							else if (command.startsWith(Protocol.GAME_START)){
 								write(Protocol.PLAYER_NAME_REQUEST);
 							}
-
 							else if (command.startsWith(Protocol.PLAYER_NAMES)){//////////////////todo////////////////////////////////
 								String[] split = command.split(":");
 								String[] totalNames = split[1].split("/");
@@ -317,21 +325,17 @@ public class Client {
 							else if (command.startsWith(Protocol.TURN)){
 								//game.broadcast(nextLine[1] + "'s turn")
 							}
-
 							else if (command.startsWith(Protocol.HIT)){
 								int position = Integer.parseInt(nextLine[2]);
 								boolean hit = nextLine[3].equals("true");
 								//game.hit(nextLine[1],position,hit);
 							}
-
 							else if (command.startsWith(Protocol.SHIP_SUNK)){
 								//game.broadcast(nextLine[1] + " sunk")
 							}
-
 							else if (command.startsWith(Protocol.PLAYER_DEAD)){
 								//game.broadcast(nextLine[1] + " sunk")
 							}
-
 							else if (command.startsWith(Protocol.GAME_OVER)){
 								System.out.println(nextLine[1]);
 								//game.broadcast(command);
@@ -356,10 +360,12 @@ public class Client {
 
 
 							else if (command.startsWith(Protocol.GAME_NOTICE_CREATE)){
-								System.out.println(command);
+								//write(Protocol.CLIENT_CHECK_GAME);
+								System.out.println(command);//////////////////////////////////////////////
 							}
 
 							else if (command.startsWith(Protocol.GAME_NOTICE_END)){
+								//write(Protocol.CLIENT_CHECK_GAME);
 								System.out.println(command);
 							}
 
