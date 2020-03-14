@@ -1,6 +1,7 @@
 package GUI2;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,19 +10,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 
-
 public class Main extends Application {
+	private String[] names;
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		String[] names = {"Player","Walter","Bob","Nigel"};
+		//String[] names = {"Player","Walter","Bob"};
 		GameController gc = new GameController();
+		gc.panes = new ArrayList<GridPane>();
 		for(String s : names){
 			Parent root = FXMLLoader.load(getClass().getResource("gameFX.fxml"));
 			gc.setMain(this);
+			//gc.setClient(client);
 			gc.setUserName("Player");
 			gc.setGrid((GridPane)root);
-			gc.panes.add(gc.getGrid());
-			gc.setName(s);
+			gc.getPanes().add(gc.getGrid());
 			gc.setNames(names);
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
@@ -45,5 +47,8 @@ public class Main extends Application {
 				//k++;
 		//	}
 		//}
+	}
+	public Main(String[] newNames){
+		this.names = newNames;
 	}
 }
