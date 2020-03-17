@@ -15,7 +15,7 @@ public class Main extends Application {
 	private String[] names;
 	private String username;
 	private Client client;
-	private int [] personalShips;
+	private ArrayList<Integer> personalShips;
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		//String[] names = {"Player","Walter","Bob"};
@@ -31,6 +31,7 @@ public class Main extends Application {
 			gc.setGrid((GridPane)root);
 			gc.getPanes().add(gc.getGrid());
 			gc.setNames(names);
+			gc.setUp(personalShips);
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
 			stage.setScene(scene);
@@ -58,7 +59,11 @@ public class Main extends Application {
 		this.client = client;
 		this.names = newNames;
 		this.username = client.getUsername();
-
+        String[] shipStrings = userShips.split(",");
+        personalShips = new ArrayList<Integer>();
+        for(String s : shipStrings){
+            personalShips.add(Integer.parseInt(s));
+        }
 		//todo display own ship positions
 		//userShips.split
 
