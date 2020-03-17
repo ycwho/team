@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +26,8 @@ public class GameLobbyController {
 	private Button loadShipsButton;
 	@FXML
 	private Button startButton;
+	@FXML
+	private TextArea infoBox;
 
 	@FXML
 	protected void setupShips(MouseEvent event) throws IOException {
@@ -55,7 +58,7 @@ public class GameLobbyController {
 			@Override
 			public void run() {
 				try {
-					main.setGameStage(client.getUsername() + " Henry Liz Henry2");
+					main.setGameStage(client.getUsername() + " Henry Liz Henry2", "[positions]");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -71,12 +74,25 @@ public class GameLobbyController {
 //			loadText.getText()
 			client.write(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " " + this.client.getUsername() + " " + loadText.getText());
 //			System.out.println(Protocol.CLIENT_LOAD_POSITIONS_REQUEST + " "+ loadText.getText());
+			//displayMessage(loadText.getText() + " setup selected");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
+	@FXML
+	protected void displayMessage(String message) {
+		this.infoBox.setText(message);
+		this.infoBox.setVisible(true);
+
+		try {Thread.sleep(1000);}
+		catch(InterruptedException ex)
+		{ Thread.currentThread().interrupt(); }
+
+		this.infoBox.setVisible(false);
+	}
+
 	public Client getClient() {
 		return client;
 	}

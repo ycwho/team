@@ -190,8 +190,7 @@ public class GameThread extends Thread {
 					
 					int index = playersInfo.get(defenderSlot).checkShipSunk(position);
 					if(index >= 0) {
-						inGameMessage("[Player-" + defenderSlot + ", Ship - " + index + "] has sunk, positions["
-								+ playersInfo.get(defenderSlot).oneShipPositions(index));
+						broadcastPlayerMessage(Protocol.SHIP_SUNK + "[Player-" + defenderSlot + ", Ship - " + index + "] has sunk"); //, positions[" + playersInfo.get(defenderSlot).oneShipPositions(index));
 					}
 					
 					

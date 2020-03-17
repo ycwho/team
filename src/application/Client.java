@@ -3,6 +3,8 @@ package application;
 import java.io.*;
 import java.net.*;
 import java.util.Arrays;
+
+import GUI2.GameController;
 import javafx.application.Platform;
 
 public class Client {
@@ -24,6 +26,8 @@ public class Client {
 	private String username;
 	private String shipLocations;
 	private ShipSetupLobbyController shipSetupLobbyController;
+	private GUI2.GameController gameController;
+	private String userShips;
 	
 	Client(String serverName, Main main) {
 		try {
@@ -117,6 +121,10 @@ public class Client {
 		this.mainMenuController = controller2;
 	}
 
+	public void setGameController(GameController gameController) {
+		this.gameController = gameController;
+	}
+
 	public void logout() throws IOException {
 		// TODO Auto-generated method stub
 		write(Protocol.CLIENT_LOGOUT);
@@ -127,7 +135,7 @@ public class Client {
 	}
 
 
-//
+
 //	public void register(String registerToServer) throws IOException {
 //		// TODO Auto-generated method stub
 //		write(registerToServer);
@@ -317,33 +325,74 @@ public class Client {
 								mainMenuController.setGamesListTextArea(toTextArea);
 							}
 
+							else if (command.startsWith(Protocol.CLIENT_UPLOAD_REPLY[0])){
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {
+										try {
+											main.setGameLobbyStage();
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}
+								});
+								System.out.println(command);
+								gameLobbyController.displayMessage(command);
+							}
+							else if (command.startsWith(Protocol.CLIENT_UPLOAD_REPLY[1])){
+								gameLobbyController.displayMessage(command);
+								//System.out.println(command);
+							}
+
+							else if (command.startsWith(Protocol.LOAD_POSITIONS_RESPONSE)){
+								String[] splitCommand = command.split(" ");
+								userShips = splitCommand[1];
+								//System.out.println(command);
+							}
+
+
 							else if (command.startsWith(Protocol.GAME_START)){
 								write(Protocol.PLAYER_NAME_REQUEST);
 							}
-							else if (command.startsWith(Protocol.PLAYER_NAMES)){//////////////////todo////////////////////////////////
-								String[] split = command.split(":");
-								String[] totalNames = split[1].split("/");
-								String[] names = totalNames[1].split(" ");
+							else if (command.startsWith(Protocol.PLAYER_NAMES)){
+								String[] nameString = command.split(":");
+								//String[] names = nameString[1].split(" ");
+
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {
+										try {
+											main.setGameStage(nameString[1], userShips);
+										} catch (Exception e) { // no longer I/OException
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+											//System.out.println("error switchign stages");
+										}
+									}
+								});
+
 								//Game game = new Game(totalNames[0], names);
 							}
 
 							else if (command.startsWith(Protocol.TURN)){
-								//game.broadcast(nextLine[1] + "'s turn")
+								gameController.broadcast(nextLine[1] + "'s turn");
 							}
 							else if (command.startsWith(Protocol.HIT)){
 								int position = Integer.parseInt(nextLine[2]);
 								boolean hit = nextLine[3].equals("true");
-								//game.hit(nextLine[1],position,hit);
+								gameController.hit(nextLine[1],position,hit);
 							}
 							else if (command.startsWith(Protocol.SHIP_SUNK)){
-								//game.broadcast(nextLine[1] + " sunk")
+								String[] sunkMessage = command.split(":");
+								gameController.broadcast(sunkMessage[1]);
 							}
 							else if (command.startsWith(Protocol.PLAYER_DEAD)){
-								//game.broadcast(nextLine[1] + " sunk")
+								gameController.broadcast(nextLine[1] + " Died");
 							}
 							else if (command.startsWith(Protocol.GAME_OVER)){
 								System.out.println(nextLine[1]);
-								//game.broadcast(command);
+								gameController.broadcast(command);
 								//pauses for 3 seconds then takes back to main menu
 								try
 								{ Thread.sleep(3000);

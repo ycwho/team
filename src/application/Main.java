@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import GUI.GUIMain;
 import GUI.PregameSetUp;
+import GUI2.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -123,9 +124,9 @@ public class Main extends Application {
 
 	}
 	//arg String list of players separated by spaces
-	public void setGameStage(String string) throws Exception { 
+	public void setGameStage(String string, String userShips) throws Exception {
 		String[] players = string.split(" ");
-		GUI2.Main m = new GUI2.Main(players, this.client.getUsername());
+		GUI2.Main m = new GUI2.Main(players, this.client, userShips);
 		m.start(new Stage());
 	}
 //	public void setGameStage(Stage primaryStage) throws IOException {

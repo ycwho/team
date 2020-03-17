@@ -27,6 +27,7 @@ public interface Protocol {
 	String SERVER_NOTICE_GAME_DELETED = "Game Deleted: ";
 
 	// Main Menu Protocols
+	// Main Menu Protocols
 	String CLIENT_CHECK_ONLINE_USER = "check"; // just Protocol
 	String CLIENT_CHECK_ONLINE_USER_RESPONSE = "Other online users: ";
 	String CLIENT_CHECK_GAME = "gamesList"; // just Protocol
@@ -60,7 +61,7 @@ public interface Protocol {
 	String TURN = "Turn:";
 	String GAME_START = "Game Start";
 	String PLAYER_DEAD = "Player Dead";
-	String SHIP_SUNK = "Sunk";
+	String SHIP_SUNK = "Sunk:";
 	String HIT = "Hit:";
 
 	int[] SHIPS_LENGTH = {5, 4, 3, 3, 2};

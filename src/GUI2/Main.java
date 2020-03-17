@@ -2,6 +2,7 @@ package GUI2;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import application.*;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +14,14 @@ import javafx.scene.layout.GridPane;
 public class Main extends Application {
 	private String[] names;
 	private String username;
+	private Client client;
+	private int [] personalShips;
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		//String[] names = {"Player","Walter","Bob"};
 		GameController gc = new GameController();
+		gc.setClient(this.client);
+		this.client.setGameController(gc);
 		gc.panes = new ArrayList<GridPane>();
 		for(String s : names){
 			Parent root = FXMLLoader.load(getClass().getResource("gameFX.fxml"));
@@ -49,8 +54,13 @@ public class Main extends Application {
 		//	}
 		//}
 	}
-	public Main(String[] newNames, String username){
+	public Main(String[] newNames, Client client, String userShips){
+		this.client = client;
 		this.names = newNames;
-		this.username = username;
+		this.username = client.getUsername();
+
+		//todo display own ship positions
+		//userShips.split
+
 	}
 }

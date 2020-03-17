@@ -18,10 +18,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import application.*;
 
 public class GameController {
 private String name;
-//private Client client;
+private Client client;
 private Main main;
 private static String userName;
 private static String[] names = new String[4];
@@ -133,12 +134,17 @@ public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
  public void shoot(MouseEvent e){
 	 Node source = (Node)e.getSource();
 	 grid = (GridPane) source.getParent();
+	 int position = grid.getChildren().indexOf(source);
 	 System.out.println(grid.getChildren().indexOf(source) + " " + names[panes.indexOf((GridPane)source.getParent())]);
 	 System.out.println(userName);
 	 if(!names[panes.indexOf((GridPane)source.getParent())].equalsIgnoreCase(userName)){
 	 Rectangle rect = (Rectangle)source;
 	 rect.setFill(Color.BLACK);
-	 //client.write(Protocol.CLIENT_ATTACK + " " + names[panes.indexOf((GridPane)source.getParent())] + " " + position);
+	 try {
+         client.write(Protocol.CLIENT_ATTACK + " " + names[panes.indexOf((GridPane) source.getParent())] + " " + position);
+     }catch (IOException ex){
+	     ex.printStackTrace();
+     }
 	 }
 }
  public void broadcast(String message){
@@ -184,9 +190,9 @@ public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
  public void setGrid(GridPane pane){
 	 grid = pane;
  }
- //public void setClient(Client newClient){
- //	 client = newClient;
- //}
+ public void setClient(Client newClient){
+ 	 client = newClient;
+ }
  public void setMain(Main newMain){
 	 main = newMain;
  }

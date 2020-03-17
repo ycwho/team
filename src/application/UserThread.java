@@ -269,24 +269,25 @@ public class UserThread extends Thread {
 
 		else if (getCommand.startsWith(Protocol.PLAYER_NAME_REQUEST)) {
 			String nameString = Protocol.PLAYER_NAMES;
-			nameString += username + "/";
+			//nameString += username + "/";
 			Vector players = joinedGame.getPlayers();
 			Iterator<UserThread> iterator = players.iterator();
 			while(iterator.hasNext()){
-				nameString += iterator.next().getUsername() + " ";
+				nameString += " " + iterator.next().getUsername();
 			}
 			return nameString;
 		}
 
+		//todo duplicate method?
         // save positions(upload to database)
-        else if(getCommand.startsWith(Protocol.CLIENT_LOAD_POSITIONS_REQUEST)) {
-            String option = commandElements[1];
-            String position = commandElements[2];
-
-            i = database.saveShipPosition(username, option, position);
-            return Protocol.CLIENT_UPLOAD_REPLY[i];
-        }
-
+//        else if(getCommand.startsWith(Protocol.CLIENT_LOAD_POSITIONS_REQUEST)) {
+//            String option = commandElements[1];
+//            String position = commandElements[2];
+//
+//            i = database.saveShipPosition(username, option, position);
+//            return Protocol.CLIENT_UPLOAD_REPLY[i] + " " + option;
+//        }
+//
 		return Protocol.CLIENT_NEED_RESENT_COMMAND;
 	}
 
@@ -341,7 +342,7 @@ public class UserThread extends Thread {
 
 
         //load(form database to game)
-        else if (getCommand.startsWith("load")) {
+        else if (getCommand.startsWith(Protocol.CLIENT_LOAD_POSITIONS_REQUEST)) {
             String loadPositions = database.loadShipPosition(username, commandElements[1]);
             if(loadPositions.equals("EMPTY")) {
                 return Protocol.CLIENT_RESPONSE_EMPTY_LOAD;
@@ -352,9 +353,7 @@ public class UserThread extends Thread {
 			
 			return Protocol.LOAD_POSITIONS_RESPONSE + " " + loadPositions;
 		}
-		
-		
-		
+
 		
 		
 		//attack
