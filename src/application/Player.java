@@ -43,7 +43,10 @@ public class Player {
 		beAttacked = new TreeSet();
 		hited = 0;
 		this.username = username;
-
+		
+		shipLength = new ArrayList();
+		shipPositions = new ArrayList();
+		eachShipPosition = new ArrayList();
 	}
 	
 	
@@ -82,23 +85,22 @@ public class Player {
 	}
 	
 	
-	//format: s1p1+s1p2-s2p1+s2p2-s3p1+s3p2
+	//format: s1p1.s1p2-s2p1.s2p2-s3p1.s3p2
 	public void setShips(String positionString) throws NumberFormatException{
 		int shipNumber = positionString.split("-").length; 
 		
 		//initialize counter
 		shipBeAttackedCounter= new int[shipNumber];
 		
-		shipLength = new ArrayList();
-		shipPositions = new ArrayList();
+
 		
 		//split by "-"
 		for(String singleShipPositions : positionString.split("-")) {
-			shipLength.add(singleShipPositions.split(".").length);
+			shipLength.add(singleShipPositions.split("\\.").length);
 			TreeSet<Integer> a = new TreeSet();
 			
-			//split by "+"
-			for(String singlePosition : singleShipPositions.split(".")) {
+			//split by "."
+			for(String singlePosition : singleShipPositions.split("\\.")) {
 				shipPositions.add(Integer.parseInt(singlePosition));
 				a.add(Integer.parseInt(singlePosition));
 			}
@@ -106,8 +108,8 @@ public class Player {
 		}
 		
 		
-		
-		setShips(shipPositions);
+		setPlayerStatus(2);
+		//setShips(shipPositions);
 		
 		
 	}
