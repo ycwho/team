@@ -20,7 +20,7 @@ public class Database {
 			Properties props = new Properties();
 			props.load(input);
 			this.username = (String) props.getProperty("username");
-			this.password = (String) props.getProperty("password");// as2xv9i16m
+			this.password = (String) props.getProperty("password");
 			this.url = (String) props.getProperty("URL");
 
 			this.connection = DriverManager.getConnection(this.url, this.username, this.password);
@@ -30,45 +30,46 @@ public class Database {
 	}
 
 	// Checking if the user' information existed(if the user has registered?)?
-	// if not, return false ,and insert his firstname,lastname,password.
+	// if not, return false ,and insert his username,password.
 	public boolean checkExistUser(String user, String pass) {
+		boolean check = false;
 		try {
-			String sql = "select username from users where " + "username= ? and password = ?";
+			String sql = "select username from users;";
 			PreparedStatement selectStatement = this.connection.prepareStatement(sql);
-			selectStatement.setString(1, user);
-			selectStatement.setString(2, pass);
 			ResultSet resultSet = selectStatement.executeQuery();
 			while (resultSet.next()) {
-				String username = resultSet.getString("username").substring(0, user.length());
+				String username = resultSet.getString("username");
 				if (user.equals(username)) {
-					return true;
+					check = true;
+					break;
 				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return false;
+		return check;
 	}
 
 	// Checking if the user' information existed(if the user has registered?)?
 	// if not, return false ,and insert his username,password.
 	public boolean checkPassword(String user, String pass) {
+		boolean check = false;
 		try {
-			String sql = "select password from users where " + "username= ? and password = ?";
+			String sql = "select password from users where " + "username= ?";
 			PreparedStatement selectStatement = this.connection.prepareStatement(sql);
 			selectStatement.setString(1, user);
-			selectStatement.setString(2, pass);
 			ResultSet resultSet = selectStatement.executeQuery();
 			while (resultSet.next()) {
-				String password = resultSet.getString("password").substring(0, pass.length());
+				String password = resultSet.getString("password");
 				if (pass.equals(password)) {
-					return true;
+					check = true;
+					break;
 				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return false;
+		return check;
 	}
 
 	// Insert new user' information who has not registered before.
@@ -127,7 +128,7 @@ public class Database {
 	}
 
 	public int saveShipPosition(String username, String option, String position) {
-		int result = 0;// if database insert successfully,return 0.
+		int result = 1;// if database insert successfully,return 0.
 		boolean check = false;
 
 		try {
@@ -151,6 +152,8 @@ public class Database {
 					System.out.println(updateSql);
 					Statement stmt = connection.createStatement();
 					stmt.executeUpdate(updateSql);
+					System.out.println("Update successfully");
+					result = result - 1;
 					break;
 				}
 			}
@@ -163,9 +166,9 @@ public class Database {
 				insertStatement.setString(2, option);
 				insertStatement.setString(3, position);
 				insertStatement.executeUpdate();
+				result = result - 1;
 				System.out.println("Insert successfully");
 			}
-
 		}
 
 		catch (
@@ -186,10 +189,6 @@ public class Database {
 	 */
 	public String loadShipPosition(String username, String option) {
 		String positions = "";
-//		String[] loadPosition = shipPosition.split(" ");
-//
-//		String username = loadPosition[1];
-//		String option = loadPosition[2];
 		try {
 			// Check if the player has pre-saved options
 			Statement stmt = connection.createStatement();
@@ -219,27 +218,26 @@ public class Database {
 	 * @param OPTION
 	 * @return true if the player delete the slot successfully.
 	 */
-	public boolean deleteOption(String optionServer) {
+	public boolean deleteOption(String username, String option) {
 		boolean result = true;
-		String[] deleteOption = optionServer.split(",");
-		String username = deleteOption[0];
-		String option = deleteOption[1];
 		try {
 			StringBuffer sbDelete = new StringBuffer();
-			sbDelete.append("delete from shipposition where option =");
-			sbDelete.append(option + "and username =" + username + ";");
+			sbDelete.append("delete from shipposition where option ='");
+			sbDelete.append(option + "' and username ='" + username + "';");
 			String sqlDelete = sbDelete.toString();
+			System.out.println(sqlDelete);
 
 			Statement st = connection.createStatement();
 			st.executeUpdate(sqlDelete);
 
-			StringBuffer sbSelect = new StringBuffer();
-			sbSelect.append("select * from " + username + ";");
-			String sqlSelect = sbSelect.toString();
+			StringBuffer select=new StringBuffer();
+			select.append("select * from shipposition where option ='");
+			select.append(option + "' and username ='" + username + "';");
+			String sqlSelect = sbDelete.toString();
 
 			ResultSet rs = st.executeQuery(sqlSelect);
 
-			if (rs.next()) {
+			if (rs != null && rs.next()) {
 				result = false;
 			}
 
