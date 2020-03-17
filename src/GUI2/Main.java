@@ -59,13 +59,14 @@ public class Main extends Application {
 		this.client = client;
 		this.names = newNames;
 		this.username = client.getUsername();
-        String[] shipStrings = userShips.split(",");
+        String[] first = userShips.split("-");
         personalShips = new ArrayList<Integer>();
-        for(String s : shipStrings){
-            personalShips.add(Integer.parseInt(s));
-        }
-		//todo display own ship positions
-		//userShips.split
+		for(String s : first){
+			String[] second = s.split(". ");
+			for(String s2 : second){
+				personalShips.add(Integer.parseInt(s2));
+			}
+		}
 
 	}
 }
