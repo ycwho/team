@@ -26,7 +26,7 @@ private Client client;
 private Main main;
 private static String userName;
 private static String[] names = new String[4];
-public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
+public static ArrayList<GridPane> panes;
 @FXML private static GridPane grid;
 @FXML Rectangle rectangle0;
 @FXML Rectangle rectangle1;
@@ -130,6 +130,16 @@ public static ArrayList<GridPane> panes = new ArrayList<GridPane>();
 @FXML Rectangle rectangle99;
 
  public GameController(){
+ }
+ public void setUp(ArrayList<Integer> playerShips){
+	 int k = 0;
+	 while(names[k] != userName){
+		 k++;
+	 }
+	 for(Integer i : playerShips){
+	 Rectangle rect = (Rectangle)panes.get(k).getChildren().get(i);
+	 rect.setFill(Color.WHITE);
+	 }
  }
  public void shoot(MouseEvent e){
 	 Node source = (Node)e.getSource();
