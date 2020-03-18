@@ -281,6 +281,15 @@ public class GameThread extends Thread {
 		}
 		return -1;
 	}
+	
+	public int indexOfUser(String user) {
+		for (int i = 0; i < playersInfo.size(); i++) {
+			if (playersInfo.get(i).getUsername().equals(user)) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	public int deadPlayer() {
 		int result = 0;

@@ -375,7 +375,9 @@ public class UserThread extends Thread {
 		else if(getCommand.startsWith(Protocol.CLIENT_ATTACK)) {
 
 			try {
-				int defenderSlot = Integer.parseInt(commandElements[1]);
+				int slot = joinedGame.indexOfUser(commandElements[1]);
+				//ADD FIND SLOT FROM USERNAME
+				int defenderSlot = slot;
 				int position = Integer.parseInt(commandElements[2]);
 				
 				result = joinedGame.attack(this, defenderSlot, position);
@@ -473,4 +475,6 @@ public class UserThread extends Thread {
 		}
 
 	}
+	
+	
 }
