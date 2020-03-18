@@ -140,6 +140,7 @@ public static ArrayList<GridPane> panes;
 		 k++;
 	 }
 	 for(Integer i : playerShips){
+		 System.out.println(i);
 	 Rectangle rect = (Rectangle)panes.get(k).getChildren().get(i);
 	 rect.setFill(Color.WHITE);
 	 }
