@@ -1,4 +1,4 @@
-package GUI2;
+package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,22 +11,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 
-public class Main extends Application {
+public class MainGame extends Application {
 	private String[] names;
 	private String username;
 	private Client client;
+	private Main main;
 	private ArrayList<Integer> personalShips;
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		//String[] names = {"Player","Walter","Bob"};
 		GameController gc = new GameController();
-		gc.setClient(this.client);
-		this.client.setGameController(gc);
+		gc.setClient(client);
 		gc.panes = new ArrayList<GridPane>();
 		for(String s : names){
-			Parent root = FXMLLoader.load(getClass().getResource("gameFX.fxml"));
-			gc.setMain(this);
-			//gc.setClient(client);
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gameFX2.fxml"));
+			Parent root = fxmlLoader.load();
+			gc = fxmlLoader.getController();
+			gc.setMainGame(this);
+			gc.setClient(client);
+			gc.setMain(main);
 			gc.setUserName(username);
 			gc.setGrid((GridPane)root);
 			gc.getPanes().add(gc.getGrid());
@@ -55,7 +58,8 @@ public class Main extends Application {
 		//	}
 		//}
 	}
-	public Main(String[] newNames, Client client, String userShips){
+	public MainGame(String[] newNames, Client client, String userShips, Main main){
+		this.main = main;
 		this.client = client;
 		this.names = newNames;
 		this.username = client.getUsername();

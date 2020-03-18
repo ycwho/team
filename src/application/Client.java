@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.*;
 import java.util.Arrays;
 
-import GUI2.GameController;
 import javafx.application.Platform;
 
 public class Client {
@@ -26,7 +25,7 @@ public class Client {
 	private String username;
 	private String shipLocations;
 	private ShipSetupLobbyController shipSetupLobbyController;
-	private GUI2.GameController gameController;
+	private application.GameController gameController;
 	private String userShips;
 	
 	Client(String serverName, Main main) {
@@ -361,6 +360,7 @@ public class Client {
 								System.out.println("revieved play names");
 								String[] nameString = command.split(": ");
 								String[] usernames = nameString[1].split(" ");
+								stringToFront(username, usernames);
 								//String[] names = nameString[1].split(" ");
 
 								Platform.runLater(new Runnable() {
@@ -471,6 +471,23 @@ public class Client {
 	public void setShipSetupLobbyController(ShipSetupLobbyController shipSetupLobbyController) {
 		// TODO Auto-generated method stub
 		this.shipSetupLobbyController = shipSetupLobbyController;
+	}
+	
+	public static void stringToFront(String username, String[] array) {
+		for(int i=0; i<array.length; i++) {
+			if(array[i].equalsIgnoreCase(username)) {
+				if(i==0) {
+					String temp = array[1];
+					array[1] = array[i];
+					array[i] = temp;
+				}
+				else {
+					String temp = array[0];
+					array[0] = array[i];
+					array[i] = temp;
+				}
+			}
+		}
 	}
 
 }

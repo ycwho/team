@@ -51,21 +51,21 @@ public class GameLobbyController {
 	}
 	
 	
-	//test button
-	@FXML
-	protected void start(MouseEvent event) throws IOException {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					main.setGameStage(client.getUsername() + " Henry Liz Henry2", "[positions]");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	//test button
+//	@FXML
+//	protected void start(MouseEvent event) throws IOException {
+//		Platform.runLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				try {
+//					main.setGameStage(client.getUsername() + " Henry Liz Henry2", "[positions]");
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 	
 	@FXML
 	protected void loadShips(MouseEvent event) throws IOException {

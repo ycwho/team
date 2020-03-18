@@ -1,8 +1,9 @@
-package GUI2;
+package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -22,7 +23,8 @@ import application.*;
 
 public class GameController {
 private String name;
-private Client client;
+public Client client;
+private MainGame mainGame;
 private Main main;
 private static String userName;
 private static String[] names = new String[4];
@@ -145,7 +147,9 @@ public static ArrayList<GridPane> panes;
 	 rect.setFill(Color.WHITE);
 	 }
  }
- public void shoot(MouseEvent e){
+ 
+ @FXML
+ protected void shoot(MouseEvent e) throws IOException{
 	 Node source = (Node)e.getSource();
 	 grid = (GridPane) source.getParent();
 	 int position = grid.getChildren().indexOf(source);
@@ -153,12 +157,7 @@ public static ArrayList<GridPane> panes;
 	 System.out.println(userName);
 	 if(!names[panes.indexOf((GridPane)source.getParent())].equalsIgnoreCase(userName)){
 	 Rectangle rect = (Rectangle)source;
-	 rect.setFill(Color.BLACK);
-	 try {
-         client.write(Protocol.CLIENT_ATTACK + " " + names[panes.indexOf((GridPane) source.getParent())] + " " + position);
-     }catch (IOException ex){
-	     ex.printStackTrace();
-     }
+	 client.write(Protocol.CLIENT_ATTACK + " " + names[panes.indexOf((GridPane) source.getParent())] + " " + position);
 	 }
 }
  public void broadcast(String message){
@@ -207,8 +206,8 @@ public static ArrayList<GridPane> panes;
  public void setClient(Client newClient){
  	 client = newClient;
  }
- public void setMain(Main newMain){
-	 main = newMain;
+ public void setMainGame(MainGame newMainGame){
+	 mainGame = newMainGame;
  }
  public GridPane getGrid(){
 	 return grid;
@@ -216,5 +215,7 @@ public static ArrayList<GridPane> panes;
  public ArrayList<GridPane> getPanes(){
 	 return panes;
  }
-
+ public void setMain(Main newMain){
+	 main = newMain;
+ }
 }
