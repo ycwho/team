@@ -261,10 +261,10 @@ public class ShipSetupLobbyController {
 			}
 			else if(placed5 == 1) {
 				if(pos == lastPos + 40 && playersGrid.getChildren().get(pos-30).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos-20).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos-10).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." + String.valueOf(pos-30);
-					shipPositions =  shipPositions + "." +String.valueOf(pos-20);
-					shipPositions =  shipPositions + "." +String.valueOf(pos-10);
-					shipPositions =  shipPositions + "." +String.valueOf(pos) +"-";
+					shipPositions =  shipPositions + "@" + String.valueOf(pos-30);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos-20);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos-10);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos) +"-";
 					playersGrid.getChildren().get(pos-30).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos-20).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos-10).setStyle("-fx-background-color: #00ff00");
@@ -273,10 +273,10 @@ public class ShipSetupLobbyController {
 					placed5 = 2;
 				}
 				if(pos == lastPos - 40 && playersGrid.getChildren().get(pos+30).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos+20).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos+10).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos+30);
-					shipPositions =  shipPositions + "." +String.valueOf(pos+20);
-					shipPositions =  shipPositions + "." +String.valueOf(pos+10);
-					shipPositions =  shipPositions + "." +String.valueOf(pos)+"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos+30);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos+20);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos+10);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos+30).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos+20).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos+10).setStyle("-fx-background-color: #00ff00");
@@ -286,10 +286,10 @@ public class ShipSetupLobbyController {
 					System.out.println(pos + " " + lastPos);
 				}
 				if(pos-4 == lastPos && Math.floorDiv(pos, 10) == Math.floorDiv(lastPos, 10) && playersGrid.getChildren().get(pos-3).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos-2).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos-1).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos-3);
-					shipPositions =  shipPositions +"." + String.valueOf(pos-2);
-					shipPositions =  shipPositions +"." + String.valueOf(pos-1);
-					shipPositions =  shipPositions + "." +String.valueOf(pos)+"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos-3);
+					shipPositions =  shipPositions +"@" + String.valueOf(pos-2);
+					shipPositions =  shipPositions +"@" + String.valueOf(pos-1);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos-3).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos-2).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos-1).setStyle("-fx-background-color: #00ff00");
@@ -299,10 +299,10 @@ public class ShipSetupLobbyController {
 					placed5 = 2;
 				}
 				if(pos+4 == lastPos && Math.floorDiv(pos, 10) == Math.floorDiv(lastPos, 10) && playersGrid.getChildren().get(pos+3).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos+2).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos+1).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos+3);
-					shipPositions =  shipPositions +"." + String.valueOf(pos+2);
-					shipPositions =  shipPositions + "." +String.valueOf(pos+1);
-					shipPositions =  shipPositions + "." +String.valueOf(pos)+"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos+3);
+					shipPositions =  shipPositions +"@" + String.valueOf(pos+2);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos+1);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos+3).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos+2).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos+1).setStyle("-fx-background-color: #00ff00");
@@ -321,9 +321,9 @@ public class ShipSetupLobbyController {
 			}
 			else if (placed4==1) {
 				if(pos == lastPos + 30 && playersGrid.getChildren().get(pos-20).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos-10).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos-20);
-					shipPositions =  shipPositions + "." +String.valueOf(pos-10);
-					shipPositions =  shipPositions + "." +String.valueOf(pos) +"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos-20);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos-10);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos) +"-";
 					playersGrid.getChildren().get(pos-20).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos-10).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
@@ -331,9 +331,9 @@ public class ShipSetupLobbyController {
 					placed4=2;
 				}
 				if(pos == lastPos - 30 && playersGrid.getChildren().get(pos+20).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos+10).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions +"." + String.valueOf(pos+20);
-					shipPositions =  shipPositions +"." + String.valueOf(pos+10);
-					shipPositions =  shipPositions + "." +String.valueOf(pos)+"-";
+					shipPositions =  shipPositions +"@" + String.valueOf(pos+20);
+					shipPositions =  shipPositions +"@" + String.valueOf(pos+10);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos+20).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos+10).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
@@ -341,9 +341,9 @@ public class ShipSetupLobbyController {
 					placed4=2;
 				}
 				if(pos-3 == lastPos && Math.floorDiv(pos, 10) == Math.floorDiv(lastPos, 10) && playersGrid.getChildren().get(pos-2).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos-1).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos-2);
-					shipPositions =  shipPositions +"." + String.valueOf(pos-1);
-					shipPositions =  shipPositions +"." + String.valueOf(pos)+"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos-2);
+					shipPositions =  shipPositions +"@" + String.valueOf(pos-1);
+					shipPositions =  shipPositions +"@" + String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos-2).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos-1).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
@@ -351,9 +351,9 @@ public class ShipSetupLobbyController {
 					placed4=2;
 				}
 				if(pos+3 == lastPos && Math.floorDiv(pos, 10) == Math.floorDiv(lastPos, 10) && playersGrid.getChildren().get(pos+2).getStyle().equals("-fx-background-color: null;") && playersGrid.getChildren().get(pos+1).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos+2);
-					shipPositions =  shipPositions + "." +String.valueOf(pos+1);
-					shipPositions =  shipPositions + "." +String.valueOf(pos)+"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos+2);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos+1);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos+2).setStyle("-fx-background-color: #00ff00");
 					playersGrid.getChildren().get(pos+1).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
@@ -370,32 +370,32 @@ public class ShipSetupLobbyController {
 			}
 			else if (placed3a==1) {
 				if(pos == lastPos + 20 && playersGrid.getChildren().get(pos-10).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos-10);
-					shipPositions =  shipPositions + "." +String.valueOf(pos) +"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos-10);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos) +"-";
 					playersGrid.getChildren().get(pos-10).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Place the head of your next ship of length 3.");
 					placed3a=2;
 				}
 				if(pos == lastPos - 20 && playersGrid.getChildren().get(pos+10).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos+10);
-					shipPositions =  shipPositions +"." + String.valueOf(pos)+"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos+10);
+					shipPositions =  shipPositions +"@" + String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos+10).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Place the head of your next ship of length 3.");
 					placed3a=2;
 				}
 				if(pos-2 == lastPos && Math.floorDiv(pos, 10) == Math.floorDiv(lastPos, 10) && playersGrid.getChildren().get(pos-1).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions +"." + String.valueOf(pos-1);
-					shipPositions =  shipPositions + "." +String.valueOf(pos)+"-";
+					shipPositions =  shipPositions +"@" + String.valueOf(pos-1);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos-1).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Place the head of your next ship of length 3.");
 					placed3a=2;
 				}
 				if(pos+2 == lastPos && Math.floorDiv(pos, 10) == Math.floorDiv(lastPos, 10) && playersGrid.getChildren().get(pos+1).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos+1);
-					shipPositions =  shipPositions + "." +String.valueOf(pos)+"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos+1);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos+1).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Place the head of your next ship of length 3.");
@@ -411,32 +411,32 @@ public class ShipSetupLobbyController {
 			}
 			else if (placed3b==1) {
 				if(pos == lastPos + 20 && playersGrid.getChildren().get(pos-10).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos-10);
-					shipPositions =  shipPositions + "." +String.valueOf(pos) +"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos-10);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos) +"-";
 					playersGrid.getChildren().get(pos-10).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Place the head of your next ship of length 2.");
 					placed3b=2;
 				}
 				if(pos == lastPos - 20 && playersGrid.getChildren().get(pos+10).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos+10);
-					shipPositions =  shipPositions + "." +String.valueOf(pos)+"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos+10);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos+10).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Place the head of your next ship of length 2.");
 					placed3b=2;
 				}
 				if(pos-2 == lastPos && Math.floorDiv(pos, 10) == Math.floorDiv(lastPos, 10) && playersGrid.getChildren().get(pos-1).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos-1);
-					shipPositions =  shipPositions + "." +String.valueOf(pos)+"-";
+					shipPositions =  shipPositions + "@" +String.valueOf(pos-1);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos-1).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Place the head of your next ship of length 2.");
 					placed3b=2;
 				}
 				if(pos+2 == lastPos && Math.floorDiv(pos, 10) == Math.floorDiv(lastPos, 10) && playersGrid.getChildren().get(pos+1).getStyle().equals("-fx-background-color: null;")) {
-					shipPositions =  shipPositions +"." + String.valueOf(pos+1);
-					shipPositions =  shipPositions +"." + String.valueOf(pos)+"-";
+					shipPositions =  shipPositions +"@" + String.valueOf(pos+1);
+					shipPositions =  shipPositions +"@" + String.valueOf(pos)+"-";
 					playersGrid.getChildren().get(pos+1).setStyle("-fx-background-color: #00ff00");
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Place the head of your next ship of length 2.");
@@ -452,25 +452,25 @@ public class ShipSetupLobbyController {
 			}
 			else if (placed2==1) {
 				if(pos == lastPos + 10) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos);
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Please save your ship locations with a name for it.");
 					placed2=2;
 				}
 				if(pos == lastPos - 10) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos);
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Please save your ship locations with a name for it.");
 					placed2=2;
 				}
 				if(pos-1 == lastPos && Math.floorDiv(pos, 10) == Math.floorDiv(lastPos, 10)) {
-					shipPositions =  shipPositions + "." +String.valueOf(pos);
+					shipPositions =  shipPositions + "@" +String.valueOf(pos);
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Please save your ship locations with a name for it.");
 					placed2=2;
 				}
 				if(pos+1 == lastPos && Math.floorDiv(pos, 10) == Math.floorDiv(lastPos, 10)) {
-					shipPositions =  shipPositions +"." + String.valueOf(pos);
+					shipPositions =  shipPositions +"@" + String.valueOf(pos);
 					button.setStyle("-fx-background-color: #00ff00");
 					instructions.setText("Please save your ship locations with a name for it.");
 					placed2=2;

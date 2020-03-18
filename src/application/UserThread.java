@@ -268,6 +268,7 @@ public class UserThread extends Thread {
 		}
 
 		else if (getCommand.startsWith(Protocol.PLAYER_NAME_REQUEST)) {
+			System.out.println("player name request revieved at server");
 			String nameString = Protocol.PLAYER_NAMES;
 			//nameString += username + "/";
 			Vector players = joinedGame.getPlayers();
@@ -275,6 +276,7 @@ public class UserThread extends Thread {
 			while(iterator.hasNext()){
 				nameString += " " + iterator.next().getUsername();
 			}
+			System.out.println(nameString);
 			return nameString;
 		}
 
@@ -332,6 +334,19 @@ public class UserThread extends Thread {
 //
 //			return Protocol.CLIENT_UPLOAD_REPLY[result];
 //		}
+		else if (getCommand.startsWith(Protocol.PLAYER_NAME_REQUEST)) {
+			System.out.println("player name request revieved at server");
+			String nameString = Protocol.PLAYER_NAMES;
+			//nameString += username + "/";
+			Vector players = joinedGame.getPlayers();
+			Iterator<UserThread> iterator = players.iterator();
+			while(iterator.hasNext()){
+				nameString += " " + iterator.next().getUsername();
+			}
+			System.out.println(nameString);
+			return nameString;
+		}
+
 		else if(getCommand.startsWith(Protocol.CLIENT_UPLOAD_SHIP_POSITIONS)) {
             String option = commandElements[1];
             String position = commandElements[2];
@@ -343,7 +358,7 @@ public class UserThread extends Thread {
 
         //load(form database to game)
         else if (getCommand.startsWith(Protocol.CLIENT_LOAD_POSITIONS_REQUEST)) {
-            String loadPositions = database.loadShipPosition(username, commandElements[1]);
+            String loadPositions = database.loadShipPosition(username, commandElements[2]);
             if(loadPositions.equals("EMPTY")) {
                 return Protocol.CLIENT_RESPONSE_EMPTY_LOAD;
             }

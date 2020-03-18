@@ -202,6 +202,7 @@ public class Client {
 				
 					try {
 						String command = fromServer.readLine();
+						if(command != null && !command.isEmpty()) {
 						String[] nextLine = command.split(" ");
 						System.out.println(command);
 						System.out.println("hi");
@@ -353,17 +354,20 @@ public class Client {
 
 
 							else if (command.startsWith(Protocol.GAME_START)){
+								System.out.println("requested player names");
 								write(Protocol.PLAYER_NAME_REQUEST);
 							}
 							else if (command.startsWith(Protocol.PLAYER_NAMES)){
-								String[] nameString = command.split(":");
+								System.out.println("revieved play names");
+								String[] nameString = command.split(": ");
+								String[] usernames = nameString[1].split(" ");
 								//String[] names = nameString[1].split(" ");
 
 								Platform.runLater(new Runnable() {
 									@Override
 									public void run() {
 										try {
-											main.setGameStage(nameString[1], userShips);
+											main.setGameStage(usernames, userShips);
 										} catch (Exception e) { // no longer I/OException
 											// TODO Auto-generated catch block
 											e.printStackTrace();
@@ -376,7 +380,8 @@ public class Client {
 							}
 
 							else if (command.startsWith(Protocol.TURN)){
-								gameController.broadcast(nextLine[1] + "'s turn");
+								System.out.println(command);
+//								gameController.broadcast(nextLine[1] + "'s turn");
 							}
 							else if (command.startsWith(Protocol.HIT)){
 								int position = Integer.parseInt(nextLine[2]);
@@ -432,11 +437,12 @@ public class Client {
 							}
 
 						}
+						}
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					if(!Arrays.toString(nextLine).isEmpty()) {
+					if(nextLine != null && !Arrays.toString(nextLine).isEmpty()) {
 						System.out.println("From Server: " + Arrays.toString(nextLine));
 					}
 			}

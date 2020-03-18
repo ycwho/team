@@ -20,7 +20,7 @@
       <children>
             <ImageView fx:id="bg2" fitHeight="480.0" fitWidth="728.0" layoutX="-71.0" layoutY="-8.0" nodeOrientation="RIGHT_TO_LEFT">
                <image>
-                  <Image url="@bgMainMenu.jpg" />
+                  <Image url="@../../bin/application/bgMainMenu.jpg" />
                </image>
             </ImageView>
             <Text layoutX="-2.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asos Battleships" wrappingWidth="302.568359375">
@@ -48,7 +48,7 @@
 <!--              <Font size="50.0" />-->
 <!--          </font>-->
 <!--      </RadioButton>-->
-      <Text fill="#63ee63" layoutX="273.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu">
+      <Text fill="#63ee63" layoutX="320.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu">
           <font>
               <Font size="36.0" />
           </font>
@@ -69,7 +69,7 @@
                </effect></TextArea>
             <ImageView fx:id="checkUserIcon" fitHeight="102.0" fitWidth="72.0" layoutX="548.0" layoutY="15.0" onMouseClicked="#checkOnline" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@userIcon.png" />
+                  <Image url="@../../bin/application/userIcon.png" />
                </image>
             </ImageView>
             <Button fx:id="gameListButton" layoutX="212.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#listGames" text="Game List">
@@ -87,12 +87,7 @@
             </Button>
             <Button fx:id="backButton" layoutX="26.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#toLoginScreen" text="Log Out" />
             <ComboBox fx:id="comboBox" layoutX="208.0" layoutY="291.0" prefHeight="25.0" prefWidth="36.0" value="2" />
-            <Button fx:id="setupButton" layoutX="154.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#setupShips" prefHeight="25.0" prefWidth="79.0" text="Setup Ships">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <Button fx:id="loadShipsButton" layoutX="248.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#loadShips" prefHeight="25.0" prefWidth="79.0" text="Load Ship">
+            <Button fx:id="setupButton" layoutX="126.0" layoutY="329.0" mnemonicParsing="false" onMouseClicked="#setupShips" prefHeight="25.0" prefWidth="79.0" text="Setup Ships">
                <effect>
                   <DropShadow />
                </effect>

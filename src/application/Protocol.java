@@ -42,7 +42,7 @@ public interface Protocol {
 	String CLIENT_RESPONSE_EMPTY_LOAD = "EMPTY";
 	String LOAD_POSITIONS_RESPONSE = "ShipPositions"; // "Ship Positions s1p1.s1p2.s1p3.s1p4.s1p5-s2p1.s2p2.s2p3.s2p4-s3p1.s3p2.s3p3-s4p1.s4p2.s4p3-s5p1.s5p2"
 	String CLIENT_UPLOAD_SHIP_POSITIONS = "UploadShipPositions"; // "UploadShipPositions [optionName] s1p1.s1p2.s1p3.s1p4.s1p5-s2p1.s2p2.s2p3.s2p4-s3p1.s3p2.s3p3-s4p1.s4p2.s4p3-s5p1.s5p2"
-
+	
 	String[] CLIENT_UPLOAD_REPLY = {"upload successfully", "upload failed" };
 
 	// Ending game
@@ -54,12 +54,12 @@ public interface Protocol {
 	String CLIENT_ATTACK = "attack";
 	String[] CLIENT_ATTACK_REPLY = {"attack successfully", "it is not your turn", "attack illegal"};
 	String PLAYER_NAME_REQUEST = "Request Player Names";
-	String PLAYER_NAMES = "Player Names:";
+	String PLAYER_NAMES = "Names:";
 
 	// Game Command Protocols
 	String GAME_OVER = "Game over";
 	String TURN = "Turn:";
-	String GAME_START = "Game Start";
+	String GAME_START = "Start";
 	String PLAYER_DEAD = "Player Dead";
 	String SHIP_SUNK = "Sunk:";
 	String HIT = "Hit:";

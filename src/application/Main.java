@@ -124,8 +124,7 @@ public class Main extends Application {
 
 	}
 	//arg String list of players separated by spaces
-	public void setGameStage(String string, String userShips) throws Exception {
-		String[] players = string.split(" ");
+	public void setGameStage(String[] players, String userShips) throws Exception {
 		GUI2.Main m = new GUI2.Main(players, this.client, userShips);
 		m.start(new Stage());
 	}

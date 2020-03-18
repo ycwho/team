@@ -133,7 +133,10 @@ public static ArrayList<GridPane> panes;
  }
  public void setUp(ArrayList<Integer> playerShips){
 	 int k = 0;
-	 while(names[k] != userName){
+	 System.out.println(names[0]);
+	 System.out.println(names[1]);
+	 System.out.println(userName);
+	 while(!names[k].equalsIgnoreCase(userName)){
 		 k++;
 	 }
 	 for(Integer i : playerShips){

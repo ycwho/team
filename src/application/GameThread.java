@@ -67,6 +67,7 @@ public class GameThread extends Thread {
 				}
 				// game start
 				else if (gameStatus == 2) {
+					host.tellClient(message);
 					if (turnEnd) {
 						
 						playersInfo.get(attackerCounter).setPlayerStatus(3);
@@ -244,12 +245,14 @@ public class GameThread extends Thread {
 
 	public void gameStart() {
 		gameStatus = 2;
+		String usernames = null;
 		for (Player p : playersInfo) {
 			if (p.getPlayerStatus() == 2) {
+				usernames = usernames + " " + p.getUsername();
 				p.setPlayerStatus(3);
 			}
 		}
-		broadcastPlayerMessage(Protocol.GAME_START);
+		broadcastPlayerMessage(Protocol.GAME_START + " " + usernames);
 
 	}
 

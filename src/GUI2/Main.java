@@ -62,7 +62,7 @@ public class Main extends Application {
         String[] first = userShips.split("-");
         personalShips = new ArrayList<Integer>();
 		for(String s : first){
-			String[] second = s.split(". ");
+			String[] second = s.split("@"); //maybe need space back was ". " before
 			for(String s2 : second){
 				personalShips.add(Integer.parseInt(s2));
 			}

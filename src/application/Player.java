@@ -96,11 +96,11 @@ public class Player {
 		
 		//split by "-"
 		for(String singleShipPositions : positionString.split("-")) {
-			shipLength.add(singleShipPositions.split("\\.").length);
+			shipLength.add(singleShipPositions.split("@").length);
 			TreeSet<Integer> a = new TreeSet();
 			
 			//split by "."
-			for(String singlePosition : singleShipPositions.split("\\.")) {
+			for(String singlePosition : singleShipPositions.split("@")) {
 				shipPositions.add(Integer.parseInt(singlePosition));
 				a.add(Integer.parseInt(singlePosition));
 			}
