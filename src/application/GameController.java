@@ -178,7 +178,7 @@ public static ArrayList<GridPane> panes;
 
  public void hit (String newName, int position, boolean hit) {
 	 int k = 0;
-	 while(names[k] != newName){
+	 while(!names[k].equalsIgnoreCase(newName)){
 		k++;
 	 }
 	 if(!hit){

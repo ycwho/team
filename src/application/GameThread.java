@@ -186,7 +186,7 @@ public class GameThread extends Thread {
 					playersInfo.get(defenderSlot).addBeAttacked(position);
 					
 					turnEnd = true;
-					broadcastPlayerMessage(Protocol.HIT + " " + defenderSlot + " " + position + " " + playersInfo.get(defenderSlot).isHit(position));
+					broadcastPlayerMessage(Protocol.HIT + " " + userAtSlot(defenderSlot) + " " + position + " " + playersInfo.get(defenderSlot).isHit(position));
 					
 					
 					int index = playersInfo.get(defenderSlot).checkShipSunk(position);
@@ -290,6 +290,11 @@ public class GameThread extends Thread {
 		}
 		return -1;
 	}
+	
+	public String userAtSlot(int slot) {
+		return playersInfo.get(slot).getUsername();
+	}
+	
 
 	public int deadPlayer() {
 		int result = 0;

@@ -27,6 +27,7 @@ public class MainGame extends Application {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gameFX2.fxml"));
 			Parent root = fxmlLoader.load();
 			gc = fxmlLoader.getController();
+			client.setGameController(gc);
 			gc.setMainGame(this);
 			gc.setClient(client);
 			gc.setMain(main);
