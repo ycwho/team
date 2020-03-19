@@ -89,6 +89,7 @@ public class GameThread extends Thread {
 					System.out.println("game finished");
 					//inGameMessage("Game is end , winner is " + winner());
 					broadcastPlayerMessage(Protocol.GAME_OVER + ", winner is " + winner());
+					calculateScores(winner(), playerNumber - 1, -1);
 					break;
 				}
 				wait();
@@ -316,7 +317,20 @@ public class GameThread extends Thread {
 		}
 		return "no man win";
 	}
-
+	
+	public void calculateScores(String winnerName, int winnerScore, int loserScore) {
+		players.forEach(p -> {
+			if(p.getUsername().equals(winnerName)) {
+				System.out.println(p.getUsername() + "got" + winnerScore + "score!");
+				p.changeScore(winnerScore);
+			}else {
+				System.out.println(p.getUsername() + " got " + loserScore + " score!");
+				p.changeScore(loserScore);
+			}
+		});
+	}
+	
+	
 	public int readyPlayer() {
 		int result = 0;
 		for (Player p : playersInfo) {
@@ -357,7 +371,7 @@ public class GameThread extends Thread {
 			}
 		});
 	}
-
+	
 	public void close() {
 		onlineGames.remove(gameName, this);
 		

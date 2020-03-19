@@ -79,6 +79,9 @@ public class UserThread extends Thread {
 				System.out.println(getCommand);
 				if(getCommand != null)
 					System.out.println(getCommand);
+				
+				
+				try {
 				if (userStatus == 0) {
 					//tellClient("[REPLY]"+logCommand(getCommand));
 					tellClient(logCommand(getCommand));
@@ -89,7 +92,10 @@ public class UserThread extends Thread {
 					//tellClient("[REPLY]"+gameCommand(getCommand));
 					tellClient(gameCommand(getCommand));
 				}
-				
+				}catch(ArrayIndexOutOfBoundsException e) {
+					e.printStackTrace();
+					tellClient(Protocol.CLIENT_NEED_RESENT_COMMAND);
+				}
 
 			}
 
@@ -406,6 +412,10 @@ public class UserThread extends Thread {
 		}
 		
 		
+	}
+	
+	public int changeScore(int score) {
+		return database.recordScore(username, score);
 	}
 
 //	public int playerNumber() throws  IOException{
