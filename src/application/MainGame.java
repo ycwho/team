@@ -39,7 +39,12 @@ public class MainGame extends Application {
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
 			stage.setScene(scene);
-			stage.setTitle(s);
+			if(s.equalsIgnoreCase(username)) {
+				stage.setTitle("Player " + username + ": Your board");
+			}
+			else{
+				stage.setTitle("Player " + username + ": enemy " +s+ "'s board");
+			}
 			stage.show();
 		}
 	}
