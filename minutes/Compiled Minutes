@@ -1,0 +1,166 @@
+
+Meeting 1 - 21/02/2020
+All present
+
+Info: Meeting scheduled for after the SW tutorial
+
+Prior to meeting
+ had created a facebook group through which to communicate. Before the meeting there was a wide consensus to do a game
+
+Chatting about what the project will be
+Met in person to discuss potential projects
+Scott suggested Battleships, Stittle and Liz happy about this plan
+Nin and Chao were unsure of what it was
+Chao proposed chess
+Scott expressed that chess was probably more complicated game-wise and had been partially covered in the SWW lectures which felt like reasons to choose something else
+Ning and Chao were happy to follow battleships after being convinced it was an easy game by the others
+
+Planned a meeting for the following Tuesday after researching the project more
+Chao and Ning to learn the game, if not convinced then option to change to a different game
+Task to understand servers and clients better - appropriate resources were shared 
+
+
+
+Meeting 2 - 25/02/2020:
+All present
+
+Info: meeting following a shared AI lecture
+
+Prior to meeting 
+learning resources were shared online and Scott created a google drive for the project with a very simplistic view of a structure of the game, along with features that could be included
+
+Start of meeting
+Chao and Ning confirmed they were happy with the game after researching it
+
+Discussed the assignment of roles in the project
+Liz expressed her interest in working with the GUI
+Ning expressed interest in working on the database
+Chao also wanted to work on the database
+Stittle interested in working on the client-server system
+Scott also happy to work on the client-server system
+As everyone’s interests seemed to split the group evenly into the three parts of the system, it was agreed upon that this would be the division
+Scott, having been the most vocal so far also agreed to be the group secretary and coordinator/leader for the group
+
+Plans for next meeting
+Liz stated she would be in london for the weekend
+Scott suggested scheduling the free day of monday to be set aside for the next meeting and groupwork
+
+Tasks until next meeting:
+Familiarise ourselves with GIT
+Try writing the start of our respective sections of code
+Finalise project structure
+
+
+Meeting 3 (Tutorial with Alex) - 28/02/20:
+Liz not present as in London
+
+Info: Tutorial with Alexandros
+
+Had been concerned that Battleships might not work as doesn’t naturally lend itself to more than 2 players
+Scott proposed potentially doing a spectator mode for the game
+Alexandros was happy with idea but also stated that it could be worth bending the rules of the game to allow for a multiplayer version
+
+Discussed use of databases in the project
+The structure of the project we were planning on implementing was to store the ship positions during the game in a database
+Alex said that complex use of database was advised, but to choose whatever implementation we chose for where to store the ship positions
+
+Reassigning tasks
+ALex encouraged Chao to not work on the database, but instead work on the server-client with Scott and Stittle
+
+
+Meeting 4 - 28/02/20:
+Liz not present as in London
+
+Info: Brief meeting following the tutorial to confirm what was discussed in the tutorial and plans for the weekend
+Confirming project would be battleships
+Discussing structure of the project
+Confirming Chao would be happy to move to the server and client
+
+
+Meeting 5 - 02/03/20:
+All present
+
+Info: Discussing the work that had been done over the week so far, followed by a group working session for the whole day to hit our targets for the week.
+
+Discussed what we had produced so far
+Stittle had worked on a login system using the server and client for 1 user
+Chao had worked on his own client server system handling multiple client and the start of the game code
+Ning (working with Chao at the beginning) had produced a working database login method
+Scott spent his time editing code that had been written
+Liz had worked on the GUI to give a simple game system
+
+After end of meeting
+Stittle and Scott discussed the use of scenebuilder and fmxl files to help run our GUIs, subsequently Menus were created in this way
+
+Set out Tasks for next week:
+Liz to continue with game GUI, seeing if scenebuilder would be helpful in this case
+Henry finishing the login system and implementing a GUI to it
+Ning to create database method to allow ship positions to be stored in database
+Chao working on the server to get multiple clients to log on and join a common game
+Scott to start writing the game logic within the server
+
+
+Meeting 6 - 06/03/20:
+All Present
+
+Info: Alex wasn’t around so instead of tutorial meeting had a group working session
+
+Discussed what had been done
+People had done the majority of their tasks
+Chao had managed to get a whole command-line game working effectively
+
+Tasks in the meeting
+Chao and Stittle worked on merging the code
+Ning and Liz continued with their tasks
+Scott wrote a document describing how the code and methods were working
+
+
+Meeting 7 - 11/03/20:
+All Present
+
+Info: Similar to prior meeting, to work, touch base about what had been produced and set upcoming tasks
+
+Discussions
+How overall structure of the code was working
+Advantage of scenebuilder and controller style GUI’s
+Desired options for the game, eg storing ship layouts in the database before a game
+Ships in game will not be stored in database but in an array as in Chao’s game
+
+Allocation of work for the coming week:
+Scott connecting the command line game to the GUI
+Stittle the main menu systems
+Chao updating the game system for different options
+Ning writing code to store positions of ships into database and testing
+Liz, updating the GUI to be able to handle the methods that are required of it now we were sure of what they were
+
+
+Meeting 7 - 13/03/20:
+Alex tutorial meeting
+All present
+
+Info: DIsplayed what we had produced and what was expected of us
+
+Discussed use of databases and structure
+
+Discussed what was expected in the project
+update automatically the online users
+work between lab computers
+Tests - Whitebox testing, labbox testing, manual testing (of gui), individual testing then integration testing
+Asked questions such as do we synchronize the database
+Need to be aware about all of our decisions
+After meeting Scott suggested coming in Saturday from midday with the target to get the system working
+Meeting 8 - 14/03/20:
+All present
+Info: Group work session all day working in the labs almost getting it all together
+Pushed code together and redesigned aspects of the GUI
+Started the compiling of a todo list to help coordinate where time would be spent
+Assigned tasks for the coming week
+Stittle and Chao: trying to get the code working then commenting and streamlining
+Scott: start writing report
+Ning: finishing, then testing and populating the database and then doing diagrams of it
+Liz: updating GUI methods then testing the GUI and then helping on the report
+
+Meeting 9 - 19/03/20:
+All present
+Info: Group meeting with Alex
+Discussed: closing servers which we didn’t catch at the time, was some confusion over how/whether the different clients were communicating with each other, effective testing, what should go into the report, diagrams and if we should prioritise either the scope or the reliability of the code
